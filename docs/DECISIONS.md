@@ -91,3 +91,14 @@ CSV/JSON inputs, never archives or user-supplied pickle/Joblib models. Local
 disk is a temporary cache in hosted environments; durable summaries belong in
 PostgreSQL. In-process jobs are deliberately non-durable and documented as
 such rather than adding a distributed queue.
+
+## ADR-008: main-branch remote workflow
+
+- Status: accepted
+- Date: 2026-07-20
+
+The user explicitly authorized pushing PlayerPulse to
+`https://github.com/Dippy2003/football-fatigue-analytics.git`. Development stays
+on the professional `main` branch; no phase-named branches are created. Daily
+phase markers remain annotated tags required by the governing specification.
+The remote was confirmed empty before the first push.

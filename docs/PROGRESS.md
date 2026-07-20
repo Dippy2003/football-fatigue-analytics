@@ -2,49 +2,81 @@
 
 ## Current checkpoint
 
-- Development phase: Day 1
-- Current task: 6 of 30 - progress and commit-log foundations
+- Development phase: Day 1 complete; work paused at the mandatory boundary
+- Completed tasks: all Day 1 foundation tasks plus rights evidence and safety tooling
 - Branch: `main`
-- Latest completed commit before this update: `a036c9a`
-- Working objective: complete the Day 1 reproducible application foundation
-- Next exact task: record initial architecture, rights, and security decisions
+- Latest completed commit before this progress update: `1306fc8`
+- Required checkpoint tag: `day-1-complete` (created after final report and ledger)
+- Authorized remote: `https://github.com/Dippy2003/football-fatigue-analytics.git`
+- Next exact task: wait for `Continue to Day 2`, then re-read continuation files and begin Day 2 Task 1 rights re-verification
 
 ## Completed work
 
-- Inspected the initially empty workspace and available toolchain.
-- Read the authoritative audited master prompt and audit report completely.
-- Confirmed Git author identity is configured and initialized `main`.
-- Recorded product purpose, ethical limits, code/data licence separation, root
-  repository hygiene, runtime versions, agent instructions, and five-day plan.
-- Verified official Metrica Sports and StatsBomb source/terms pages on
-  2026-07-20 without downloading third-party data.
+- Created a 35-commit foundation before final progress/report commits, exceeding
+  the required 30 meaningful commits without empty or padding changes.
+- Provisioned Python 3.12.13 with uv, locked 46 backend packages, and generated
+  the npm lockfile for 355 installed frontend packages.
+- Built and runtime-verified FastAPI health, readiness, and version endpoints.
+- Added safe typed settings, CORS, redacted structured logging, SQLite/PostgreSQL
+  sessions, UUID/UTC model conventions, and Alembic.
+- Built and HTTP-verified a responsive React application shell with routing,
+  typed API/query foundations, original branding, disclaimer, and placeholders.
+- Added backend/frontend tests, static checks, production frontend build,
+  Dockerfiles, Compose, CI, cross-platform commands, and documentation.
+- Verified official Metrica Sports and StatsBomb pages, branch heads, and terms
+  digests without downloading raw football data or provider logos.
+- Configured the user-authorized empty GitHub repository as `origin`; push occurs
+  only after the local Day 1 tag is created.
 
-## Validation history
+## Latest validation
 
-| Check | Result | Notes |
+| Check | Result | Evidence |
 | --- | --- | --- |
-| Initial Git inspection | Passed | Workspace was not a repository; initialized safely. |
-| Git identity | Passed | Existing user configuration is present. |
-| Node toolchain | Passed | Node 22.16.0 and npm 10.9.2 via `npm.cmd`. |
-| Python toolchain | Pending | Python absent from PATH; uv 0.11.19 will provision 3.12. |
-| Docker CLI | Passed | Docker 29.5.3 and Compose 5.1.4 installed. |
-| Docker engine | Blocked locally | Docker Desktop engine is not running. |
+| Backend format | Passed | Ruff: 18 files already formatted |
+| Backend lint | Passed | Ruff: all checks passed |
+| Backend types | Passed | mypy: 17 source files, no issues |
+| Backend tests | Passed | pytest: 10 passed, one framework deprecation warning |
+| Backend runtime | Passed | live health/readiness/version responses verified |
+| Frontend format | Passed | Prettier: all matched files formatted |
+| Frontend lint | Passed | ESLint: zero warnings/errors |
+| Frontend types | Passed | TypeScript project build/type check succeeded |
+| Frontend tests | Passed | Vitest: 1 interaction test passed |
+| Frontend production build | Passed | Vite: 95 modules, build completed |
+| Frontend HTTP runtime | Passed | Vite returned HTTP 200 and correct document title |
+| Interactive browser inspection | Unavailable | no browser backend was available in this session |
+| SQLite connection | Passed | in-memory SQLAlchemy test |
+| Alembic | Passed | upgrade/current against disposable SQLite database |
+| Dataset-file policy | Passed | no prohibited tracked data or large files |
+| Compose syntax | Passed | database, backend, and frontend services parsed |
+| Docker image/stack runtime | Skipped | Docker CLI installed; Docker Desktop engine not running |
 
-## Known failures and blockers
+## Problems found and resolved
 
-- PowerShell execution policy blocks `npm.ps1`; use `npm.cmd` on Windows.
-- GNU Make is not installed; exact native PowerShell alternatives are required.
-- uv's default cache path is unusable in the sandbox; use repository-local
-  `UV_CACHE_DIR` for provisioning and commands.
-- Docker engine is unavailable until Docker Desktop is started. Compose config
-  validation does not require the engine and remains in scope.
+- Git rejected sandbox ownership; the exact workspace was added to Git's safe
+  directory list without changing author identity.
+- uv's default sandbox cache path was unusable; a repository-local ignored cache
+  and managed Python directory allowed reproducible provisioning.
+- PowerShell blocked `npm.ps1`; Windows commands consistently use `npm.cmd`.
+- Initial pytest console execution could not import `app`; explicit pytest
+  `pythonpath` configuration fixed collection.
+- Strict mypy and Ruff exposed settings-test typing/import issues, structured-log
+  return typing, UTC alias use, Alembic import order, and router hot-reload
+  warnings; each was corrected and the full gates rerun.
 
-## Implementation notes
+## Known limitations
 
-- The repository documents original code under MIT while excluding external
-  datasets and trademarks from that licence.
-- External football data adapters will be optional and rights-gated. Public and
-  automated workflows will rely on deterministic project-owned synthetic data.
-- Record actual command results here and in each daily report; never infer a
-  pass from implementation alone.
+- No match data generation, ingestion, analytics, canonical schemas, Parquet,
+  domain persistence, risk calculation, or complete dashboard exists yet.
+- Readiness checks application state only until Day 3 database domain work.
+- Docker images and full Compose startup are implemented but not runtime-tested.
+- The synchronous framework test client emits a visible upstream deprecation warning.
+- No interactive rendered-browser inspection or screenshots were captured because
+  no supported browser backend was available.
 
+## Resume protocol
+
+Do not begin Day 2 until the user explicitly says `Continue to Day 2`. On resume,
+read `AGENTS.md`, `docs/IMPLEMENTATION_PLAN.md`, this file,
+`docs/COMMIT_LOG.md`, the Day 1 report, and recent Git history; verify the clean
+working tree and `day-1-complete`; then run the smallest backend/frontend smoke
+check before Day 2 Task 1.

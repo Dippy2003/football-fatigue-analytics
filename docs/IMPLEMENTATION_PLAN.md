@@ -1,5 +1,10 @@
 # PlayerPulse implementation plan
 
+## Phase status
+
+- Day 1: completed locally; checkpoint report/tag finalized at the end of this phase
+- Days 2-5: not started
+
 This plan follows the authoritative audited master prompt. A "day" is a tagged
 development phase, not necessarily a calendar day. Each day ends with at least
 30 meaningful atomic commits, a complete quality gate, a report, and an
