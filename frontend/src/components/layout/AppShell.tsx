@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { NavLink } from 'react-router-dom'
 
 import { BrandMark } from './BrandMark'
 
@@ -26,9 +27,9 @@ export function AppShell({ children }: AppShellProps) {
       </a>
       <header className="border-b border-[var(--border)] bg-white/95">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <a
+          <NavLink
             className="flex w-fit items-center gap-3"
-            href="/"
+            to="/"
             aria-label="PlayerPulse home"
           >
             <BrandMark />
@@ -40,17 +41,21 @@ export function AppShell({ children }: AppShellProps) {
                 Performance indicators
               </span>
             </span>
-          </a>
+          </NavLink>
           <nav aria-label="Primary navigation">
             <ul className="flex flex-wrap gap-1">
               {navigation.map((item) => (
                 <li key={item.href}>
-                  <a
-                    className="inline-flex rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-emerald-50 hover:text-emerald-800"
-                    href={item.href}
+                  <NavLink
+                    className={({ isActive }) =>
+                      `inline-flex rounded-md px-3 py-2 text-sm font-medium hover:bg-emerald-50 hover:text-emerald-800 ${
+                        isActive ? 'bg-emerald-50 text-emerald-800' : 'text-slate-600'
+                      }`
+                    }
+                    to={item.href}
                   >
                     {item.label}
-                  </a>
+                  </NavLink>
                 </li>
               ))}
             </ul>
