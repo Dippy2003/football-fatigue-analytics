@@ -3,11 +3,12 @@
 from fastapi import FastAPI
 
 from app import __version__
+from app.api.routes.system import router as system_router
 
 
 def create_app() -> FastAPI:
     """Create an isolated PlayerPulse application instance."""
-    return FastAPI(
+    application = FastAPI(
         title="PlayerPulse API",
         summary="Explainable football workload and performance indicators",
         description=(
@@ -19,6 +20,8 @@ def create_app() -> FastAPI:
         redoc_url="/redoc",
         openapi_url="/api/v1/openapi.json",
     )
+    application.include_router(system_router)
+    return application
 
 
 app = create_app()
