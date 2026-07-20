@@ -1,13 +1,16 @@
 """FastAPI application entry point."""
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app import __version__
 from app.api.routes.system import router as system_router
+from app.core.config import Settings, get_settings
 
 
-def create_app() -> FastAPI:
+def create_app(settings: Settings | None = None) -> FastAPI:
     """Create an isolated PlayerPulse application instance."""
+    resolved_settings = settings or get_settings()
     application = FastAPI(
         title="PlayerPulse API",
         summary="Explainable football workload and performance indicators",
@@ -15,10 +18,18 @@ def create_app() -> FastAPI:
             "Performance analytics decision support. PlayerPulse is not a medical "
             "diagnostic tool."
         ),
-        version=__version__,
+        version=resolved_settings.app_version or __version__,
         docs_url="/docs",
         redoc_url="/redoc",
         openapi_url="/api/v1/openapi.json",
+    )
+    application.state.settings = resolved_settings
+    application.add_middleware(
+        CORSMiddleware,
+        allow_origins=resolved_settings.cors_allowed_origins,
+        allow_credentials=False,
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["Accept", "Authorization", "Content-Type", "X-Request-ID"],
     )
     application.include_router(system_router)
     return application
