@@ -6,11 +6,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from app import __version__
 from app.api.routes.system import router as system_router
 from app.core.config import Settings, get_settings
+from app.core.logging import configure_logging
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     """Create an isolated PlayerPulse application instance."""
     resolved_settings = settings or get_settings()
+    configure_logging(resolved_settings)
     application = FastAPI(
         title="PlayerPulse API",
         summary="Explainable football workload and performance indicators",
