@@ -1,0 +1,66 @@
+name: playerpulse
+
+services:
+  database:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: playerpulse
+      POSTGRES_USER: playerpulse
+      POSTGRES_PASSWORD: playerpulse_local_only
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U playerpulse -d playerpulse"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      APP_ENV: development
+      APP_VERSION: 0.1.0
+      DATABASE_URL: postgresql+psycopg://playerpulse:playerpulse_local_only@database:5432/playerpulse
+      CORS_ALLOWED_ORIGINS: '["http://localhost:5173"]'
+      ENABLE_UPLOADS: "false"
+      DATA_ROOT: /data
+      MODEL_ROOT: /models
+      SYNTHETIC_SEED: 20260720
+    command:
+      - sh
+      - -c
+      - alembic -c alembic.ini upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=2)",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data
+      - ./models:/models
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:8000/api/v1
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "5173:8080"
+
+volumes:
+  postgres_data:
