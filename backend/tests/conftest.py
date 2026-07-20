@@ -13,4 +13,3 @@ def client() -> Iterator[TestClient]:
     """Create an isolated synchronous API client."""
     with TestClient(create_app()) as test_client:
         yield test_client
-

@@ -42,3 +42,19 @@ source = ["app"]
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+extend-exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
