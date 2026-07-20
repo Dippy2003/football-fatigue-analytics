@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import subprocess
 from pathlib import Path
 
@@ -22,16 +23,16 @@ def git_output(*args: str) -> str:
     ).stdout.strip()
 
 
-def phase_for_commit(commit_hash: str) -> str:
+def phase_for_commit(commit_hash: str, current_phase: str) -> str:
     """Derive the phase from existing checkpoint ancestry."""
     tags = set(git_output("tag", "--contains", commit_hash).splitlines())
     for day in range(1, 6):
         if f"day-{day}-complete" in tags:
             return f"Day {day}"
-    return "Day 1 (in progress)"
+    return current_phase
 
 
-def render() -> str:
+def render(current_phase: str) -> str:
     """Render all commits through the current parent snapshot."""
     rows = git_output(
         "log",
@@ -50,7 +51,7 @@ def render() -> str:
     for row in rows:
         full_hash, short_hash, timestamp, message = row.split(FIELD_SEPARATOR, 3)
         safe_message = message.replace("|", "\\|")
-        phase = phase_for_commit(full_hash)
+        phase = phase_for_commit(full_hash, current_phase)
         lines.append(f"| {phase} | `{short_hash}` | {timestamp} | {safe_message} |")
     lines.extend(
         [
@@ -67,7 +68,14 @@ def render() -> str:
 
 def main() -> int:
     """Write the generated commit ledger."""
-    OUTPUT.write_text(render(), encoding="utf-8", newline="\n")
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--current-phase",
+        default="Uncheckpointed",
+        help="Label for commits not yet contained by a checkpoint tag.",
+    )
+    args = parser.parse_args()
+    OUTPUT.write_text(render(args.current_phase), encoding="utf-8", newline="\n")
     print(f"Wrote {OUTPUT.relative_to(ROOT)} from current Git history.")
     return 0
 
