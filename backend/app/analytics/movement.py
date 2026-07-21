@@ -66,3 +66,13 @@ def summarize_speed(frame: pd.DataFrame) -> pd.DataFrame:
         )
         .reset_index()
     )
+
+
+def add_acceleration_features(frame: pd.DataFrame) -> pd.DataFrame:
+    """Calculate signed acceleration and separated acceleration/deceleration."""
+    result = add_speed_features(frame)
+    speed_delta = result.groupby(PLAYER_PERIOD, sort=False)["speed_mps"].diff()
+    result["acceleration_mps2"] = speed_delta.div(result["delta_t_s"])
+    result["positive_acceleration_mps2"] = result["acceleration_mps2"].clip(lower=0)
+    result["deceleration_mps2"] = (-result["acceleration_mps2"]).clip(lower=0)
+    return result
