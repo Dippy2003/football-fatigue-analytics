@@ -20,7 +20,7 @@ def _player_ids() -> list[tuple[str, str]]:
     return [
         (team, f"{team}-{number:02d}")
         for team in ("home", "away")
-        for number in range(1, 10)
+        for number in range(1, 11)
     ]
 
 
@@ -38,7 +38,11 @@ def generate_synthetic_tracking(
             ball_x = 52.5 + 32 * np.sin(absolute / 23)
             ball_y = 34 + 20 * np.cos(absolute / 17)
             for index, (team, player_id) in enumerate(players):
-                shirt = (index % 9) + 1
+                shirt = (index % 10) + 1
+                if shirt == 10 and (period == 1 or second <= period_duration_s / 2):
+                    continue
+                if shirt == 9 and period == 2 and second > period_duration_s / 2:
+                    continue
                 phase = shirt * 0.61 + (0 if team == "home" else np.pi)
                 direction = 1 if team == "home" else -1
                 workload = 1.0 if shirt <= 6 else 1.18
@@ -97,7 +101,7 @@ def generate_synthetic_events(
                     "period": period,
                     "timestamp_seconds": float(second),
                     "team_id": team,
-                    "player_id": f"{team}-{(event_id % 9) + 1:02d}",
+                    "player_id": f"{team}-{(event_id % 10) + 1:02d}",
                     "event_type": event_type,
                     "outcome": "complete" if is_pass else "observed",
                     "start_x": start_x,

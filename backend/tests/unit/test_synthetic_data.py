@@ -44,3 +44,15 @@ def test_synthetic_tracking_includes_cleanable_dropout() -> None:
         (tracking["player_id"] == "home-01") & (tracking["period"] == 1)
     ]
     assert one_player_period["timestamp_seconds"].diff().min() == pytest.approx(0.1)
+
+
+def test_synthetic_match_includes_second_period_substitutions() -> None:
+    tracking = generate_synthetic_match().tracking
+    substitute = tracking[tracking["player_id"] == "home-10"]
+    replaced = tracking[
+        (tracking["player_id"] == "home-09") & (tracking["period"] == 2)
+    ]
+
+    assert set(substitute["period"]) == {2}
+    assert substitute["timestamp_seconds"].min() > 90
+    assert replaced["timestamp_seconds"].max() == 90
