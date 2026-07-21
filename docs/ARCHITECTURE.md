@@ -1,6 +1,6 @@
 # PlayerPulse architecture
 
-## Day 1 system context
+## System context
 
 ```mermaid
 flowchart LR
@@ -28,8 +28,33 @@ Browser request
 → accessible UI state
 ```
 
-At Day 1 only the system routes return data. Placeholder frontend routes do not
+At Day 2 only the system routes return data. Placeholder frontend routes do not
 invent match, player, analytics, or risk content.
+
+## Data and analytics flow
+
+```mermaid
+flowchart LR
+    Registry[Rights registry] --> Gate[Import policy gate]
+    Synthetic[Deterministic synthetic generator] --> Canonical[Canonical tables]
+    Local[Developer-supplied local files] --> Gate
+    Gate --> Adapters[Metrica or StatsBomb adapters]
+    Adapters --> Canonical
+    Canonical --> Clean[Sort, deduplicate, interpolate, quality flags]
+    Clean --> Metrics[Movement, intensity, sprints, windows, events]
+    Metrics --> Quality[Quality score and limitations]
+    Metrics --> Parquet[Ignored local Parquet outputs]
+```
+
+The synthetic source is the only path open by default. Metrica is local-only.
+StatsBomb fails closed until the caller explicitly acknowledges a fresh rights
+check. Adapters return the same provider-neutral metre/time columns, so metric
+code never needs provider-specific branches.
+
+The processing pipeline is deterministic and side-effect free unless an output
+directory is explicitly supplied. Parquet is the only supported local table
+format; unsafe pickle deserialization is not used. Raw, interim, processed, and
+model artifacts remain ignored.
 
 ## Backend modules
 
@@ -37,9 +62,15 @@ invent match, player, analytics, or risk content.
 - `app/core/`: typed settings and safe structured logging.
 - `app/api/routes/system.py`: liveness, readiness, and version contracts.
 - `app/db/`: engine/session lifecycle and shared UUID/UTC model base.
+- `app/data/registry.py`: validated source rights and fail-closed import policy.
+- `app/data/importers/`: local-only provider adapters and input validation.
+- `app/data/cleaning.py`: ordering, deduplication, interpolation, quality flags.
+- `app/data/processing.py`: deterministic synthetic end-to-end pipeline.
+- `app/data/storage.py`: safe Parquet persistence.
+- `app/analytics/`: movement, zones, sprints, windows, and event metrics.
 - `alembic/`: database migration environment.
 
-Future analytics remain modules in the same backend process. This modular
+These analytics remain modules in the same backend process. This modular
 monolith keeps transactions and tests simple while allowing clean boundaries.
 
 ## Frontend modules
