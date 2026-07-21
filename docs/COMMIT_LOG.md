@@ -42,7 +42,41 @@ Generated from Git history by `scripts/export_commit_log.py`. Git remains the so
 | Day 1 | `06bbf0f` | 2026-07-20T20:10:14+05:30 | docs: finalize Day 1 progress and continuation state |
 | Day 1 | `5f501a3` | 2026-07-20T20:16:43+05:30 | docs: add verified Day 1 completion report |
 | Day 1 | `8f87897` | 2026-07-20T20:17:55+05:30 | chore: label untagged commits in generated phase ledgers |
+| Day 1 | `ab929e6` | 2026-07-20T20:18:38+05:30 | docs: generate Day 1 commit ledger from Git history |
+| Day 2 | `505ed54` | 2026-07-21T08:24:03+05:30 | docs(data): reverify official dataset rights for Day 2 |
+| Day 2 | `b369019` | 2026-07-21T08:27:36+05:30 | build(data): lock scientific analytics dependencies |
+| Day 2 | `f7eef3a` | 2026-07-21T08:54:28+05:30 | feat(data): enforce source registry rights policy |
+| Day 2 | `4e6188d` | 2026-07-21T08:55:19+05:30 | feat(data): define canonical football data schemas |
+| Day 2 | `7ad0b2c` | 2026-07-21T09:33:44+05:30 | feat(analytics): centralize validated metric thresholds |
+| Day 2 | `fa794ea` | 2026-07-21T09:37:19+05:30 | feat(data): generate deterministic synthetic matches |
+| Day 2 | `6a819f0` | 2026-07-21T09:38:18+05:30 | feat(data): normalize provider pitch coordinates |
+| Day 2 | `e8d39b0` | 2026-07-21T09:44:05+05:30 | feat(data): add local-only Metrica tracking adapter |
+| Day 2 | `5a4d9ca` | 2026-07-21T09:52:12+05:30 | feat(data): add local-only Metrica event adapter |
+| Day 2 | `2614efc` | 2026-07-21T10:09:42+05:30 | feat(data): gate local StatsBomb event imports |
+| Day 2 | `3f08334` | 2026-07-21T10:16:57+05:30 | feat(data): sort and deduplicate tracking rows |
+| Day 2 | `9279444` | 2026-07-21T10:17:56+05:30 | feat(data): interpolate only short in-period gaps |
+| Day 2 | `b52ce61` | 2026-07-21T10:19:10+05:30 | feat(analytics): calculate player movement distance |
+| Day 2 | `f0cb10c` | 2026-07-21T10:20:25+05:30 | feat(analytics): calculate player speed features |
+| Day 2 | `65cdf1a` | 2026-07-21T10:21:01+05:30 | feat(analytics): derive acceleration and deceleration |
+| Day 2 | `41bb0ea` | 2026-07-21T10:21:34+05:30 | feat(analytics): flag physiological speed outliers |
+| Day 2 | `6728237` | 2026-07-21T10:22:50+05:30 | feat(analytics): smooth speed with centered median |
+| Day 2 | `f731038` | 2026-07-21T10:25:04+05:30 | feat(analytics): classify workload intensity zones |
+| Day 2 | `4dd0913` | 2026-07-21T10:26:27+05:30 | feat(analytics): detect explainable sprint bouts |
+| Day 2 | `cfdd616` | 2026-07-21T10:27:54+05:30 | feat(analytics): aggregate fifteen-minute match windows |
+| Day 2 | `eac393e` | 2026-07-21T10:28:54+05:30 | feat(analytics): summarize supported event metrics |
+| Day 2 | `21f75fc` | 2026-07-21T10:31:07+05:30 | feat(data): score tracking data quality transparently |
+| Day 2 | `63f23d1` | 2026-07-21T10:32:25+05:30 | feat(data): record checksum-backed import manifests |
+| Day 2 | `b76d7b5` | 2026-07-21T10:33:53+05:30 | feat(data): persist analytics tables as safe Parquet |
+| Day 2 | `b8346f2` | 2026-07-21T10:54:20+05:30 | feat(data): sample synthetic tracking at ten hertz |
+| Day 2 | `49c7ef4` | 2026-07-21T10:55:50+05:30 | feat(data): run synthetic demo analytics end to end |
+| Day 2 | `370c9a0` | 2026-07-21T11:06:05+05:30 | feat(data): expose deterministic demo pipeline CLI |
+| Day 2 | `571b23f` | 2026-07-21T11:08:00+05:30 | docs(analytics): document formulas thresholds and limits |
+| Day 2 | `5c9e3dc` | 2026-07-21T11:08:34+05:30 | docs(data): explain demo generation and local imports |
+| Day 2 | `4604c00` | 2026-07-21T11:09:36+05:30 | docs(architecture): map rights-aware analytics pipeline |
+| Day 2 | `1f5d0a2` | 2026-07-21T11:11:11+05:30 | feat(data): model deterministic demo substitutions |
+| Day 2 | `e96df97` | 2026-07-21T11:19:52+05:30 | docs: persist Day 2 analytics handoff state |
+| Day 2 | `e8cf945` | 2026-07-21T11:22:54+05:30 | docs: add verified Day 2 completion report |
 
-Commits recorded: **38**.
+Commits recorded: **72**.
 
 The commit that updates this generated file cannot contain its own not-yet-known hash; the next checkpoint generation captures it.
