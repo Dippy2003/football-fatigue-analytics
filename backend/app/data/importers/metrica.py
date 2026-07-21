@@ -23,6 +23,16 @@ TRACKING_COLUMNS = {
     "ball_x",
     "ball_y",
 }
+EVENT_COLUMNS = {
+    "match_id",
+    "event_id",
+    "period",
+    "timestamp_seconds",
+    "team_id",
+    "event_type",
+    "start_x",
+    "start_y",
+}
 
 
 def load_metrica_tracking(path: Path) -> pd.DataFrame:
@@ -50,6 +60,46 @@ def load_metrica_tracking(path: Path) -> pd.DataFrame:
             "y",
             "ball_x",
             "ball_y",
+            "source",
+            "is_synthetic",
+        ]
+    ]
+
+
+def load_metrica_events(path: Path) -> pd.DataFrame:
+    """Load developer-supplied long-form normalized Metrica events."""
+    frame = pd.read_csv(require_local_file(path))
+    require_columns(frame, EVENT_COLUMNS)
+    canonical = convert_xy(
+        frame, x_column="start_x", y_column="start_y", system="normalized"
+    )
+    if {"end_x", "end_y"}.issubset(canonical.columns):
+        canonical = convert_xy(
+            canonical, x_column="end_x", y_column="end_y", system="normalized"
+        )
+    else:
+        canonical[["end_x", "end_y"]] = pd.NA
+    validate_pitch_bounds(
+        canonical, coordinate_pairs=(("start_x", "start_y"), ("end_x", "end_y"))
+    )
+    canonical["player_id"] = canonical.get("player_id", pd.Series(dtype="object"))
+    canonical["outcome"] = canonical.get("outcome", pd.Series(dtype="object"))
+    canonical["source"] = "metrica_sample_data"
+    canonical["is_synthetic"] = False
+    return canonical[
+        [
+            "match_id",
+            "event_id",
+            "period",
+            "timestamp_seconds",
+            "team_id",
+            "player_id",
+            "event_type",
+            "outcome",
+            "start_x",
+            "start_y",
+            "end_x",
+            "end_y",
             "source",
             "is_synthetic",
         ]

@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from app.data.importers.metrica import load_metrica_tracking
+from app.data.importers.metrica import load_metrica_events, load_metrica_tracking
 
 
 def test_metrica_tracking_converts_normalized_coordinates(tmp_path: Path) -> None:
@@ -43,3 +43,27 @@ def test_metrica_tracking_rejects_missing_columns(tmp_path: Path) -> None:
 def test_metrica_tracking_requires_existing_local_file(tmp_path: Path) -> None:
     with pytest.raises(FileNotFoundError):
         load_metrica_tracking(tmp_path / "not-downloaded.csv")
+
+
+def test_metrica_events_convert_locations(tmp_path: Path) -> None:
+    path = tmp_path / "developer-events.csv"
+    pd.DataFrame(
+        {
+            "match_id": ["local-1"],
+            "event_id": ["event-1"],
+            "period": [1],
+            "timestamp_seconds": [12.0],
+            "team_id": ["Home"],
+            "event_type": ["PASS"],
+            "start_x": [0.25],
+            "start_y": [0.5],
+            "end_x": [0.75],
+            "end_y": [0.5],
+        }
+    ).to_csv(path, index=False)
+
+    result = load_metrica_events(path)
+
+    assert result.loc[0, "start_x"] == 26.25
+    assert result.loc[0, "end_x"] == 78.75
+    assert result.loc[0, "source"] == "metrica_sample_data"
