@@ -90,3 +90,23 @@ def flag_physiological_outliers(
     result["is_speed_outlier"] = result["speed_mps"] > max_speed_mps
     result["quality_excluded"] = result["is_speed_outlier"]
     return result
+
+
+def add_smoothed_speed(
+    frame: pd.DataFrame,
+    *,
+    window_s: float = DEFAULT_ANALYTICS_CONFIG.smoothing_window_s,
+) -> pd.DataFrame:
+    """Add a centered rolling-median speed robust to single-sample spikes."""
+    result = add_speed_features(frame)
+    intervals = result.groupby(PLAYER_PERIOD, sort=False)["timestamp_seconds"].diff()
+    typical_interval = float(intervals[intervals > 0].median())
+    sample_count = max(1, round(window_s / typical_interval)) if typical_interval else 1
+    if sample_count % 2 == 0:
+        sample_count += 1
+    result["smoothed_speed_mps"] = result.groupby(PLAYER_PERIOD, sort=False)[
+        "speed_mps"
+    ].transform(
+        lambda values: values.rolling(sample_count, center=True, min_periods=1).median()
+    )
+    return result
