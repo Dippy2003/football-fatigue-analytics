@@ -25,14 +25,15 @@ def _player_ids() -> list[tuple[str, str]]:
 
 
 def generate_synthetic_tracking(
-    *, seed: int = 20250714, period_duration_s: int = 180
+    *, seed: int = 20250714, period_duration_s: int = 180, sample_hz: int = 10
 ) -> pd.DataFrame:
     """Build repeatable two-period tracking for 18 fictional players."""
     rng = np.random.default_rng(seed)
     rows: list[dict[str, object]] = []
     players = _player_ids()
     for period in (1, 2):
-        for second in range(period_duration_s + 1):
+        for sample in range(period_duration_s * sample_hz + 1):
+            second = sample / sample_hz
             absolute = (period - 1) * period_duration_s + second
             ball_x = 52.5 + 32 * np.sin(absolute / 23)
             ball_y = 34 + 20 * np.cos(absolute / 17)
@@ -50,7 +51,8 @@ def generate_synthetic_tracking(
                     {
                         "match_id": "synthetic-match-001",
                         "period": period,
-                        "frame_id": absolute,
+                        "frame_id": (period - 1) * period_duration_s * sample_hz
+                        + sample,
                         "timestamp_seconds": float(second),
                         "team_id": team,
                         "player_id": player_id,
@@ -67,7 +69,7 @@ def generate_synthetic_tracking(
     dropout = (
         (frame["player_id"] == "home-06")
         & (frame["period"] == 2)
-        & frame["timestamp_seconds"].between(80, 81)
+        & frame["timestamp_seconds"].between(80.1, 80.2)
     )
     frame.loc[dropout, ["x", "y"]] = np.nan
     return frame

@@ -1,6 +1,7 @@
 """Tests for deterministic public-demo data."""
 
 import pandas as pd
+import pytest
 
 from app.data.synthetic import generate_synthetic_match
 
@@ -39,3 +40,7 @@ def test_synthetic_tracking_includes_cleanable_dropout() -> None:
     tracking = generate_synthetic_match().tracking
 
     assert tracking[["x", "y"]].isna().any().all()
+    one_player_period = tracking[
+        (tracking["player_id"] == "home-01") & (tracking["period"] == 1)
+    ]
+    assert one_player_period["timestamp_seconds"].diff().min() == pytest.approx(0.1)
