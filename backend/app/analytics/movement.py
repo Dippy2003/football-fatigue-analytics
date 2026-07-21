@@ -44,3 +44,25 @@ def summarize_distance(frame: pd.DataFrame) -> pd.DataFrame:
         active_minutes.where(active_minutes > 0)
     )
     return summary
+
+
+def add_speed_features(frame: pd.DataFrame) -> pd.DataFrame:
+    """Calculate instantaneous speed using only positive in-period time deltas."""
+    result = add_distance_features(frame)
+    delta_t = result.groupby(PLAYER_PERIOD, sort=False)["timestamp_seconds"].diff()
+    valid_delta = delta_t > 0
+    result["delta_t_s"] = delta_t.where(valid_delta)
+    result["speed_mps"] = result["step_distance_m"].div(result["delta_t_s"])
+    return result
+
+
+def summarize_speed(frame: pd.DataFrame) -> pd.DataFrame:
+    """Return average and maximum observed speeds per player."""
+    enriched = add_speed_features(frame)
+    return (
+        enriched.groupby(["match_id", "player_id"], sort=False)
+        .agg(
+            average_speed_mps=("speed_mps", "mean"), max_speed_mps=("speed_mps", "max")
+        )
+        .reset_index()
+    )
