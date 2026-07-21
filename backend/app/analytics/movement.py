@@ -5,6 +5,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from app.analytics.config import DEFAULT_ANALYTICS_CONFIG
+
 PLAYER_PERIOD = ["match_id", "period", "player_id"]
 
 
@@ -75,4 +77,16 @@ def add_acceleration_features(frame: pd.DataFrame) -> pd.DataFrame:
     result["acceleration_mps2"] = speed_delta.div(result["delta_t_s"])
     result["positive_acceleration_mps2"] = result["acceleration_mps2"].clip(lower=0)
     result["deceleration_mps2"] = (-result["acceleration_mps2"]).clip(lower=0)
+    return result
+
+
+def flag_physiological_outliers(
+    frame: pd.DataFrame,
+    *,
+    max_speed_mps: float = DEFAULT_ANALYTICS_CONFIG.physiological_max_speed_mps,
+) -> pd.DataFrame:
+    """Flag implausible jumps without silently deleting observations."""
+    result = add_speed_features(frame)
+    result["is_speed_outlier"] = result["speed_mps"] > max_speed_mps
+    result["quality_excluded"] = result["is_speed_outlier"]
     return result
