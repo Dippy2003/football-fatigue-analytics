@@ -116,9 +116,15 @@ def generate_synthetic_events(
     return pd.DataFrame(rows)
 
 
-def generate_synthetic_match(*, seed: int = 20250714) -> SyntheticMatch:
+def generate_synthetic_match(
+    *, seed: int = 20250714, period_duration_s: int = 180
+) -> SyntheticMatch:
     """Return the only dataset enabled by default for public demonstrations."""
     return SyntheticMatch(
-        tracking=generate_synthetic_tracking(seed=seed),
-        events=generate_synthetic_events(seed=seed),
+        tracking=generate_synthetic_tracking(
+            seed=seed, period_duration_s=period_duration_s
+        ),
+        events=generate_synthetic_events(
+            seed=seed, period_duration_s=period_duration_s
+        ),
     )
