@@ -113,3 +113,10 @@ Generate `docs/COMMIT_LOG.md` from real Git history at each checkpoint with
 `scripts/export_commit_log.py`; never try to put a commit's own hash inside that
 same commit. At least 30 substantive atomic commits and an annotated checkpoint
 tag are required per development day.
+
+## Current handoff
+
+Day 2 implementation and its full quality gate are complete on `main`. The
+next permitted work is checkpoint documentation, commit-log export, and the
+annotated `day-2-complete` tag. Do not begin Day 3 persistence/API/risk work
+until the user explicitly says `Continue to Day 3`.

@@ -2,14 +2,32 @@
 
 ## Current checkpoint
 
-- Development phase: Day 2 in progress
-- Completed tasks: Day 2 Task 1 - official dataset rights re-verification
+- Development phase: Day 2 checkpoint preparation
+- Completed tasks: all Day 2 ingestion, analytics, quality, and documentation tasks
 - Branch: `main`
 - Starting checkpoint: `day-1-complete` at `ab929e68b84796b1a66fa84161e4df8a72d92243`
 - Authorized remote: `https://github.com/Dippy2003/football-fatigue-analytics.git`
-- Next exact task: Day 2 Task 2 - implement and test the typed source-registry schema and rights-status validation
+- Day 2 commits so far: 31 substantive commits after `day-1-complete`
+- Next exact task: finalize `docs/DAY_2_REPORT.md`, export Git history, create `day-2-complete`, and stop
 
 ## Completed work
+
+- Implemented validated rights registry records and fail-closed import rules.
+- Added canonical tracking/event schemas and 105 by 68 metre conversions.
+- Added deterministic fictional 10 Hz tracking for two teams, 20 rostered
+  players, two periods, substitutions, workload profiles, supported events,
+  and a cleanable dropout.
+- Added local-only Metrica-compatible tracking/event CSV adapters and an
+  acknowledgement-gated StatsBomb event JSON adapter; tests use only generated
+  fictional fixtures.
+- Added ordering, deduplication, short-gap interpolation, quality flags,
+  distance, active time, speed, acceleration/deceleration, outlier flags,
+  centered-median smoothing, five intensity zones, sprint detection,
+  15-minute windows, event metrics, and transparent quality scores.
+- Added checksum-backed import manifests, safe Parquet persistence, an
+  end-to-end synthetic processing pipeline, and a developer CLI.
+- Generated six ignored synthetic Parquet tables in a real CLI smoke check;
+  quality score was 100 with 10,836 rows for the 30-second-per-period check.
 
 - Re-read the continuation files, verified clean `main` and the annotated Day 1
   tag, and reran the smallest backend/frontend smoke tests successfully.
@@ -34,6 +52,33 @@
   only after the local Day 1 tag is created.
 
 ## Latest validation
+
+Day 2 checkpoint checks supersede the Day 1 evidence below:
+
+| Check | Day 2 result | Evidence |
+| --- | --- | --- |
+| Backend format/lint/types | Passed | Ruff 62 files; mypy 61 source files |
+| Backend tests | Passed | 71 passed; 96% coverage; one upstream warning |
+| Frontend format/lint/types | Passed | Prettier, ESLint, TypeScript clean |
+| Frontend tests/build | Passed | 1 Vitest test; Vite 95-module build |
+| Demo pipeline | Passed | six synthetic Parquet outputs; quality 100 |
+| Dataset-file policy | Passed | no prohibited tracked data |
+| Alembic upgrade | Passed | current empty Day 1 migration baseline |
+| Alembic downgrade | Expected failure | no revisions exist until Day 3 |
+| Compose syntax | Passed | three services parsed successfully |
+
+## Day 2 known limitations
+
+- The synthetic demo uses compressed 180-second periods to keep local/CI runs
+  fast; its workload patterns are illustrative, not match validation.
+- Metrica adapters currently accept documented local long-form normalized CSV,
+  not the provider's wide multi-header sample layout.
+- StatsBomb is event-only; tracking-dependent metrics cannot be inferred.
+- Generated Parquet remains local and ignored; Day 3 adds relational persistence
+  and APIs.
+- Docker Compose syntax passed, but the container stack was not started during
+  this checkpoint.
+- Alembic has no domain revision to downgrade until Day 3.
 
 | Check | Result | Evidence |
 | --- | --- | --- |
@@ -68,7 +113,7 @@
   return typing, UTC alias use, Alembic import order, and router hot-reload
   warnings; each was corrected and the full gates rerun.
 
-## Known limitations
+## Day 1 limitations (historical checkpoint)
 
 - No match data generation, ingestion, analytics, canonical schemas, Parquet,
   domain persistence, risk calculation, or complete dashboard exists yet.
@@ -80,8 +125,7 @@
 
 ## Resume protocol
 
-Do not begin Day 2 until the user explicitly says `Continue to Day 2`. On resume,
-read `AGENTS.md`, `docs/IMPLEMENTATION_PLAN.md`, this file,
-`docs/COMMIT_LOG.md`, the Day 1 report, and recent Git history; verify the clean
-working tree and `day-1-complete`; then run the smallest backend/frontend smoke
-check before Day 2 Task 1.
+After the Day 2 report and tag exist, do not begin Day 3 until the user
+explicitly says `Continue to Day 3`. On resume, read `AGENTS.md`, the plan, this
+file, commit log, Day 2 report, and recent Git history; verify clean `main` and
+`day-2-complete`, then run small backend/frontend smoke checks before Day 3.

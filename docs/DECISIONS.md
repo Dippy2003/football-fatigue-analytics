@@ -102,3 +102,33 @@ The user explicitly authorized pushing PlayerPulse to
 on the professional `main` branch; no phase-named branches are created. Daily
 phase markers remain annotated tags required by the governing specification.
 The remote was confirmed empty before the first push.
+
+## ADR-009: provider-neutral metre schemas and fail-closed adapters
+
+- Status: accepted
+- Date: 2026-07-21
+
+All tracking and event adapters normalize into strict provider-neutral schemas
+using seconds within period and a 105 by 68 metre pitch. Analytics operate only
+on these canonical tables. This prevents provider conventions from leaking into
+metric formulas and makes boundary behavior testable.
+
+The synthetic generator is the only source allowed without additional action.
+Metrica-compatible imports require developer-supplied local files. StatsBomb
+event imports additionally require an explicit current-rights acknowledgement.
+Neither adapter downloads, bundles, or commits provider data.
+
+## ADR-010: transparent quality-preserving movement pipeline
+
+- Status: accepted
+- Date: 2026-07-21
+
+Cleaning retains evidence: duplicates are reported, short interpolation is
+marked, long gaps remain unresolved, and implausible speed observations are
+flagged instead of silently removed. The quality score exposes completeness,
+timestamp monotonicity, and plausible-speed rate separately from later
+performance-risk calculations.
+
+Derived local tables use Parquet with PyArrow. Pickle and Joblib are prohibited
+for imported tables because they can execute untrusted serialized code. Public
+demo outputs are reproducible, synthetic, generated on demand, and Git-ignored.

@@ -3,7 +3,7 @@
 ## Phase status
 
 - Day 1: complete and tagged `day-1-complete`
-- Day 2: in progress after explicit user authorization
+- Day 2: implementation and quality gate complete; checkpoint documentation/tag pending
 - Days 3-5: not started
 
 This plan follows the authoritative audited master prompt. A "day" is a tagged
