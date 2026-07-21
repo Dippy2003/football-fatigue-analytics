@@ -7,11 +7,22 @@ providers' current official terms.
 
 ## Verification record
 
-- Verification timestamp: 2026-07-20T04:57:02Z
+- Verification timestamp: 2026-07-21T02:27:23Z
 - Verification method: official repository pages opened; official branch heads
   resolved; small official terms files fetched temporarily for SHA-256 only.
 - Raw football data downloaded: none
 - Provider logos downloaded or bundled: none
+
+## Day 2 re-verification
+
+The official pages, `master` branch heads, and terms files were checked again
+before adapter implementation on 2026-07-21. The Metrica commit remains
+`e706dd506b360d69d9d123d5b8026e7294b13996` and its README terms digest remains
+`fa4b178e62c4d3559e13b6d3a4fdd42e45293461c2ab656e05a13360a6adcbcf`.
+The Hudl StatsBomb commit remains
+`b0bc9f22dd77c206ddedc1d742893b3bbe64baec` and its licence digest remains
+`a5462e69aeb71a39268b760b110c5c2190a2e0cee3015ba976f66bd71f6c2bb4`.
+No rights status changed, so the conservative adapter policies remain in force.
 
 ## PlayerPulse deterministic synthetic data
 

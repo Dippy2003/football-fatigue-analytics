@@ -1,12 +1,12 @@
 schema_version: 1
-verified_at_utc: "2026-07-20T04:57:02Z"
+verified_at_utc: "2026-07-21T02:27:23Z"
 sources:
   - id: synthetic_playerpulse
     provider: PlayerPulse
     repository_owner: PlayerPulse contributors
     source_url: null
     terms_url: null
-    access_date: "2026-07-20"
+    access_date: "2026-07-21"
     checked_ref: null
     verified_commit: null
     terms_sha256: null
@@ -21,7 +21,7 @@ sources:
     repository_owner: metrica-sports
     source_url: "https://github.com/metrica-sports/sample-data"
     terms_url: "https://github.com/metrica-sports/sample-data#legal-stuff"
-    access_date: "2026-07-20"
+    access_date: "2026-07-21"
     checked_ref: master
     verified_commit: "e706dd506b360d69d9d123d5b8026e7294b13996"
     terms_sha256: "fa4b178e62c4d3559e13b6d3a4fdd42e45293461c2ab656e05a13360a6adcbcf"
@@ -37,7 +37,7 @@ sources:
     repository_owner: hudl
     source_url: "https://github.com/hudl/open-data"
     terms_url: "https://github.com/hudl/open-data/blob/master/LICENSE.pdf"
-    access_date: "2026-07-20"
+    access_date: "2026-07-21"
     checked_ref: master
     verified_commit: "b0bc9f22dd77c206ddedc1d742893b3bbe64baec"
     terms_sha256: "a5462e69aeb71a39268b760b110c5c2190a2e0cee3015ba976f66bd71f6c2bb4"

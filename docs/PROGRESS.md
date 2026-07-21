@@ -2,15 +2,20 @@
 
 ## Current checkpoint
 
-- Development phase: Day 1 complete; work paused at the mandatory boundary
-- Completed tasks: all Day 1 foundation tasks plus rights evidence and safety tooling
+- Development phase: Day 2 in progress
+- Completed tasks: Day 2 Task 1 - official dataset rights re-verification
 - Branch: `main`
-- Latest completed commit before this progress update: `1306fc8`
-- Required checkpoint tag: `day-1-complete` (created after final report and ledger)
+- Starting checkpoint: `day-1-complete` at `ab929e68b84796b1a66fa84161e4df8a72d92243`
 - Authorized remote: `https://github.com/Dippy2003/football-fatigue-analytics.git`
-- Next exact task: wait for `Continue to Day 2`, then re-read continuation files and begin Day 2 Task 1 rights re-verification
+- Next exact task: Day 2 Task 2 - implement and test the typed source-registry schema and rights-status validation
 
 ## Completed work
+
+- Re-read the continuation files, verified clean `main` and the annotated Day 1
+  tag, and reran the smallest backend/frontend smoke tests successfully.
+- Re-checked the official Metrica Sports and Hudl StatsBomb pages, branch heads,
+  and terms digests at `2026-07-21T02:27:23Z`; no rights status changed and no
+  raw football data or provider logo was downloaded.
 
 - Created a 35-commit foundation before final progress/report commits, exceeding
   the required 30 meaningful commits without empty or padding changes.
