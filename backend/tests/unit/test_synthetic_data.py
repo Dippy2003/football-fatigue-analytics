@@ -59,8 +59,9 @@ def test_synthetic_match_includes_second_period_substitutions() -> None:
     assert replaced["timestamp_seconds"].max() == 90
 
 
-def test_synthetic_match_contains_plausible_sprint_bouts() -> None:
-    tracking = generate_synthetic_match(period_duration_s=40).tracking
+@pytest.mark.parametrize("seed", [42, 20_250_714, 20_260_720])
+def test_synthetic_match_contains_plausible_sprint_bouts(seed: int) -> None:
+    tracking = generate_synthetic_match(seed=seed, period_duration_s=40).tracking
     sprints = detect_sprints(tracking)
 
     assert not sprints.empty

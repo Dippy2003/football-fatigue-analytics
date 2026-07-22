@@ -30,7 +30,7 @@ def _sprint_displacement(second: float, *, shirt: int, period: int) -> float:
     within_cycle = (second + shirt * 1.3) % cycle_seconds
     if within_cycle >= 1.6:
         return 0.0
-    return float(3.5 * np.sin(np.pi * within_cycle / 1.6))
+    return float(4.2 * np.sin(np.pi * within_cycle / 1.6))
 
 
 def generate_synthetic_tracking(
