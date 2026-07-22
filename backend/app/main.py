@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import __version__
+from app.api.routes.datasets import router as dataset_router
 from app.api.routes.system import router as system_router
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
@@ -34,6 +35,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         allow_headers=["Accept", "Authorization", "Content-Type", "X-Request-ID"],
     )
     application.include_router(system_router)
+    application.include_router(dataset_router)
     return application
 
 
