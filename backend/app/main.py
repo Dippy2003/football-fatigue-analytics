@@ -1,9 +1,15 @@
 """FastAPI application entry point."""
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import __version__
+from app.api.errors import (
+    http_exception_handler,
+    request_id_middleware,
+    validation_exception_handler,
+)
 from app.api.routes.datasets import router as dataset_router
 from app.api.routes.jobs import router as job_router
 from app.api.routes.matches import router as match_router
@@ -31,6 +37,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         openapi_url="/api/v1/openapi.json",
     )
     application.state.settings = resolved_settings
+    application.middleware("http")(request_id_middleware)
+    application.add_exception_handler(HTTPException, http_exception_handler)
+    application.add_exception_handler(
+        RequestValidationError, validation_exception_handler
+    )
     application.add_middleware(
         CORSMiddleware,
         allow_origins=resolved_settings.cors_allowed_origins,

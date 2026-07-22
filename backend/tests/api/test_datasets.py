@@ -69,4 +69,5 @@ def test_upload_endpoint_fails_closed_by_default() -> None:
         )
 
     assert response.status_code == 403
-    assert response.json()["detail"] == "Third-party uploads are disabled."
+    assert response.json()["message"] == "Third-party uploads are disabled."
+    assert response.json()["code"] == "http_403"
