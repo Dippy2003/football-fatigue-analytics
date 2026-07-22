@@ -3,7 +3,7 @@
 import pandas as pd
 import pytest
 
-from app.analytics.sprints import detect_sprints
+from app.analytics.sprints import SPRINT_COLUMNS, detect_sprints
 
 
 def make_track(speeds: list[float], interval: float = 0.1) -> pd.DataFrame:
@@ -36,4 +36,7 @@ def test_sprint_summary_reports_distance_and_peak() -> None:
 
 
 def test_subthreshold_movement_is_not_a_sprint() -> None:
-    assert detect_sprints(make_track([6.9] * 10)).empty
+    result = detect_sprints(make_track([6.9] * 10))
+
+    assert result.empty
+    assert result.columns.tolist() == SPRINT_COLUMNS

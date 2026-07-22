@@ -7,6 +7,17 @@ import pandas as pd
 from app.analytics.config import DEFAULT_ANALYTICS_CONFIG
 from app.analytics.movement import PLAYER_PERIOD, add_speed_features
 
+SPRINT_COLUMNS = [
+    "match_id",
+    "period",
+    "player_id",
+    "start_seconds",
+    "end_seconds",
+    "duration_s",
+    "distance_m",
+    "peak_speed_mps",
+]
+
 
 def detect_sprints(
     frame: pd.DataFrame,
@@ -43,4 +54,4 @@ def detect_sprints(
                     "peak_speed_mps": float(bout["speed_mps"].max()),
                 }
             )
-    return pd.DataFrame(bouts)
+    return pd.DataFrame(bouts, columns=SPRINT_COLUMNS)
