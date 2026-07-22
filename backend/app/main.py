@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app import __version__
 from app.api.routes.datasets import router as dataset_router
+from app.api.routes.jobs import router as job_router
 from app.api.routes.matches import router as match_router
 from app.api.routes.players import router as player_router
 from app.api.routes.risk import router as risk_router
@@ -40,6 +41,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(system_router)
     application.include_router(dataset_router)
     application.include_router(match_router)
+    application.include_router(job_router)
     application.include_router(player_router)
     application.include_router(risk_router)
     return application
