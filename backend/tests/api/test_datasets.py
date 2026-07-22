@@ -13,7 +13,9 @@ from app.main import create_app
 
 
 @contextmanager
-def api_client(*, enable_uploads: bool = False) -> Iterator[TestClient]:
+def api_client(
+    *, enable_uploads: bool = False, max_upload_mb: int = 25
+) -> Iterator[TestClient]:
     engine = build_engine(Settings(database_url="sqlite+pysqlite:///:memory:"))
     Base.metadata.create_all(engine)
     session_factory = build_session_factory(engine)
@@ -21,6 +23,7 @@ def api_client(*, enable_uploads: bool = False) -> Iterator[TestClient]:
         Settings(
             database_url="sqlite+pysqlite:///:memory:",
             enable_uploads=enable_uploads,
+            max_upload_mb=max_upload_mb,
             synthetic_seed=42,
         )
     )
