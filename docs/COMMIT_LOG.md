@@ -76,7 +76,42 @@ Generated from Git history by `scripts/export_commit_log.py`. Git remains the so
 | Day 2 | `1f5d0a2` | 2026-07-21T11:11:11+05:30 | feat(data): model deterministic demo substitutions |
 | Day 2 | `e96df97` | 2026-07-21T11:19:52+05:30 | docs: persist Day 2 analytics handoff state |
 | Day 2 | `e8cf945` | 2026-07-21T11:22:54+05:30 | docs: add verified Day 2 completion report |
+| Day 2 | `31b7c14` | 2026-07-21T11:23:32+05:30 | docs: generate Day 2 commit ledger from Git history |
+| Day 3 | `bd701a3` | 2026-07-22T09:57:06+05:30 | docs: refresh persistence implementation handoff |
+| Day 3 | `59dc81d` | 2026-07-22T10:36:47+05:30 | feat(db): persist dataset import lineage |
+| Day 3 | `09fd31c` | 2026-07-22T10:41:11+05:30 | feat(db): persist teams and anonymized players |
+| Day 3 | `1cee600` | 2026-07-22T10:42:25+05:30 | feat(db): link matches to teams and source lineage |
+| Day 3 | `67b0d4b` | 2026-07-22T10:44:00+05:30 | feat(db): persist player match feature summaries |
+| Day 3 | `3a720f1` | 2026-07-22T10:45:40+05:30 | feat(db): persist explainable risk assessments |
+| Day 3 | `0a72908` | 2026-07-22T11:07:40+05:30 | feat(db): persist processing job status |
+| Day 3 | `4e49892` | 2026-07-22T11:28:49+05:30 | test(db): verify clean migration round trip |
+| Day 3 | `27b7f19` | 2026-07-22T11:33:27+05:30 | feat(backend): add team and player repository |
+| Day 3 | `8a42737` | 2026-07-22T11:34:09+05:30 | feat(backend): add idempotent dataset repository |
+| Day 3 | `ae526fd` | 2026-07-22T11:34:55+05:30 | feat(backend): add match repository |
+| Day 3 | `a25bf81` | 2026-07-22T11:35:48+05:30 | feat(backend): add metrics and risk repository |
+| Day 3 | `b2220c1` | 2026-07-22T11:36:56+05:30 | feat(backend): enforce processing job transitions |
+| Day 3 | `cdcae65` | 2026-07-22T11:39:18+05:30 | fix(analytics): preserve empty sprint table schema |
+| Day 3 | `8b80d45` | 2026-07-22T11:41:04+05:30 | feat(backend): persist deterministic demo dataset |
+| Day 3 | `2ca6a5c` | 2026-07-22T11:43:23+05:30 | feat(analytics): select transparent workload baselines |
+| Day 3 | `5d627c3` | 2026-07-22T11:44:53+05:30 | feat(analytics): calculate transparent risk indicators |
+| Day 3 | `a44f954` | 2026-07-22T11:45:37+05:30 | test(analytics): validate risk sensitivity scenarios |
+| Day 3 | `77d34c8` | 2026-07-22T12:16:52+05:30 | feat(ml): gate reproducible anomaly training |
+| Day 3 | `8d7cc26` | 2026-07-22T12:20:55+05:30 | fix(db): share in-memory SQLite across request threads |
+| Day 3 | `be8ef6c` | 2026-07-22T12:21:33+05:30 | feat(api): expose demo sources and guarded uploads |
+| Day 3 | `0847e17` | 2026-07-22T12:22:54+05:30 | feat(api): expose matches players and team summaries |
+| Day 3 | `d79fef6` | 2026-07-22T12:39:58+05:30 | feat(api): expose player metrics timelines and heatmaps |
+| Day 3 | `5874b77` | 2026-07-22T12:41:32+05:30 | feat(data): add plausible synthetic sprint profiles |
+| Day 3 | `b077da6` | 2026-07-22T12:49:13+05:30 | feat(backend): persist sprint and baseline comparison features |
+| Day 3 | `119d5f1` | 2026-07-22T12:51:20+05:30 | fix(data): stabilize synthetic sprint bouts across seeds |
+| Day 3 | `0333518` | 2026-07-22T12:58:04+05:30 | feat(api): expose explainable risk and comparisons |
+| Day 3 | `2e69443` | 2026-07-22T12:59:43+05:30 | feat(api): orchestrate persisted match processing jobs |
+| Day 3 | `9bdb341` | 2026-07-22T20:53:23+05:30 | feat(api): standardize safe error responses |
+| Day 3 | `db0ef00` | 2026-07-22T20:58:45+05:30 | test(api): cover upload validation and limits |
+| Day 3 | `c0dafd9` | 2026-07-22T21:00:06+05:30 | docs(api): document endpoints model and risk limits |
+| Day 3 | `2120658` | 2026-07-22T21:02:50+05:30 | test(api): verify published OpenAPI surface |
+| Day 3 | `6a29178` | 2026-07-22T21:04:46+05:30 | docs: persist API and risk handoff state |
+| Day 3 | `6e99555` | 2026-07-22T22:13:34+05:30 | docs: add verified persistence and API report |
 
-Commits recorded: **72**.
+Commits recorded: **107**.
 
 The commit that updates this generated file cannot contain its own not-yet-known hash; the next checkpoint generation captures it.
