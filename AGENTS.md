@@ -116,7 +116,6 @@ tag are required per development day.
 
 ## Current handoff
 
-Day 2 implementation and its full quality gate are complete on `main`. The
-next permitted work is checkpoint documentation, commit-log export, and the
-annotated `day-2-complete` tag. Do not begin Day 3 persistence/API/risk work
-until the user explicitly says `Continue to Day 3`.
+Day 2 is complete, tagged, and pushed. The user explicitly authorized Day 3 on
+2026-07-22. Continue on `main` without phase-named branches or completion-style
+commit messages. Current work starts with dataset-import lineage persistence.

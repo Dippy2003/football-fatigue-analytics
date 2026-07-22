@@ -2,13 +2,14 @@
 
 ## Current checkpoint
 
-- Development phase: Day 2 checkpoint preparation
-- Completed tasks: all Day 2 ingestion, analytics, quality, and documentation tasks
+- Development phase: Day 3 in progress
+- Completed tasks: Day 2 checkpoint tagged and pushed to the authorized remote
 - Branch: `main`
 - Starting checkpoint: `day-1-complete` at `ab929e68b84796b1a66fa84161e4df8a72d92243`
 - Authorized remote: `https://github.com/Dippy2003/football-fatigue-analytics.git`
-- Day 2 commits so far: 31 substantive commits after `day-1-complete`
-- Next exact task: finalize `docs/DAY_2_REPORT.md`, export Git history, create `day-2-complete`, and stop
+- Day 2 commits: 34 substantive commits after `day-1-complete`
+- Day 3 branch policy: continue on `main`; do not create phase-named branches
+- Next exact task: add dataset-import lineage persistence and the first migration
 
 ## Completed work
 
