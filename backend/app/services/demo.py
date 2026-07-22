@@ -36,7 +36,18 @@ def _metric_values(processing: ProcessingResult, player: Player) -> dict[str, ob
         .sum()
     )
     sprint_rows = processing.tables["sprints"]
-    player_sprints = sprint_rows[sprint_rows.get("player_id") == player.external_id]
+    player_sprints = sprint_rows[sprint_rows["player_id"] == player.external_id]
+    sprint_counts = player_sprints.groupby("period").size()
+    sprint_change = None
+    if 1 in sprint_counts and int(sprint_counts.loc[1]) > 0:
+        first_count = int(sprint_counts.loc[1])
+        second_count = int(sprint_counts.get(2, 0))
+        sprint_change = 100 * (second_count - first_count) / first_count
+    recoveries = (
+        player_sprints.sort_values(["period", "start_seconds"])
+        .groupby("period")["start_seconds"]
+        .diff()
+    )
     period_speed = player_rows.groupby("period")["speed_mps"].mean()
     speed_change = None
     if len(period_speed) == 2 and float(period_speed.iloc[0]) > 0:
@@ -62,16 +73,18 @@ def _metric_values(processing: ProcessingResult, player: Player) -> dict[str, ob
         "sprint_distance_m": float(player_sprints["distance_m"].sum())
         if not player_sprints.empty
         else 0,
-        "median_sprint_recovery_seconds": None,
+        "median_sprint_recovery_seconds": (
+            float(recoveries.median()) if recoveries.notna().any() else None
+        ),
         "acceleration_count": int((player_rows["acceleration_mps2"] >= 2).sum()),
         "deceleration_count": int((player_rows["deceleration_mps2"] >= 2).sum()),
         "second_half_speed_change_pct": speed_change,
-        "late_match_sprint_change_pct": None,
+        "late_match_sprint_change_pct": sprint_change,
         "late_match_distance_change_pct": None,
         "pass_accuracy_change_pct": None,
         "pressure_change_pct": None,
         "possession_loss_change": None,
-        "workload_vs_baseline_zscore": None,
+        "workload_vs_baseline_zscore": 0.0,
         "data_quality_score": processing.quality.quality_score / 100,
         "baseline_type": "match_only",
         "baseline_confidence": 0.4,

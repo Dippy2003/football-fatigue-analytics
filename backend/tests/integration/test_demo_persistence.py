@@ -14,8 +14,8 @@ def test_demo_persistence_is_complete_and_idempotent() -> None:
     Base.metadata.create_all(engine)
     session_factory = build_session_factory(engine)
     with session_factory() as session:
-        first = create_demo_dataset(session, seed=42, period_duration_s=10)
-        second = create_demo_dataset(session, seed=42, period_duration_s=10)
+        first = create_demo_dataset(session, seed=20_250_714, period_duration_s=40)
+        second = create_demo_dataset(session, seed=20_250_714, period_duration_s=40)
 
         assert first.created
         assert not second.created
@@ -24,4 +24,9 @@ def test_demo_persistence_is_complete_and_idempotent() -> None:
         assert session.scalar(select(func.count()).select_from(Match)) == 1
         assert session.scalar(select(func.count()).select_from(Player)) == 20
         assert session.scalar(select(func.count()).select_from(PlayerMatchMetric)) == 20
+        metric = session.scalar(
+            select(PlayerMatchMetric).where(PlayerMatchMetric.sprint_count > 0)
+        )
+        assert metric is not None
+        assert metric.workload_vs_baseline_zscore == 0
     engine.dispose()
