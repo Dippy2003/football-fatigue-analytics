@@ -116,6 +116,8 @@ tag are required per development day.
 
 ## Current handoff
 
-Day 2 is complete, tagged, and pushed. The user explicitly authorized Day 3 on
-2026-07-22. Continue on `main` without phase-named branches or completion-style
-commit messages. Current work starts with dataset-import lineage persistence.
+Persistence/API/risk implementation and its full quality gate are complete on
+`main`. Continue without phase-named branches or completion-style commit
+messages. Only checkpoint documentation, ledger generation, the required tag,
+and the already-authorized push remain. Do not begin frontend dashboard work
+until the user explicitly authorizes the next development phase.

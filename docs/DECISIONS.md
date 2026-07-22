@@ -132,3 +132,36 @@ performance-risk calculations.
 Derived local tables use Parquet with PyArrow. Pickle and Joblib are prohibited
 for imported tables because they can execute untrusted serialized code. Public
 demo outputs are reproducible, synthetic, generated on demand, and Git-ignored.
+
+## ADR-011: typed relational summaries with deterministic raw regeneration
+
+- Status: accepted
+- Date: 2026-07-22
+
+Dataset lineage, teams, players, matches, player-match metrics, assessments, and
+processing jobs use typed SQLAlchemy columns, UUID keys, UTC timestamps, and six
+reversible Alembic revisions. Public synthetic raw/timeline/heatmap/event tables
+are regenerated from the stored seed rather than bloating the relational store.
+Queryable summaries and explanations remain durable.
+
+## ADR-012: rule indicator primary, anomaly signal separate
+
+- Status: accepted
+- Date: 2026-07-22
+
+`rule-risk-v1` is the primary displayed performance-risk indicator. It requires
+three physical factors, 60% coverage, and quality of at least 0.50; otherwise it
+returns `insufficient_data`. Score and data/model confidence remain separate.
+The Isolation Forest is a separately reported optional signal, refuses fewer
+than 50 valid records, and is never interpreted as confirmed fatigue.
+
+## ADR-013: fail-closed uploads and in-process jobs
+
+- Status: accepted
+- Date: 2026-07-22
+
+Third-party multipart uploads remain disabled by default. When deliberately
+enabled for local use they require an explicit provider/manifest, bounded file
+count/size, safe `.csv`/`.json` basenames, and reject archives and serialized
+models. Processing jobs persist state but execute in-process; the API visibly
+states that a restart can require retry rather than implying durable workers.

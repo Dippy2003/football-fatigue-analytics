@@ -4,7 +4,7 @@
 
 - Day 1: complete and tagged `day-1-complete`
 - Day 2: complete and tagged `day-2-complete`
-- Day 3: in progress after explicit user authorization
+- Day 3: implementation and full quality gate complete; checkpoint report/tag pending
 - Days 4-5: not started
 
 This plan follows the authoritative audited master prompt. A "day" is a tagged

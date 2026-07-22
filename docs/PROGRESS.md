@@ -2,14 +2,51 @@
 
 ## Current checkpoint
 
-- Development phase: Day 3 in progress
-- Completed tasks: Day 2 checkpoint tagged and pushed to the authorized remote
+- Development phase: Day 3 checkpoint preparation
+- Completed tasks: persistence, API, baseline, risk, anomaly gate, security tests, and full quality gate
 - Branch: `main`
 - Starting checkpoint: `day-1-complete` at `ab929e68b84796b1a66fa84161e4df8a72d92243`
 - Authorized remote: `https://github.com/Dippy2003/football-fatigue-analytics.git`
 - Day 2 commits: 34 substantive commits after `day-1-complete`
 - Day 3 branch policy: continue on `main`; do not create phase-named branches
-- Next exact task: add dataset-import lineage persistence and the first migration
+- Day 3 commits so far: 33 substantive commits after `day-2-complete`
+- Next exact task: write the checkpoint report, export real Git history, create the required annotated tag, push authorized `main` and tag, then stop
+
+## Day 3 completed work
+
+- Added six reversible migrations and relational models for dataset lineage,
+  teams, anonymized players, matches, metrics, assessments, and jobs.
+- Added idempotent repositories and a deterministic demo persistence service.
+- Added demo/source/upload, match, player, metric, timeline, heatmap, event,
+  baseline, risk, comparison, processing, and job endpoints under `/api/v1`.
+- Added bounded 8 by 12 heatmaps, roughly 120-point timelines, standard errors,
+  request IDs, fail-closed upload validation, and published OpenAPI coverage.
+- Added baseline fallback/confidence, rule risk with contribution explanations,
+  insufficient-data handling, and reproducible Isolation Forest gating.
+- Live HTTP verification created one match and 20 players, returned an available
+  `rule-risk-v1` response, and served `/docs` with HTTP 200.
+
+## Day 3 latest validation
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Backend format/lint/types | Passed | Ruff 114 files; mypy 113 source files |
+| Backend tests | Passed | 123 passed; 96% coverage; one upstream warning |
+| Clean migrations | Passed | revisions 0001 through 0006 up; all down to base |
+| Live API journey | Passed | demo created; 1 match; 20 players; available risk; docs 200 |
+| Frontend checks/build | Passed | Prettier, ESLint, types, 1 test, 95-module build |
+| Dataset-file policy | Passed | no prohibited tracked data |
+| Compose syntax | Passed | configuration parsed quietly |
+
+## Day 3 known limitations
+
+- In-process jobs can require retry after a server restart.
+- External upload validation is implemented but remains disabled by default and
+  no third-party source file was processed during the checkpoint.
+- The public synthetic history has one stored match, so its baseline confidence
+  is the documented match-only 0.40 until more fictional/history rows exist.
+- The anomaly pipeline is validated in memory; no binary artifact is committed.
+- Raw tracking is regenerated deterministically for timeline/heatmap responses.
 
 ## Completed work
 
