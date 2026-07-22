@@ -3,6 +3,7 @@
 import pandas as pd
 import pytest
 
+from app.analytics.sprints import detect_sprints
 from app.data.synthetic import generate_synthetic_match
 
 
@@ -56,3 +57,11 @@ def test_synthetic_match_includes_second_period_substitutions() -> None:
     assert set(substitute["period"]) == {2}
     assert substitute["timestamp_seconds"].min() > 90
     assert replaced["timestamp_seconds"].max() == 90
+
+
+def test_synthetic_match_contains_plausible_sprint_bouts() -> None:
+    tracking = generate_synthetic_match(period_duration_s=40).tracking
+    sprints = detect_sprints(tracking)
+
+    assert not sprints.empty
+    assert sprints["peak_speed_mps"].max() <= 12.5

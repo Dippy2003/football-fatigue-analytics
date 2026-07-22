@@ -24,6 +24,15 @@ def _player_ids() -> list[tuple[str, str]]:
     ]
 
 
+def _sprint_displacement(second: float, *, shirt: int, period: int) -> float:
+    """Add smooth fictional sprint bouts with selected second-period decline."""
+    cycle_seconds = 70 if period == 2 and shirt in (3, 8) else 35
+    within_cycle = (second + shirt * 1.3) % cycle_seconds
+    if within_cycle >= 1.6:
+        return 0.0
+    return float(3.5 * np.sin(np.pi * within_cycle / 1.6))
+
+
 def generate_synthetic_tracking(
     *, seed: int = 20250714, period_duration_s: int = 180, sample_hz: int = 10
 ) -> pd.DataFrame:
@@ -51,6 +60,9 @@ def generate_synthetic_tracking(
                 y = 34 + 25 * np.cos(absolute / 15 + phase)
                 x += workload * decline * np.sin(absolute / 2.7 + phase)
                 y += workload * decline * np.cos(absolute / 3.1 + phase)
+                x += direction * _sprint_displacement(
+                    second, shirt=shirt, period=period
+                )
                 rows.append(
                     {
                         "match_id": "synthetic-match-001",
