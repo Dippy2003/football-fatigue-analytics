@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app import __version__
 from app.api.routes.datasets import router as dataset_router
 from app.api.routes.matches import router as match_router
+from app.api.routes.players import router as player_router
 from app.api.routes.system import router as system_router
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
@@ -38,6 +39,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(system_router)
     application.include_router(dataset_router)
     application.include_router(match_router)
+    application.include_router(player_router)
     return application
 
 
