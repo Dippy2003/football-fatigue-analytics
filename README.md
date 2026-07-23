@@ -2,7 +2,7 @@
 
 PlayerPulse is an explainable football workload, fatigue-indicator, and
 performance-risk analytics platform for coaches, analysts, students, and
-portfolio reviewers.
+portfolio reviewers
 
 > PlayerPulse provides performance-based indicators from available match data.
 > It is not a medical diagnostic tool and must not be used as a substitute for
