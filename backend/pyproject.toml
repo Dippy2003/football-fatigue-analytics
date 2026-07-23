@@ -44,6 +44,7 @@ packages = ["app"]
 
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers --strict-config"
+cache_dir = ".pytest-cache"
 pythonpath = ["."]
 testpaths = ["tests"]
 
