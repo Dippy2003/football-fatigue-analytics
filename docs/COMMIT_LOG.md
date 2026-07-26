@@ -111,7 +111,49 @@ Generated from Git history by `scripts/export_commit_log.py`. Git remains the so
 | Day 3 | `2120658` | 2026-07-22T21:02:50+05:30 | test(api): verify published OpenAPI surface |
 | Day 3 | `6a29178` | 2026-07-22T21:04:46+05:30 | docs: persist API and risk handoff state |
 | Day 3 | `6e99555` | 2026-07-22T22:13:34+05:30 | docs: add verified persistence and API report |
+| Day 3 | `b619789` | 2026-07-22T22:48:13+05:30 | docs: refresh generated commit ledger |
+| Uncheckpointed | `0b7c848` | 2026-07-23T14:54:46+05:30 | fix(test): isolate Windows pytest temp paths |
+| Uncheckpointed | `8e15d75` | 2026-07-23T22:59:51+05:30 | fix(docs): correct punctuation in project description |
+| Uncheckpointed | `12c8646` | 2026-07-26T22:03:35+05:30 | feat(frontend): define analytics domain contracts |
+| Uncheckpointed | `f661569` | 2026-07-26T22:03:36+05:30 | feat(frontend): add dataset API client |
+| Uncheckpointed | `8913fe4` | 2026-07-26T22:03:36+05:30 | feat(frontend): add match API client |
+| Uncheckpointed | `f01d0bb` | 2026-07-26T22:03:36+05:30 | feat(frontend): add player analytics API client |
+| Uncheckpointed | `0547cd5` | 2026-07-26T22:03:36+05:30 | feat(frontend): add risk comparison API client |
+| Uncheckpointed | `57571bb` | 2026-07-26T22:03:36+05:30 | feat(frontend): add processing job API client |
+| Uncheckpointed | `13763fa` | 2026-07-26T22:03:36+05:30 | feat(frontend): add safe metric formatting |
+| Uncheckpointed | `00d4142` | 2026-07-26T22:03:36+05:30 | test(frontend): verify safe metric formatting |
+| Uncheckpointed | `df7cdfa` | 2026-07-26T22:03:36+05:30 | feat(frontend): add reusable content panels |
+| Uncheckpointed | `268aa96` | 2026-07-26T22:03:36+05:30 | feat(frontend): add labelled status badges |
+| Uncheckpointed | `8d75fca` | 2026-07-26T22:03:37+05:30 | feat(frontend): add remote data states |
+| Uncheckpointed | `d58fee6` | 2026-07-26T22:03:37+05:30 | feat(frontend): add metric summary cards |
+| Uncheckpointed | `da33be1` | 2026-07-26T22:03:37+05:30 | feat(frontend): present data quality evidence |
+| Uncheckpointed | `74ad075` | 2026-07-26T22:03:37+05:30 | feat(frontend): present explainable risk indicators |
+| Uncheckpointed | `c7293a8` | 2026-07-26T22:03:37+05:30 | feat(frontend): support persistent color themes |
+| Uncheckpointed | `5ce481b` | 2026-07-26T22:03:37+05:30 | feat(frontend): render accessible football pitch |
+| Uncheckpointed | `2eead59` | 2026-07-26T22:03:37+05:30 | feat(frontend): chart sampled speed timeline |
+| Uncheckpointed | `1b361de` | 2026-07-26T22:03:37+05:30 | feat(frontend): chart player workload ranking |
+| Uncheckpointed | `2b517a4` | 2026-07-26T22:03:38+05:30 | feat(frontend): establish responsive design system |
+| Uncheckpointed | `1fb9195` | 2026-07-26T22:03:38+05:30 | feat(frontend): add adaptive navigation controls |
+| Uncheckpointed | `71ca7a8` | 2026-07-26T22:03:38+05:30 | feat(frontend): load demo from landing page |
+| Uncheckpointed | `181fc49` | 2026-07-26T22:03:38+05:30 | feat(frontend): build match overview dashboard |
+| Uncheckpointed | `7c43b1e` | 2026-07-26T22:03:38+05:30 | feat(frontend): build processed match directory |
+| Uncheckpointed | `923c1fc` | 2026-07-26T22:03:38+05:30 | feat(frontend): build filterable match explorer |
+| Uncheckpointed | `a5cc6a9` | 2026-07-26T22:03:38+05:30 | feat(frontend): build player analysis workspace |
+| Uncheckpointed | `461f9b3` | 2026-07-26T22:03:38+05:30 | feat(frontend): compare selected player workloads |
+| Uncheckpointed | `b6ae7cb` | 2026-07-26T22:03:38+05:30 | feat(frontend): build data management workflow |
+| Uncheckpointed | `8317f00` | 2026-07-26T22:03:39+05:30 | docs(frontend): explain analytics methodology |
+| Uncheckpointed | `173b133` | 2026-07-26T22:03:39+05:30 | docs(frontend): publish ethical limitations |
+| Uncheckpointed | `de11af8` | 2026-07-26T22:03:39+05:30 | docs(frontend): present project and attribution |
+| Uncheckpointed | `97e2e56` | 2026-07-26T22:03:39+05:30 | feat(frontend): connect reviewer routes |
+| Uncheckpointed | `7ce6f4c` | 2026-07-26T22:03:39+05:30 | test(frontend): cover navigation and theme access |
+| Uncheckpointed | `9e11296` | 2026-07-26T22:03:39+05:30 | test(frontend): verify pitch accessibility |
+| Uncheckpointed | `c7c6088` | 2026-07-26T22:03:39+05:30 | test(frontend): verify risk explanation content |
+| Uncheckpointed | `31f5397` | 2026-07-26T22:14:00+05:30 | fix(docs): correct root mypy command |
+| Uncheckpointed | `6e6f9c9` | 2026-07-26T22:14:00+05:30 | docs: add frontend reviewer guide |
+| Uncheckpointed | `815b4e1` | 2026-07-26T22:14:00+05:30 | docs: record accessible interface decision |
+| Uncheckpointed | `422a377` | 2026-07-26T22:14:00+05:30 | docs: persist interface phase handoff |
+| Uncheckpointed | `75d7468` | 2026-07-26T22:14:00+05:30 | docs: add verified interface report |
 
-Commits recorded: **107**.
+Commits recorded: **149**.
 
 The commit that updates this generated file cannot contain its own not-yet-known hash; the next checkpoint generation captures it.
