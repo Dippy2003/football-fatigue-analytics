@@ -165,3 +165,20 @@ enabled for local use they require an explicit provider/manifest, bounded file
 count/size, safe `.csv`/`.json` basenames, and reject archives and serialized
 models. Processing jobs persist state but execute in-process; the API visibly
 states that a restart can require retry rather than implying durable workers.
+
+## ADR-014: API-backed accessible reviewer interface
+
+- Status: accepted
+- Date: 2026-07-26
+
+The frontend uses strict response types and cancellation-aware TanStack Query
+functions against versioned FastAPI routes. Unsupported values remain visibly
+unavailable rather than zero-filled. Match filters are preserved in URL
+parameters and comparison selection is bounded to two through four players.
+
+Charts use processed API values and provide units and textual summaries. The
+SVG pitch includes a semantic title and description. Risk color is paired with
+an icon and label, confidence remains separate from score, and the exact
+non-medical disclaimer accompanies assessments. Theme tokens, visible focus,
+skip navigation, labelled controls, responsive layouts, and reduced-motion
+behavior form the accessibility baseline.
