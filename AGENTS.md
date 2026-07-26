@@ -41,7 +41,7 @@ npm.cmd --prefix frontend run dev
 # Quality
 uv run --project backend ruff format --check .
 uv run --project backend ruff check .
-uv run --project backend mypy app tests
+uv run --project backend mypy --config-file backend/pyproject.toml backend/app backend/tests
 uv run --project backend pytest
 npm.cmd --prefix frontend run format:check
 npm.cmd --prefix frontend run lint
