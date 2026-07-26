@@ -153,7 +153,9 @@ Generated from Git history by `scripts/export_commit_log.py`. Git remains the so
 | Uncheckpointed | `815b4e1` | 2026-07-26T22:14:00+05:30 | docs: record accessible interface decision |
 | Uncheckpointed | `422a377` | 2026-07-26T22:14:00+05:30 | docs: persist interface phase handoff |
 | Uncheckpointed | `75d7468` | 2026-07-26T22:14:00+05:30 | docs: add verified interface report |
+| Uncheckpointed | `1443e5b` | 2026-07-26T22:14:06+05:30 | docs: refresh generated commit ledger |
+| Uncheckpointed | `e61c387` | 2026-07-26T22:14:39+05:30 | docs: refresh interface checkpoint handoff |
 
-Commits recorded: **149**.
+Commits recorded: **151**.
 
 The commit that updates this generated file cannot contain its own not-yet-known hash; the next checkpoint generation captures it.
