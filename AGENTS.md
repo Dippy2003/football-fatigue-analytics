@@ -116,8 +116,8 @@ tag are required per development day.
 
 ## Current handoff
 
-Persistence/API/risk implementation and its full quality gate are complete on
-`main`. Continue without phase-named branches or completion-style commit
-messages. Only checkpoint documentation, ledger generation, the required tag,
-and the already-authorized push remain. Do not begin frontend dashboard work
-until the user explicitly authorizes the next development phase.
+The API-backed responsive reviewer interface and its full repository quality
+gate are complete on `main`. Continue without phase-named branches or
+completion-style commit messages. Only final checkpoint verification, the
+required annotated tag, and the authorized push remain. Do not begin release
+hardening until the user explicitly authorizes the next development phase.
