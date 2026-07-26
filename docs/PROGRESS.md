@@ -2,15 +2,52 @@
 
 ## Current checkpoint
 
-- Development phase: Day 3 checkpoint preparation
-- Completed tasks: persistence, API, baseline, risk, anomaly gate, security tests, and full quality gate
+- Development phase: Day 4 checkpoint preparation
+- Completed tasks: responsive API-backed reviewer interface and full repository quality gate
 - Branch: `main`
 - Starting checkpoint: `day-1-complete` at `ab929e68b84796b1a66fa84161e4df8a72d92243`
 - Authorized remote: `https://github.com/Dippy2003/football-fatigue-analytics.git`
 - Day 2 commits: 34 substantive commits after `day-1-complete`
-- Day 3 branch policy: continue on `main`; do not create phase-named branches
-- Day 3 commits so far: 33 substantive commits after `day-2-complete`
-- Next exact task: write the checkpoint report, export real Git history, create the required annotated tag, push authorized `main` and tag, then stop
+- Day 4 branch policy: continue on `main`; no phase-named branch was created
+- Day 4 implementation commits: 34 substantive commits after phase authorization
+- Next exact task: finalize report and ledger, tag the verified checkpoint, push authorized `main` and tag, then stop
+
+## Day 4 completed work
+
+- Replaced frontend placeholders with API-backed landing, dashboard, match,
+  player, comparison, data, methodology, ethics, and about experiences.
+- Added demo loading, query cancellation, retryable errors, skeleton loading,
+  empty/unsupported states, URL-backed filters, and bounded player selection.
+- Added accessible workload and speed charts plus an SVG pitch with heatmap,
+  trajectory, average position, units, and text summaries.
+- Added labelled risk score, confidence, factor contributions, limitations,
+  exact disclaimer, and separate data-quality views.
+- Added responsive navigation, mobile menu, persistent themes, skip/focus
+  behavior, labelled forms, reduced motion, and safe unavailable formatting.
+- Live clean-database verification returned frontend HTTP 200, backend health
+  `ok`, 20 fictional players, `rule-risk-v1`, and an 8 by 12 heatmap.
+
+## Day 4 latest validation
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Frontend format/lint/types | Passed | Prettier, ESLint and TypeScript clean |
+| Frontend tests | Passed | 4 files, 6 tests |
+| Frontend build | Passed | 2,364 modules; chunk warning documented |
+| Backend format/lint/types | Passed | Ruff; mypy 114 source files |
+| Backend tests | Passed | 124 passed; one upstream warning |
+| Live API/UI services | Passed | frontend 200; health ok; 20 players; risk available |
+| Dataset/Compose policy | Passed | no prohibited files; Compose parsed |
+| Rendered browser inspection | Skipped | no browser backend was available |
+
+## Day 4 known limitations
+
+- Rendered-browser inspection and screenshots were unavailable; component
+  interaction tests and live HTTP were used.
+- The 793 kB production JavaScript chunk produces Vite's non-failing size
+  warning; route splitting remains release hardening.
+- Unsupported fifteen-minute changes display `Insufficient data`.
+- Local uploads remain intentionally disabled by default.
 
 ## Day 3 completed work
 
