@@ -15,15 +15,33 @@ describe('PlayerPulse application shell', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: 'See workload and performance changes in context.',
+        name: 'Turn match movement into decisions you can explain.',
       }),
     ).toBeInTheDocument()
-    expect(screen.getByText(/not a medical diagnostic tool/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/not a medical diagnostic tool/i)).not.toHaveLength(0)
 
-    await user.click(screen.getByRole('link', { name: 'Dashboard' }))
+    await user.click(screen.getByRole('link', { name: 'Methodology' }))
 
     expect(
-      await screen.findByRole('heading', { name: 'Dashboard' }),
+      await screen.findByRole('heading', { name: 'Methodology' }),
+    ).toBeInTheDocument()
+  })
+
+  it('supports a keyboard-accessible theme toggle', async () => {
+    const user = userEvent.setup()
+    render(
+      <AppProviders>
+        <App />
+      </AppProviders>,
+    )
+
+    const toggle = screen.getByRole('button', { name: 'Switch to dark mode' })
+    toggle.focus()
+    await user.keyboard('{Enter}')
+
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
+    expect(
+      screen.getByRole('button', { name: 'Switch to light mode' }),
     ).toBeInTheDocument()
   })
 })
