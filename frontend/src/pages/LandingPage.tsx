@@ -1,29 +1,96 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { Activity, ArrowRight, BarChart3, ShieldCheck } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { createDemo } from '../services/api/datasets'
+import { RISK_DISCLAIMER } from '../types/domain'
+
 export function LandingPage() {
+  const navigate = useNavigate()
+  const queryClient = useQueryClient()
+  const demo = useMutation({
+    mutationFn: () => createDemo(),
+    onSuccess: async (result) => {
+      await queryClient.invalidateQueries()
+      void navigate(`/matches/${result.match_id}`)
+    },
+  })
   return (
-    <section className="grid gap-8 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm md:grid-cols-[1.4fr_1fr] md:p-10">
-      <div>
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
-          Explainable football analytics
-        </p>
-        <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-          See workload and performance changes in context.
-        </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-          PlayerPulse turns match tracking and event data into movement, workload,
-          quality, and non-medical performance indicators that analysts can inspect.
-        </p>
-      </div>
-      <aside
-        className="rounded-xl bg-slate-950 p-6 text-slate-100"
-        aria-label="Day 1 status"
-      >
-        <p className="text-sm font-semibold text-emerald-300">Foundation checkpoint</p>
-        <p className="mt-3 text-2xl font-bold">Application shell ready</p>
-        <p className="mt-3 leading-7 text-slate-300">
-          The deterministic demo and football analytics pipeline arrive in later tagged
-          development phases.
-        </p>
+    <div className="space-y-8">
+      <section className="hero">
+        <div>
+          <p className="eyebrow">Explainable football analytics</p>
+          <h1>Turn match movement into decisions you can explain.</h1>
+          <p className="hero-copy">
+            Explore workload, speed changes, match context, data quality, and
+            transparent performance-risk indicators using a deterministic fictional
+            match.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <button
+              className="button-primary"
+              disabled={demo.isPending}
+              onClick={() => demo.mutate()}
+              type="button"
+            >
+              {demo.isPending ? 'Loading demo…' : 'Load demo match'}{' '}
+              <ArrowRight aria-hidden="true" size={18} />
+            </button>
+            <Link className="button-secondary" to="/methodology">
+              Review methodology
+            </Link>
+          </div>
+          {demo.isError && (
+            <p className="mt-3 text-sm text-red-700" role="alert">
+              The API is unavailable. Start the backend and try again.
+            </p>
+          )}
+        </div>
+        <div className="hero-visual" aria-label="PlayerPulse analysis summary">
+          <Activity aria-hidden="true" size={38} />
+          <strong>Synthetic demo</strong>
+          <p>20 fictional players · two teams · transparent calculations</p>
+        </div>
+      </section>
+      <section className="grid gap-4 md:grid-cols-3" aria-label="Supported analysis">
+        {(
+          [
+            [
+              'Workload context',
+              'Distance, speed, intensity, sprints, and match windows.',
+              BarChart3,
+            ],
+            [
+              'Explainable indicators',
+              'Factors, confidence, limitations, and alternative explanations.',
+              Activity,
+            ],
+            [
+              'Quality first',
+              'Missing support is shown instead of silently invented.',
+              ShieldCheck,
+            ],
+          ] satisfies Array<[string, string, LucideIcon]>
+        ).map(([title, copy, Icon]) => (
+          <article className="feature-card" key={String(title)}>
+            <Icon aria-hidden="true" />
+            <h2>{String(title)}</h2>
+            <p>{String(copy)}</p>
+          </article>
+        ))}
+      </section>
+      <aside className="disclaimer">
+        <ShieldCheck aria-hidden="true" size={18} />
+        {RISK_DISCLAIMER}
       </aside>
-    </section>
+      <p className="text-sm text-[var(--muted)]">
+        Public demonstrations use project-owned synthetic data. See{' '}
+        <Link className="text-link" to="/data">
+          data sources and rights
+        </Link>
+        .
+      </p>
+    </div>
   )
 }
