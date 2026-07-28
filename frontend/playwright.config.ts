@@ -9,7 +9,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://127.0.0.1:5173',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
@@ -26,7 +26,7 @@ export default defineConfig({
       env: {
         APP_ENV: 'test',
         DATABASE_URL: 'sqlite:///./playerpulse-e2e.db',
-        CORS_ALLOWED_ORIGINS: '["http://localhost:5173"]',
+        CORS_ALLOWED_ORIGINS: '["http://localhost:5173","http://127.0.0.1:5173"]',
       },
     },
     {

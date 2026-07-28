@@ -9,7 +9,7 @@ Settings are defined and validated in `backend/app/core/config.py`. Copy
 | `APP_VERSION` | `1.0.0` | public build version |
 | `LOG_LEVEL` | `INFO` | structured application log threshold |
 | `DATABASE_URL` | `sqlite:///./playerpulse.db` | SQLite local fallback or PostgreSQL URL |
-| `CORS_ALLOWED_ORIGINS` | `["http://localhost:5173"]` | explicit browser origin allowlist |
+| `CORS_ALLOWED_ORIGINS` | localhost and `127.0.0.1` on port 5173 | explicit browser origin allowlist |
 | `ENABLE_UPLOADS` | `false` | third-party import switch |
 | `MAX_UPLOAD_MB` | `25` | per-file size ceiling |
 | `MAX_IMPORT_FILES` | `5` | files per manifest ceiling |

@@ -22,7 +22,7 @@ services:
       APP_ENV: development
       APP_VERSION: 1.0.0
       DATABASE_URL: postgresql+psycopg://playerpulse:playerpulse_local_only@database:5432/playerpulse
-      CORS_ALLOWED_ORIGINS: '["http://localhost:5173"]'
+      CORS_ALLOWED_ORIGINS: '["http://localhost:5173","http://127.0.0.1:5173"]'
       ENABLE_UPLOADS: "false"
       DATA_ROOT: /data
       MODEL_ROOT: /models
