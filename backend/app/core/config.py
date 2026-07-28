@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     )
 
     app_env: Literal["development", "test", "production"] = "development"
-    app_version: str = "0.1.0"
+    app_version: str = "1.0.0"
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
     database_url: str = "sqlite:///./playerpulse.db"
     cors_allowed_origins: list[str] = Field(

@@ -1,6 +1,6 @@
 [project]
 name = "playerpulse-backend"
-version = "0.1.0"
+version = "1.0.0"
 description = "PlayerPulse FastAPI backend and football analytics services"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -29,7 +29,7 @@ dev = [
   "httpx>=0.28,<1",
   "mypy>=1.14,<2",
   "pandas-stubs>=2.2,<3",
-  "pytest>=8.3,<9",
+  "pytest>=9.0.3,<10",
   "pytest-cov>=6,<7",
   "ruff>=0.9,<1",
   "types-pyyaml>=6,<7",

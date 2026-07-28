@@ -26,7 +26,7 @@ def test_version_exposes_public_build_identity(client: TestClient) -> None:
     assert response.status_code == 200
     assert response.json() == {
         "name": "PlayerPulse API",
-        "version": "0.1.0",
+        "version": "1.0.0",
         "api_version": "v1",
     }
 
