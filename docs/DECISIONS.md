@@ -247,3 +247,21 @@ idempotent, while a reused source match ID with different bytes fails closed.
 This is a controlled local feature, not a public athlete-data service.
 Authentication, authorization, retention, audit, tenancy, privacy governance,
 and qualified operational review remain prerequisites for organizational use.
+
+## ADR-020: motion supports hierarchy without obscuring evidence
+
+- Status: accepted
+- Date: 2026-07-28
+
+PlayerPulse uses a modern, animated interface to communicate hierarchy and
+interaction state, but motion never changes an analytical value or replaces a
+text label. Page entrances, card feedback, radar scanning, route drawing,
+quality fills, and chart transitions use CSS and the existing visualization
+library instead of adding another animation dependency.
+
+Every effect is short, non-blocking, and disabled under
+`prefers-reduced-motion`. Keyboard focus, skip navigation, contrast, semantic
+chart summaries, responsive layouts, light/dark themes, and the exact
+performance-risk disclaimer remain part of the design contract. This keeps the
+portfolio experience visually distinctive without turning decision-support
+evidence into decoration or implying medical certainty.

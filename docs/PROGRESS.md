@@ -2,15 +2,49 @@
 
 ## Current checkpoint
 
-- Development phase: post-1.0 local tracking import feature
+- Development phase: post-1.0 interface modernization
 - Branch: `main` (no phase-named branch)
 - Runtime version: `1.0.0`
 - Starting release tag: `v1.0.0` at `8cd4861`
-- Feature commits: `87fcfbd`, `f9ca181`, and `169b0a9`
+- Feature baseline: authorized local tracking import and fictional upload
+  samples are complete
 - Remote state: local `main` contains unpushed work; no push or deployment was
   performed
-- Next exact action: update the generated commit ledger, commit the verified
-  checkpoint, and report the local enablement/import steps
+- Next exact action: commit the verified interface redesign, regenerate the
+  commit ledger, and hand off the browser review steps
+
+## Modern interface redesign completed
+
+- Rebuilt the application shell as a responsive glass navigation bar with
+  icon-labelled routes, a compact live-status indicator, an improved mobile
+  menu, and a richer footer.
+- Reworked the landing page into a contemporary football-intelligence hero
+  with a radar-style match visual, clearer calls to action, trust signals, and
+  an explicit responsible-review section.
+- Introduced a consistent visual language for metric cards, panels, buttons,
+  uploads, tables, status badges, data-quality meters, and light/dark themes.
+- Added restrained CSS-native motion for page entrances, hover feedback,
+  radar scanning, route drawing, metric fills, and chart transitions.
+- Modernized speed and workload charts with gradients and refined tooltips,
+  while preserving the semantic pitch description and real API-backed values.
+- Kept keyboard focus, skip navigation, readable contrast, mobile layouts, and
+  a comprehensive reduced-motion mode as release requirements.
+- Added no animation dependency: the motion layer uses CSS and the existing
+  chart library, limiting bundle and maintenance cost.
+
+## Interface verification evidence
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Prettier | Passed | All matched files use Prettier style |
+| ESLint | Passed | Zero warnings under `--max-warnings 0` |
+| TypeScript | Passed | Project references compiled cleanly |
+| Frontend unit suite | Passed | 8 files, 14 tests |
+| Production build | Passed | Vite transformed 2,366 modules |
+| Browser journeys | Passed | 8 desktop/mobile Playwright tests |
+| Accessibility | Passed | No serious/critical Axe findings at both viewports |
+| Keyboard navigation | Passed | Desktop and mobile route access verified |
+| Upload journey | Passed | Fictional CSV import verified at both viewports |
 
 ## Local tracking import completed
 
