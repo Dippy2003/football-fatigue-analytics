@@ -17,6 +17,26 @@ include real credentials, athlete data, or exploit payloads in a public issue.
 - raw/interim/processed data and generated model artifacts are ignored
 - CI and local checks scan for prohibited tracked data and oversized files
 - container health checks and a non-root backend runtime are configured
+- API responses and Nginx add anti-sniffing, framing, referrer, permissions,
+  cache, and content-security controls
+- production startup rejects wildcard, HTTP, localhost, and loopback CORS
+- uploads stream through bounded memory and validate suffix, media type, path,
+  file count, row count, and configured size
+- CI audits Python packages, critical production npm issues, tracked secrets,
+  dataset distribution, migrations, browsers, and container configuration
+
+## Supported version
+
+Security fixes are maintained on the current `1.x` release line. Older
+development checkpoints are historical and unsupported.
+
+## Reporting
+
+Send a private report to the repository owner with the affected version,
+reproduction conditions, impact, and suggested mitigation. Do not include
+credentials, real athlete information, provider raw data, or destructive
+payloads. Expect acknowledgement when the owner is available; this portfolio
+project does not promise a commercial response SLA.
 
 ## Data and privacy boundary
 
@@ -25,11 +45,10 @@ biometric, sleep, soreness, injury, or medical data. Synthetic data is fictional
 and explicitly labelled. External football data remains subject to its provider
 terms and must not be redistributed by default.
 
-## Not yet implemented
+## Production limitations
 
 Authentication, authorization, rate limiting, durable audit logs, object
 storage, retention policies, club tenancy, and a durable job queue are outside
 the five-day MVP. They are mandatory design work before real club deployment.
 
-Supported-version and coordinated-disclosure details will be finalized for
-v1.0.0. Never commit a vulnerability report containing secrets.
+Never commit a vulnerability report containing secrets.
