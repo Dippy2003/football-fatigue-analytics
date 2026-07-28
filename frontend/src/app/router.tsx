@@ -1,17 +1,45 @@
+import { lazy, Suspense } from 'react'
+import type { ComponentType } from 'react'
 import { createBrowserRouter, Outlet } from 'react-router-dom'
 
 import { AppShell } from '../components/layout/AppShell'
-import { AboutPage } from '../pages/AboutPage'
-import { ComparisonPage } from '../pages/ComparisonPage'
-import { DashboardPage } from '../pages/DashboardPage'
-import { DataPage } from '../pages/DataPage'
-import { EthicsPage } from '../pages/EthicsPage'
 import { LandingPage } from '../pages/LandingPage'
-import { MatchesPage } from '../pages/MatchesPage'
-import { MatchExplorerPage } from '../pages/MatchExplorerPage'
-import { MethodologyPage } from '../pages/MethodologyPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
-import { PlayerPage } from '../pages/PlayerPage'
+import { LoadingState } from '../components/ui/AsyncState'
+
+const loadPage = <T extends Record<string, ComponentType>>(
+  importer: () => Promise<T>,
+  exportName: keyof T,
+) =>
+  lazy(async () => {
+    const module = await importer()
+    return { default: module[exportName] }
+  })
+
+const DashboardPage = loadPage(() => import('../pages/DashboardPage'), 'DashboardPage')
+const MatchesPage = loadPage(() => import('../pages/MatchesPage'), 'MatchesPage')
+const MatchExplorerPage = loadPage(
+  () => import('../pages/MatchExplorerPage'),
+  'MatchExplorerPage',
+)
+const PlayerPage = loadPage(() => import('../pages/PlayerPage'), 'PlayerPage')
+const ComparisonPage = loadPage(
+  () => import('../pages/ComparisonPage'),
+  'ComparisonPage',
+)
+const DataPage = loadPage(() => import('../pages/DataPage'), 'DataPage')
+const MethodologyPage = loadPage(
+  () => import('../pages/MethodologyPage'),
+  'MethodologyPage',
+)
+const EthicsPage = loadPage(() => import('../pages/EthicsPage'), 'EthicsPage')
+const AboutPage = loadPage(() => import('../pages/AboutPage'), 'AboutPage')
+
+const deferred = (Page: ComponentType) => (
+  <Suspense fallback={<LoadingState label="Loading page" />}>
+    <Page />
+  </Suspense>
+)
 
 export const router = createBrowserRouter([
   {
@@ -22,15 +50,15 @@ export const router = createBrowserRouter([
     ),
     children: [
       { path: '/', element: <LandingPage /> },
-      { path: '/dashboard', element: <DashboardPage /> },
-      { path: '/matches', element: <MatchesPage /> },
-      { path: '/matches/:matchId', element: <MatchExplorerPage /> },
-      { path: '/matches/:matchId/players/:playerId', element: <PlayerPage /> },
-      { path: '/matches/:matchId/compare', element: <ComparisonPage /> },
-      { path: '/data', element: <DataPage /> },
-      { path: '/methodology', element: <MethodologyPage /> },
-      { path: '/ethics', element: <EthicsPage /> },
-      { path: '/about', element: <AboutPage /> },
+      { path: '/dashboard', element: deferred(DashboardPage) },
+      { path: '/matches', element: deferred(MatchesPage) },
+      { path: '/matches/:matchId', element: deferred(MatchExplorerPage) },
+      { path: '/matches/:matchId/players/:playerId', element: deferred(PlayerPage) },
+      { path: '/matches/:matchId/compare', element: deferred(ComparisonPage) },
+      { path: '/data', element: deferred(DataPage) },
+      { path: '/methodology', element: deferred(MethodologyPage) },
+      { path: '/ethics', element: deferred(EthicsPage) },
+      { path: '/about', element: deferred(AboutPage) },
       { path: '*', element: <NotFoundPage /> },
     ],
   },
