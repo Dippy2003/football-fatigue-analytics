@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import dataclass
+from threading import Lock
 
 from sqlalchemy.orm import Session
 
@@ -13,6 +14,8 @@ from app.repositories.analytics import AnalyticsRepository
 from app.repositories.datasets import DatasetRepository
 from app.repositories.matches import MatchRepository
 from app.repositories.teams import TeamPlayerRepository
+
+_DEMO_CREATION_LOCK = Lock()
 
 
 @dataclass(frozen=True)
@@ -93,7 +96,7 @@ def _metric_values(processing: ProcessingResult, player: Player) -> dict[str, ob
     }
 
 
-def create_demo_dataset(
+def _create_demo_dataset(
     session: Session, *, seed: int = 20_260_720, period_duration_s: int = 180
 ) -> DemoCreationResult:
     """Generate and store the same fictional match without duplicate records."""
@@ -159,3 +162,15 @@ def create_demo_dataset(
         processing=processing,
         created=existing_import is None,
     )
+
+
+def create_demo_dataset(
+    session: Session, *, seed: int = 20_260_720, period_duration_s: int = 180
+) -> DemoCreationResult:
+    """Serialize deterministic demo persistence within an API process."""
+    with _DEMO_CREATION_LOCK:
+        return _create_demo_dataset(
+            session,
+            seed=seed,
+            period_duration_s=period_duration_s,
+        )
