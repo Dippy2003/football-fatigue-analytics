@@ -52,6 +52,90 @@ jobs:
       - run: npm test -- --run
       - run: npm run build
 
+  browser:
+    name: Browser journey
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: uv sync --project backend --locked --all-groups
+      - run: npm ci
+        working-directory: frontend
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      - run: npm run test:e2e
+        working-directory: frontend
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-diagnostics
+          path: |
+            frontend/playwright-report
+            frontend/test-results
+          retention-days: 7
+
+  postgres:
+    name: PostgreSQL migrations
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: playerpulse
+          POSTGRES_USER: playerpulse
+          POSTGRES_PASSWORD: playerpulse_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U playerpulse"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://playerpulse:playerpulse_ci@localhost:5432/playerpulse
+      APP_ENV: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          python-version: "3.12"
+      - run: uv sync --project backend --locked --all-groups
+      - run: uv run --project backend alembic -c backend/alembic.ini upgrade head
+      - run: uv run --project backend alembic -c backend/alembic.ini downgrade base
+      - run: uv run --project backend alembic -c backend/alembic.ini upgrade head
+
+  security:
+    name: Security and rights
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: uv sync --project backend --locked --all-groups
+      - run: npm ci
+        working-directory: frontend
+      - run: uv run --project backend python scripts/check_dataset_files.py
+      - run: uv run --project backend python scripts/check_secrets.py
+      - run: uvx pip-audit --path backend/.venv/lib/python3.12/site-packages
+      - run: npm audit --omit=dev --audit-level=critical
+        working-directory: frontend
+
   compose:
     name: Container configuration
     runs-on: ubuntu-latest
