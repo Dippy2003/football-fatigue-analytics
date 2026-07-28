@@ -2,6 +2,8 @@
 FROM ghcr.io/astral-sh/uv:0.11.19 AS uv
 
 FROM python:3.12-slim AS runtime
+LABEL org.opencontainers.image.title="PlayerPulse API" \
+      org.opencontainers.image.description="Explainable football performance analytics API"
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
