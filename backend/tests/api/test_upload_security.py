@@ -57,3 +57,15 @@ def test_upload_size_limit_is_enforced_before_parsing() -> None:
         )
 
     assert response.status_code == 413
+
+
+def test_upload_content_type_must_match_suffix() -> None:
+    with api_client(enable_uploads=True) as client:
+        response = client.post(
+            "/api/v1/datasets/upload",
+            data={"provider": "local", "manifest": '{"files": []}'},
+            files=[("files", ("tracking.csv", b"{}", "application/json"))],
+        )
+
+    assert response.status_code == 415
+    assert response.json()["message"] == "File content type does not match its suffix."

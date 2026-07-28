@@ -28,6 +28,10 @@ from app.services.demo import create_demo_dataset
 router = APIRouter(prefix="/api/v1/datasets", tags=["datasets"])
 ROOT = Path(__file__).parents[4]
 ALLOWED_UPLOAD_SUFFIXES = {".csv", ".json"}
+ALLOWED_UPLOAD_TYPES = {
+    ".csv": {"text/csv", "application/csv"},
+    ".json": {"application/json", "text/json"},
+}
 
 
 class DemoDatasetResponse(BaseModel):
@@ -108,12 +112,14 @@ async def upload_dataset(
         raise HTTPException(status_code=422, detail="Manifest must declare file roles.")
     for upload in files:
         safe_name = Path(upload.filename or "").name
-        if (
-            safe_name != upload.filename
-            or Path(safe_name).suffix.lower() not in ALLOWED_UPLOAD_SUFFIXES
-        ):
+        suffix = Path(safe_name).suffix.lower()
+        if safe_name != upload.filename or suffix not in ALLOWED_UPLOAD_SUFFIXES:
             raise HTTPException(
                 status_code=415, detail="Unsupported or unsafe filename."
+            )
+        if upload.content_type not in ALLOWED_UPLOAD_TYPES[suffix]:
+            raise HTTPException(
+                status_code=415, detail="File content type does not match its suffix."
             )
         if (
             upload.size is not None
@@ -122,5 +128,13 @@ async def upload_dataset(
             raise HTTPException(
                 status_code=413, detail="Import file exceeds size limit."
             )
+        total = 0
+        while chunk := await upload.read(64 * 1024):
+            total += len(chunk)
+            if total > settings.max_upload_mb * 1024 * 1024:
+                await upload.close()
+                raise HTTPException(
+                    status_code=413, detail="Import file exceeds size limit."
+                )
         await upload.close()
     return {"status": "validated", "provider": provider, "file_count": len(files)}
