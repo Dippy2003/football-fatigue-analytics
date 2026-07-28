@@ -156,48 +156,57 @@ Generated from Git history by `scripts/export_commit_log.py`. Git remains the so
 | Day 4 | `1443e5b` | 2026-07-26T22:14:06+05:30 | docs: refresh generated commit ledger |
 | Day 4 | `e61c387` | 2026-07-26T22:14:39+05:30 | docs: refresh interface checkpoint handoff |
 | Day 4 | `304a406` | 2026-07-26T22:14:45+05:30 | docs: update checkpoint commit ledger |
-| Uncheckpointed | `e5f5035` | 2026-07-28T09:48:53+05:30 | security(api): add defensive response headers |
-| Uncheckpointed | `549a40d` | 2026-07-28T09:48:53+05:30 | security(config): reject unsafe production origins |
-| Uncheckpointed | `e2e992b` | 2026-07-28T09:48:53+05:30 | security(upload): enforce streamed size and media checks |
-| Uncheckpointed | `07250fb` | 2026-07-28T09:48:54+05:30 | perf(data): cache isolated synthetic fixtures |
-| Uncheckpointed | `cd33881` | 2026-07-28T09:48:54+05:30 | fix(demo): serialize idempotent demo creation |
-| Uncheckpointed | `a944732` | 2026-07-28T09:48:54+05:30 | test(integration): cover complete reviewer API flow |
-| Uncheckpointed | `700f03d` | 2026-07-28T09:48:54+05:30 | test(api): cover safe release error contracts |
-| Uncheckpointed | `26939e5` | 2026-07-28T09:48:55+05:30 | test(analytics): cover release edge cases |
-| Uncheckpointed | `f0c7654` | 2026-07-28T09:48:55+05:30 | fix(frontend): bound retries and sanitize errors |
-| Uncheckpointed | `f9c12c3` | 2026-07-28T09:48:55+05:30 | feat(frontend): add application error boundary |
-| Uncheckpointed | `644d003` | 2026-07-28T09:48:56+05:30 | test(frontend): verify loading and failure states |
-| Uncheckpointed | `5b2a293` | 2026-07-28T09:48:56+05:30 | perf(frontend): lazy load analytical routes |
-| Uncheckpointed | `c0b7327` | 2026-07-28T09:48:56+05:30 | build(frontend): isolate unit and browser test types |
-| Uncheckpointed | `38d7638` | 2026-07-28T09:48:56+05:30 | test(e2e): configure desktop and mobile browsers |
-| Uncheckpointed | `5108fe2` | 2026-07-28T09:48:57+05:30 | test(e2e): verify demo accessibility journey |
-| Uncheckpointed | `2200e51` | 2026-07-28T09:48:57+05:30 | fix(frontend): keep table actions accessible on mobile |
-| Uncheckpointed | `ae576f1` | 2026-07-28T09:48:57+05:30 | build(backend): label production container image |
-| Uncheckpointed | `635ba93` | 2026-07-28T09:48:57+05:30 | security(frontend): harden unprivileged web container |
-| Uncheckpointed | `e9070a9` | 2026-07-28T09:48:58+05:30 | security(compose): reduce container privileges |
-| Uncheckpointed | `6623446` | 2026-07-28T09:52:01+05:30 | ci: verify browsers postgres security and rights |
-| Uncheckpointed | `cb4a77e` | 2026-07-28T09:52:02+05:30 | ci: schedule dependency update reviews |
-| Uncheckpointed | `4897bed` | 2026-07-28T09:52:02+05:30 | security: scan tracked files for credentials |
-| Uncheckpointed | `b5c4860` | 2026-07-28T09:52:02+05:30 | build(release): add release invariant verifier |
-| Uncheckpointed | `a84a81a` | 2026-07-28T09:52:09+05:30 | build(release): align version and secure test toolchain |
-| Uncheckpointed | `4339009` | 2026-07-28T09:55:39+05:30 | docs(data): define canonical and persisted fields |
-| Uncheckpointed | `0c0806d` | 2026-07-28T09:55:39+05:30 | docs(data): publish synthetic demo data card |
-| Uncheckpointed | `798b147` | 2026-07-28T09:55:40+05:30 | docs(ethics): document responsible-use boundaries |
-| Uncheckpointed | `1fb8d51` | 2026-07-28T09:55:40+05:30 | docs(release): add evidence-based release checklist |
-| Uncheckpointed | `22e060f` | 2026-07-28T09:55:40+05:30 | docs(rights): record release terms re-verification |
-| Uncheckpointed | `31b6a18` | 2026-07-28T09:55:41+05:30 | docs(readme): publish complete reviewer quick start |
-| Uncheckpointed | `c127056` | 2026-07-28T09:55:41+05:30 | docs(security): finalize supported safeguards and reporting |
-| Uncheckpointed | `32735bd` | 2026-07-28T09:55:41+05:30 | docs(changelog): document 1.0.0 capabilities |
-| Uncheckpointed | `b538b1d` | 2026-07-28T09:55:41+05:30 | docs(architecture): describe release trust boundaries |
-| Uncheckpointed | `e5842ad` | 2026-07-28T09:55:42+05:30 | docs(deploy): define production release sequence |
-| Uncheckpointed | `9ba491a` | 2026-07-28T09:55:42+05:30 | docs(methodology): align release calculations and settings |
-| Uncheckpointed | `ed49c12` | 2026-07-28T09:55:42+05:30 | docs(guide): clarify recovery and local import flow |
-| Uncheckpointed | `dfb0ed3` | 2026-07-28T09:55:43+05:30 | docs(testing): document complete quality gate |
-| Uncheckpointed | `7287886` | 2026-07-28T09:55:43+05:30 | build: expose browser and release verification targets |
-| Uncheckpointed | `8fb9bba` | 2026-07-28T09:57:33+05:30 | fix(frontend): exclude browser artifacts from formatting |
-| Uncheckpointed | `95cc79a` | 2026-07-28T09:59:08+05:30 | fix(e2e): allow concurrent demo processing budget |
-| Uncheckpointed | `82d7780` | 2026-07-28T10:02:01+05:30 | docs: persist release verification handoff |
+| Day 5 | `e5f5035` | 2026-07-28T09:48:53+05:30 | security(api): add defensive response headers |
+| Day 5 | `549a40d` | 2026-07-28T09:48:53+05:30 | security(config): reject unsafe production origins |
+| Day 5 | `e2e992b` | 2026-07-28T09:48:53+05:30 | security(upload): enforce streamed size and media checks |
+| Day 5 | `07250fb` | 2026-07-28T09:48:54+05:30 | perf(data): cache isolated synthetic fixtures |
+| Day 5 | `cd33881` | 2026-07-28T09:48:54+05:30 | fix(demo): serialize idempotent demo creation |
+| Day 5 | `a944732` | 2026-07-28T09:48:54+05:30 | test(integration): cover complete reviewer API flow |
+| Day 5 | `700f03d` | 2026-07-28T09:48:54+05:30 | test(api): cover safe release error contracts |
+| Day 5 | `26939e5` | 2026-07-28T09:48:55+05:30 | test(analytics): cover release edge cases |
+| Day 5 | `f0c7654` | 2026-07-28T09:48:55+05:30 | fix(frontend): bound retries and sanitize errors |
+| Day 5 | `f9c12c3` | 2026-07-28T09:48:55+05:30 | feat(frontend): add application error boundary |
+| Day 5 | `644d003` | 2026-07-28T09:48:56+05:30 | test(frontend): verify loading and failure states |
+| Day 5 | `5b2a293` | 2026-07-28T09:48:56+05:30 | perf(frontend): lazy load analytical routes |
+| Day 5 | `c0b7327` | 2026-07-28T09:48:56+05:30 | build(frontend): isolate unit and browser test types |
+| Day 5 | `38d7638` | 2026-07-28T09:48:56+05:30 | test(e2e): configure desktop and mobile browsers |
+| Day 5 | `5108fe2` | 2026-07-28T09:48:57+05:30 | test(e2e): verify demo accessibility journey |
+| Day 5 | `2200e51` | 2026-07-28T09:48:57+05:30 | fix(frontend): keep table actions accessible on mobile |
+| Day 5 | `ae576f1` | 2026-07-28T09:48:57+05:30 | build(backend): label production container image |
+| Day 5 | `635ba93` | 2026-07-28T09:48:57+05:30 | security(frontend): harden unprivileged web container |
+| Day 5 | `e9070a9` | 2026-07-28T09:48:58+05:30 | security(compose): reduce container privileges |
+| Day 5 | `6623446` | 2026-07-28T09:52:01+05:30 | ci: verify browsers postgres security and rights |
+| Day 5 | `cb4a77e` | 2026-07-28T09:52:02+05:30 | ci: schedule dependency update reviews |
+| Day 5 | `4897bed` | 2026-07-28T09:52:02+05:30 | security: scan tracked files for credentials |
+| Day 5 | `b5c4860` | 2026-07-28T09:52:02+05:30 | build(release): add release invariant verifier |
+| Day 5 | `a84a81a` | 2026-07-28T09:52:09+05:30 | build(release): align version and secure test toolchain |
+| Day 5 | `4339009` | 2026-07-28T09:55:39+05:30 | docs(data): define canonical and persisted fields |
+| Day 5 | `0c0806d` | 2026-07-28T09:55:39+05:30 | docs(data): publish synthetic demo data card |
+| Day 5 | `798b147` | 2026-07-28T09:55:40+05:30 | docs(ethics): document responsible-use boundaries |
+| Day 5 | `1fb8d51` | 2026-07-28T09:55:40+05:30 | docs(release): add evidence-based release checklist |
+| Day 5 | `22e060f` | 2026-07-28T09:55:40+05:30 | docs(rights): record release terms re-verification |
+| Day 5 | `31b6a18` | 2026-07-28T09:55:41+05:30 | docs(readme): publish complete reviewer quick start |
+| Day 5 | `c127056` | 2026-07-28T09:55:41+05:30 | docs(security): finalize supported safeguards and reporting |
+| Day 5 | `32735bd` | 2026-07-28T09:55:41+05:30 | docs(changelog): document 1.0.0 capabilities |
+| Day 5 | `b538b1d` | 2026-07-28T09:55:41+05:30 | docs(architecture): describe release trust boundaries |
+| Day 5 | `e5842ad` | 2026-07-28T09:55:42+05:30 | docs(deploy): define production release sequence |
+| Day 5 | `9ba491a` | 2026-07-28T09:55:42+05:30 | docs(methodology): align release calculations and settings |
+| Day 5 | `ed49c12` | 2026-07-28T09:55:42+05:30 | docs(guide): clarify recovery and local import flow |
+| Day 5 | `dfb0ed3` | 2026-07-28T09:55:43+05:30 | docs(testing): document complete quality gate |
+| Day 5 | `7287886` | 2026-07-28T09:55:43+05:30 | build: expose browser and release verification targets |
+| Day 5 | `8fb9bba` | 2026-07-28T09:57:33+05:30 | fix(frontend): exclude browser artifacts from formatting |
+| Day 5 | `95cc79a` | 2026-07-28T09:59:08+05:30 | fix(e2e): allow concurrent demo processing budget |
+| Day 5 | `82d7780` | 2026-07-28T10:02:01+05:30 | docs: persist release verification handoff |
+| Day 5 | `11fe786` | 2026-07-28T10:02:12+05:30 | docs: refresh release commit ledger |
+| Day 5 | `8cd4861` | 2026-07-28T10:03:39+05:30 | docs: add release hardening verification report |
+| Post-release import feature | `b3451b6` | 2026-07-28T10:09:15+05:30 | fix(config): allow documented loopback frontend |
+| Post-release import feature | `ba1650a` | 2026-07-28T10:15:55+05:30 | fix(frontend): align risk factor contract |
+| Post-release import feature | `87fcfbd` | 2026-07-28T10:33:58+05:30 | feat(backend): process authorized tracking imports |
+| Post-release import feature | `f9ca181` | 2026-07-28T10:34:04+05:30 | feat(frontend): add rights-aware local import workflow |
+| Post-release import feature | `169b0a9` | 2026-07-28T10:34:04+05:30 | test(e2e): verify local import journey |
+| Post-release import feature | `728d36b` | 2026-07-28T10:36:37+05:30 | docs: explain authorized local data analysis |
+| Post-release import feature | `f04281e` | 2026-07-28T10:37:59+05:30 | docs: record local import verification |
 
-Commits recorded: **193**.
+Commits recorded: **202**.
 
 The commit that updates this generated file cannot contain its own not-yet-known hash; the next checkpoint generation captures it.
