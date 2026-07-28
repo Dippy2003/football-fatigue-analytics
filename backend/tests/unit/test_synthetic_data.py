@@ -15,6 +15,17 @@ def test_synthetic_match_is_deterministic() -> None:
     pd.testing.assert_frame_equal(first.events, second.events)
 
 
+def test_cached_synthetic_match_returns_isolated_tables() -> None:
+    first = generate_synthetic_match(seed=42, period_duration_s=10)
+    original_x = float(first.tracking.iloc[0]["x"])
+    first.tracking.loc[first.tracking.index[0], "x"] = -1
+
+    second = generate_synthetic_match(seed=42, period_duration_s=10)
+
+    assert second.tracking is not first.tracking
+    assert float(second.tracking.iloc[0]["x"]) == original_x
+
+
 def test_synthetic_match_has_two_teams_periods_and_many_players() -> None:
     match = generate_synthetic_match()
 

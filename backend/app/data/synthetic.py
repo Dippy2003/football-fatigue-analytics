@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 
 import numpy as np
 import pandas as pd
@@ -132,10 +133,11 @@ def generate_synthetic_events(
     return pd.DataFrame(rows)
 
 
-def generate_synthetic_match(
+@lru_cache(maxsize=16)
+def _cached_synthetic_match(
     *, seed: int = 20250714, period_duration_s: int = 180
 ) -> SyntheticMatch:
-    """Return the only dataset enabled by default for public demonstrations."""
+    """Generate and retain immutable-by-convention source tables."""
     return SyntheticMatch(
         tracking=generate_synthetic_tracking(
             seed=seed, period_duration_s=period_duration_s
@@ -143,4 +145,15 @@ def generate_synthetic_match(
         events=generate_synthetic_events(
             seed=seed, period_duration_s=period_duration_s
         ),
+    )
+
+
+def generate_synthetic_match(
+    *, seed: int = 20250714, period_duration_s: int = 180
+) -> SyntheticMatch:
+    """Return isolated copies of cached deterministic public demo tables."""
+    cached = _cached_synthetic_match(seed=seed, period_duration_s=period_duration_s)
+    return SyntheticMatch(
+        tracking=cached.tracking.copy(deep=True),
+        events=cached.events.copy(deep=True),
     )
