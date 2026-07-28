@@ -206,7 +206,9 @@ Generated from Git history by `scripts/export_commit_log.py`. Git remains the so
 | Post-release import feature | `169b0a9` | 2026-07-28T10:34:04+05:30 | test(e2e): verify local import journey |
 | Post-release import feature | `728d36b` | 2026-07-28T10:36:37+05:30 | docs: explain authorized local data analysis |
 | Post-release import feature | `f04281e` | 2026-07-28T10:37:59+05:30 | docs: record local import verification |
+| Post-release import feature | `d70d02f` | 2026-07-28T10:38:12+05:30 | docs: refresh feature commit ledger |
+| Post-release import feature | `c072989` | 2026-07-28T10:56:32+05:30 | feat(data): provide upload-ready fictional samples |
 
-Commits recorded: **202**.
+Commits recorded: **204**.
 
 The commit that updates this generated file cannot contain its own not-yet-known hash; the next checkpoint generation captures it.
