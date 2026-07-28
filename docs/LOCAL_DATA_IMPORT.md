@@ -39,6 +39,23 @@ npm.cmd --prefix frontend run dev
 Open `http://127.0.0.1:5173/data`. The local-import form should replace the
 `Disabled by server` badge.
 
+## Try the ready-made fictional files
+
+The Data page provides **Fictional tracking sample** and
+**Fictional events sample** downloads. Download both, enter
+`fictional-upload-003` as the Source match ID, select the tracking sample in the
+required field and the events sample in the optional field, acknowledge the
+rights statement, and select **Process match**.
+
+These files are generated deterministically by PlayerPulse, contain 20
+fictional players across two periods, and may be used for local checks,
+screenshots, and tests. They contain no third-party or real-athlete data. The
+blank **Tracking template** and **Events template** downloads remain available
+for preparing an independently authorized dataset. Open player `home-06` after
+processing to see a numeric example indicator; other players may correctly show
+`Insufficient Data` when their sample factors do not meet the availability
+threshold.
+
 ## Required tracking CSV
 
 Download **Tracking template** from the Data page. The file is long-form: one

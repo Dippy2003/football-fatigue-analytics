@@ -131,6 +131,7 @@ select {
   color: #bce4d9;
 }
 .panel {
+  min-width: 0;
   border: 1px solid var(--border);
   border-radius: 1rem;
   background: var(--surface);
@@ -383,11 +384,13 @@ select {
   border: 0;
 }
 .table-wrap {
+  max-width: 100%;
   overflow-x: auto;
   position: relative;
 }
 table {
   width: 100%;
+  min-width: 640px;
   border-collapse: collapse;
   text-align: left;
 }

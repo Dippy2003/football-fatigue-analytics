@@ -27,6 +27,9 @@
 - Added an accessible Data-page form, downloadable tracking/event templates,
   server-disabled guidance, local-import labels, and automatic navigation to
   the processed match.
+- Added downloadable deterministic fictional tracking and event samples with
+  20 players, two periods, explicit synthetic markers, and a reproducible
+  generator; the files process directly through the local-import form.
 - Added API security/idempotency tests, an API-to-analytics integration test,
   frontend form tests, and desktop/mobile browser import coverage.
 - The local workflow does not accept StatsBomb event-only files because the

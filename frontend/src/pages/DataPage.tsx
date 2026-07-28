@@ -177,6 +177,20 @@ export function DataPage() {
             <a
               className="text-link"
               download
+              href="/samples/playerpulse-fictional-tracking.csv"
+            >
+              Fictional tracking sample
+            </a>
+            <a
+              className="text-link"
+              download
+              href="/samples/playerpulse-fictional-events.csv"
+            >
+              Fictional events sample
+            </a>
+            <a
+              className="text-link"
+              download
               href="/templates/metrica-tracking-template.csv"
             >
               Tracking template
@@ -189,6 +203,10 @@ export function DataPage() {
               Events template
             </a>
           </div>
+          <p className="mt-3 text-xs text-[var(--muted)]">
+            To try the fictional samples, download both and use Source match ID{' '}
+            <code>fictional-upload-003</code>.
+          </p>
         </Panel>
       </div>
       <Panel title="Dataset sources and attribution">

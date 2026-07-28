@@ -65,33 +65,35 @@ test('mobile navigation is keyboard operable', async ({ page }) => {
 })
 
 test('authorized local tracking CSV becomes an explorable match', async ({ page }) => {
-  const tracking = [
-    'match_id,period,frame_id,timestamp_seconds,team_id,player_id,x,y,ball_x,ball_y',
-    'browser-import-001,1,0,0.0,Home,Home_1,0.10,0.20,0.50,0.50',
-    'browser-import-001,1,1,1.0,Home,Home_1,0.11,0.20,0.50,0.50',
-    'browser-import-001,1,0,0.0,Away,Away_1,0.90,0.80,0.50,0.50',
-    'browser-import-001,1,1,1.0,Away,Away_1,0.89,0.80,0.50,0.50',
-  ].join('\n')
-
   await page.goto('/data')
   await expect(
     page.getByRole('heading', { name: 'Load data with its rights context intact.' }),
   ).toBeVisible()
-  await page.getByLabel('Source match ID').fill('browser-import-001')
-  await page.getByLabel('Competition or context').fill('Authorized browser test')
-  await page.getByLabel('Tracking CSV (required)').setInputFiles({
-    name: 'tracking.csv',
-    mimeType: 'text/csv',
-    buffer: Buffer.from(tracking),
-  })
+  await page.getByLabel('Source match ID').fill('fictional-upload-003')
+  await page.getByLabel('Competition or context').fill('Fictional upload sample')
+  await page
+    .getByLabel('Tracking CSV (required)')
+    .setInputFiles('public/samples/playerpulse-fictional-tracking.csv')
+  await page
+    .getByLabel('Event CSV (optional)')
+    .setInputFiles('public/samples/playerpulse-fictional-events.csv')
   await page
     .getByRole('checkbox', { name: /I am authorized to use these files/ })
     .check()
   await page.getByRole('button', { name: 'Process match' }).click()
 
   await expect(
-    page.getByRole('heading', { name: 'Authorized browser test' }),
+    page.getByRole('heading', { name: 'Fictional upload sample' }),
   ).toBeVisible()
   await expect(page.getByText('Local import').first()).toBeVisible()
-  await expect(page.getByRole('cell', { name: 'Home_1' })).toBeVisible()
+  const analyse = page
+    .getByRole('row')
+    .filter({ hasText: 'home-06' })
+    .getByRole('link', { name: 'Analyse' })
+  await analyse.click()
+  await expect(page.getByRole('heading', { name: 'home-06' })).toBeVisible()
+  await expect(
+    page.getByRole('heading', { name: 'Performance-risk indicator' }),
+  ).toBeVisible()
+  await expect(page.getByText('out of 100')).toBeVisible()
 })
