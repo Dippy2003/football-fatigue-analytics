@@ -4,7 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -33,6 +33,24 @@ class Settings(BaseSettings):
     data_root: Path = Path("../data")
     model_root: Path = Path("../models")
     synthetic_seed: int = 20_260_720
+
+    @model_validator(mode="after")
+    def validate_production_origins(self) -> "Settings":
+        """Reject unsafe public CORS configurations."""
+        if self.is_production:
+            unsafe = {
+                origin
+                for origin in self.cors_allowed_origins
+                if origin == "*"
+                or origin.startswith("http://")
+                or "localhost" in origin
+                or "127.0.0.1" in origin
+            }
+            if unsafe:
+                raise ValueError(
+                    "Production CORS origins must be explicit HTTPS origins."
+                )
+        return self
 
     @property
     def is_production(self) -> bool:
