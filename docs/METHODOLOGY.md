@@ -73,8 +73,20 @@ no passes are observed.
 
 ## Synthetic demo
 
-The public demo uses a fixed-seed fictional match with two teams, 18 players,
+The public demo uses a fixed-seed fictional match with two teams, 20 players,
 two periods, 10 Hz tracking, several workload profiles, supported event types,
 and a short deliberate coordinate dropout. Every row is marked
 `is_synthetic=true`. Synthetic patterns demonstrate software behavior and are
 not validation against real athletes or competitions.
+
+## Performance-risk calculation
+
+`rule-risk-v1` maps available decline/workload features through documented
+piecewise-linear 0–100 factor functions. Available weights are renormalized,
+then contributions are summed and bounded to 0–100. The result is not a
+probability. Confidence separately combines data quality, baseline confidence,
+and feature coverage. Missing inputs reduce support rather than becoming zero.
+
+A numeric score requires sufficient physical features, at least 60% feature
+coverage, and quality of at least 0.50. Otherwise the response is explicitly
+`insufficient_data`. See `MODEL_CARD.md` for intended use and validation limits.

@@ -6,7 +6,7 @@ Settings are defined and validated in `backend/app/core/config.py`. Copy
 | Variable | Safe default | Purpose |
 | --- | --- | --- |
 | `APP_ENV` | `development` | development, test, or production safeguards |
-| `APP_VERSION` | `0.1.0` | public build version |
+| `APP_VERSION` | `1.0.0` | public build version |
 | `LOG_LEVEL` | `INFO` | structured application log threshold |
 | `DATABASE_URL` | `sqlite:///./playerpulse.db` | SQLite local fallback or PostgreSQL URL |
 | `CORS_ALLOWED_ORIGINS` | `["http://localhost:5173"]` | explicit browser origin allowlist |
