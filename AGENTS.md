@@ -116,8 +116,8 @@ tag are required per development day.
 
 ## Current handoff
 
-The API-backed responsive reviewer interface and its full repository quality
-gate are complete on `main`. Continue without phase-named branches or
-completion-style commit messages. Only final checkpoint verification, the
-required annotated tag, and the authorized push remain. Do not begin release
-hardening until the user explicitly authorizes the next development phase.
+Release hardening and the complete 1.0.0 quality gate are complete on `main`.
+The phase started from verified `day-4-complete` at `304a406`. Continue without
+phase-named branches. Only final report/ledger persistence, annotated
+`day-5-complete` and `v1.0.0` tags, post-tag verification, and an explicitly
+authorized push may remain. No external deployment has been performed.

@@ -182,3 +182,47 @@ an icon and label, confidence remains separate from score, and the exact
 non-medical disclaimer accompanies assessments. Theme tokens, visible focus,
 skip navigation, labelled controls, responsive layouts, and reduced-motion
 behavior form the accessibility baseline.
+
+## ADR-015: client-only advisory scope and critical audit gate
+
+- Status: accepted residual with monitoring
+- Date: 2026-07-28
+
+React Router's current compatible release is covered by a high-severity
+RSC/server-action advisory. PlayerPulse uses browser-only `createBrowserRouter`
+with no RSC, SSR, server actions, route actions, or framework server runtime, so
+the affected execution path is absent. Downgrading reintroduces multiple older
+advisories. CI therefore blocks critical production npm findings, records this
+high residual, and uses Dependabot for the first compatible upstream fix.
+
+## ADR-016: release browsers run at desktop and mobile widths
+
+- Status: accepted
+- Date: 2026-07-28
+
+Playwright owns the executable reviewer journey. It starts a clean migrated API
+and Vite, loads the deterministic demo, reaches a player explanation, runs Axe
+for serious/critical issues, and proves keyboard navigation in desktop Chrome
+and a Pixel 7 viewport. Concurrent synthetic processing gets a measured
+15-second assertion budget; behavior assertions remain unchanged.
+
+## ADR-017: defense-in-depth public container boundary
+
+- Status: accepted
+- Date: 2026-07-28
+
+The frontend uses unprivileged Nginx with CSP and security headers. Both
+containers drop Linux capabilities and disallow privilege escalation. The API
+also emits defensive headers because it may be deployed independently.
+Production configuration fails startup for wildcard, HTTP, or loopback CORS.
+
+## ADR-018: release remains synthetic and locally verifiable
+
+- Status: accepted
+- Date: 2026-07-28
+
+Version 1.0.0 is a portfolio release, not a club medical system or public
+deployment claim. CI, screenshots, browser tests, and documentation use only
+project-owned synthetic data. Official provider terms were rechecked without
+committing raw data or marks. Real-athlete use requires separate governance,
+security, privacy, validation, and qualified oversight.

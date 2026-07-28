@@ -2,205 +2,75 @@
 
 ## Current checkpoint
 
-- Development phase: Day 4 checkpoint preparation
-- Completed tasks: responsive API-backed reviewer interface and full repository quality gate
-- Branch: `main`
-- Starting checkpoint: `day-1-complete` at `ab929e68b84796b1a66fa84161e4df8a72d92243`
-- Authorized remote: `https://github.com/Dippy2003/football-fatigue-analytics.git`
-- Day 2 commits: 34 substantive commits after `day-1-complete`
-- Day 4 branch policy: continue on `main`; no phase-named branch was created
-- Day 4 implementation commits: 34 substantive commits after phase authorization
-- Next exact task: finalize report and ledger, tag the verified checkpoint, push authorized `main` and tag, then stop
+- Development phase: release hardening and 1.0.0 checkpoint preparation
+- Branch: `main` (no phase-named branch)
+- Verified starting tag: `day-4-complete` at
+  `304a4061a687d5051535769290c6641530f25b88`
+- Substantive commits after starting tag: 40 before final report/ledger commits
+- Runtime version: `1.0.0`
+- Remote state: `origin/main` remains at the starting checkpoint; final changes
+  have not been pushed
+- Next exact action: finalize checkpoint documents and ledger, create annotated
+  `day-5-complete` and `v1.0.0` tags, run post-tag verification, and stop
 
-## Day 4 completed work
+## Release hardening completed
 
-- Replaced frontend placeholders with API-backed landing, dashboard, match,
-  player, comparison, data, methodology, ethics, and about experiences.
-- Added demo loading, query cancellation, retryable errors, skeleton loading,
-  empty/unsupported states, URL-backed filters, and bounded player selection.
-- Added accessible workload and speed charts plus an SVG pitch with heatmap,
-  trajectory, average position, units, and text summaries.
-- Added labelled risk score, confidence, factor contributions, limitations,
-  exact disclaimer, and separate data-quality views.
-- Added responsive navigation, mobile menu, persistent themes, skip/focus
-  behavior, labelled forms, reduced motion, and safe unavailable formatting.
-- Live clean-database verification returned frontend HTTP 200, backend health
-  `ok`, 20 fictional players, `rule-risk-v1`, and an 8 by 12 heatmap.
+- Added defensive API/Nginx headers, strict production CORS validation,
+  streamed upload limits/media checks, safe frontend errors, bounded retries,
+  and a render error boundary.
+- Serialized demo persistence under concurrent requests and cached synthetic
+  generation with copy isolation.
+- Split analytical routes into production chunks and kept mobile table actions
+  reachable.
+- Added integration/edge/security tests plus desktop/mobile Playwright demo,
+  Axe accessibility, and keyboard-navigation coverage.
+- Hardened unprivileged containers and reduced Compose privileges.
+- Expanded CI for browser tests, PostgreSQL migration cycles, rights/secret
+  scans, dependency checks, and diagnostic artifacts.
+- Added Dependabot, tracked-secret and release invariant verifiers.
+- Re-verified official Metrica and StatsBomb terms/commits/hashes without
+  importing raw data or provider marks.
+- Finalized README, architecture, deployment, testing, data dictionary, data
+  card, ethics, model/methodology, security, release checklist, and changelog.
 
-## Day 4 latest validation
-
-| Check | Result | Evidence |
-| --- | --- | --- |
-| Frontend format/lint/types | Passed | Prettier, ESLint and TypeScript clean |
-| Frontend tests | Passed | 4 files, 6 tests |
-| Frontend build | Passed | 2,364 modules; chunk warning documented |
-| Backend format/lint/types | Passed | Ruff; mypy 114 source files |
-| Backend tests | Passed | 124 passed; one upstream warning |
-| Live API/UI services | Passed | frontend 200; health ok; 20 players; risk available |
-| Dataset/Compose policy | Passed | no prohibited files; Compose parsed |
-| Rendered browser inspection | Skipped | no browser backend was available |
-
-## Day 4 known limitations
-
-- Rendered-browser inspection and screenshots were unavailable; component
-  interaction tests and live HTTP were used.
-- The 793 kB production JavaScript chunk produces Vite's non-failing size
-  warning; route splitting remains release hardening.
-- Unsupported fifteen-minute changes display `Insufficient data`.
-- Local uploads remain intentionally disabled by default.
-
-## Day 3 completed work
-
-- Added six reversible migrations and relational models for dataset lineage,
-  teams, anonymized players, matches, metrics, assessments, and jobs.
-- Added idempotent repositories and a deterministic demo persistence service.
-- Added demo/source/upload, match, player, metric, timeline, heatmap, event,
-  baseline, risk, comparison, processing, and job endpoints under `/api/v1`.
-- Added bounded 8 by 12 heatmaps, roughly 120-point timelines, standard errors,
-  request IDs, fail-closed upload validation, and published OpenAPI coverage.
-- Added baseline fallback/confidence, rule risk with contribution explanations,
-  insufficient-data handling, and reproducible Isolation Forest gating.
-- Live HTTP verification created one match and 20 players, returned an available
-  `rule-risk-v1` response, and served `/docs` with HTTP 200.
-
-## Day 3 latest validation
+## Latest verified evidence
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Backend format/lint/types | Passed | Ruff 114 files; mypy 113 source files |
-| Backend tests | Passed | 123 passed; 96% coverage; one upstream warning |
-| Clean migrations | Passed | revisions 0001 through 0006 up; all down to base |
-| Live API journey | Passed | demo created; 1 match; 20 players; available risk; docs 200 |
-| Frontend checks/build | Passed | Prettier, ESLint, types, 1 test, 95-module build |
-| Dataset-file policy | Passed | no prohibited tracked data |
-| Compose syntax | Passed | configuration parsed quietly |
-
-## Day 3 known limitations
-
-- In-process jobs can require retry after a server restart.
-- External upload validation is implemented but remains disabled by default and
-  no third-party source file was processed during the checkpoint.
-- The public synthetic history has one stored match, so its baseline confidence
-  is the documented match-only 0.40 until more fictional/history rows exist.
-- The anomaly pipeline is validated in memory; no binary artifact is committed.
-- Raw tracking is regenerated deterministically for timeline/heatmap responses.
-
-## Completed work
-
-- Implemented validated rights registry records and fail-closed import rules.
-- Added canonical tracking/event schemas and 105 by 68 metre conversions.
-- Added deterministic fictional 10 Hz tracking for two teams, 20 rostered
-  players, two periods, substitutions, workload profiles, supported events,
-  and a cleanable dropout.
-- Added local-only Metrica-compatible tracking/event CSV adapters and an
-  acknowledgement-gated StatsBomb event JSON adapter; tests use only generated
-  fictional fixtures.
-- Added ordering, deduplication, short-gap interpolation, quality flags,
-  distance, active time, speed, acceleration/deceleration, outlier flags,
-  centered-median smoothing, five intensity zones, sprint detection,
-  15-minute windows, event metrics, and transparent quality scores.
-- Added checksum-backed import manifests, safe Parquet persistence, an
-  end-to-end synthetic processing pipeline, and a developer CLI.
-- Generated six ignored synthetic Parquet tables in a real CLI smoke check;
-  quality score was 100 with 10,836 rows for the 30-second-per-period check.
-
-- Re-read the continuation files, verified clean `main` and the annotated Day 1
-  tag, and reran the smallest backend/frontend smoke tests successfully.
-- Re-checked the official Metrica Sports and Hudl StatsBomb pages, branch heads,
-  and terms digests at `2026-07-21T02:27:23Z`; no rights status changed and no
-  raw football data or provider logo was downloaded.
-
-- Created a 35-commit foundation before final progress/report commits, exceeding
-  the required 30 meaningful commits without empty or padding changes.
-- Provisioned Python 3.12.13 with uv, locked 46 backend packages, and generated
-  the npm lockfile for 355 installed frontend packages.
-- Built and runtime-verified FastAPI health, readiness, and version endpoints.
-- Added safe typed settings, CORS, redacted structured logging, SQLite/PostgreSQL
-  sessions, UUID/UTC model conventions, and Alembic.
-- Built and HTTP-verified a responsive React application shell with routing,
-  typed API/query foundations, original branding, disclaimer, and placeholders.
-- Added backend/frontend tests, static checks, production frontend build,
-  Dockerfiles, Compose, CI, cross-platform commands, and documentation.
-- Verified official Metrica Sports and StatsBomb pages, branch heads, and terms
-  digests without downloading raw football data or provider logos.
-- Configured the user-authorized empty GitHub repository as `origin`; push occurs
-  only after the local Day 1 tag is created.
-
-## Latest validation
-
-Day 2 checkpoint checks supersede the Day 1 evidence below:
-
-| Check | Day 2 result | Evidence |
-| --- | --- | --- |
-| Backend format/lint/types | Passed | Ruff 62 files; mypy 61 source files |
-| Backend tests | Passed | 71 passed; 96% coverage; one upstream warning |
+| Backend format/lint/types | Passed | Ruff 124 files; mypy 123 source files |
+| Backend full suite | Passed | 135 tests; 97% coverage; 2 non-failing framework/cache warnings |
 | Frontend format/lint/types | Passed | Prettier, ESLint, TypeScript clean |
-| Frontend tests/build | Passed | 1 Vitest test; Vite 95-module build |
-| Demo pipeline | Passed | six synthetic Parquet outputs; quality 100 |
-| Dataset-file policy | Passed | no prohibited tracked data |
-| Alembic upgrade | Passed | current empty Day 1 migration baseline |
-| Alembic downgrade | Expected failure | no revisions exist until Day 3 |
-| Compose syntax | Passed | three services parsed successfully |
+| Frontend unit suite | Passed | 7 files, 11 tests |
+| Frontend production build | Passed | 2,366 modules; route chunks emitted |
+| Browser journey | Passed | 6 desktop/mobile journey, Axe, keyboard checks |
+| Clean SQLite migrations | Passed | upgrade, downgrade to base, upgrade |
+| Clean-clone gate | Passed | locked install, 135 backend tests, 11 frontend tests, build |
+| Python dependency audit | Passed | no known vulnerabilities |
+| npm critical audit | Passed | no critical issue; scoped high RSC advisory documented |
+| Rights/secret/release checks | Passed | all three project verifiers |
+| Docker Compose syntax | Passed | configuration parsed quietly |
+| Docker build/runtime | Skipped | Docker Desktop engine unavailable |
+| Synthetic pipeline profile | Passed | cold 1.556 s; warm 0.413/0.432 s |
 
-## Day 2 known limitations
+## Known limitations
 
-- The synthetic demo uses compressed 180-second periods to keep local/CI runs
-  fast; its workload patterns are illustrative, not match validation.
-- Metrica adapters currently accept documented local long-form normalized CSV,
-  not the provider's wide multi-header sample layout.
-- StatsBomb is event-only; tracking-dependent metrics cannot be inferred.
-- Generated Parquet remains local and ignored; Day 3 adds relational persistence
-  and APIs.
-- Docker Compose syntax passed, but the container stack was not started during
-  this checkpoint.
-- Alembic has no domain revision to downgrade until Day 3.
-
-| Check | Result | Evidence |
-| --- | --- | --- |
-| Backend format | Passed | Ruff: 18 files already formatted |
-| Backend lint | Passed | Ruff: all checks passed |
-| Backend types | Passed | mypy: 17 source files, no issues |
-| Backend tests | Passed | pytest: 10 passed, one framework deprecation warning |
-| Backend runtime | Passed | live health/readiness/version responses verified |
-| Frontend format | Passed | Prettier: all matched files formatted |
-| Frontend lint | Passed | ESLint: zero warnings/errors |
-| Frontend types | Passed | TypeScript project build/type check succeeded |
-| Frontend tests | Passed | Vitest: 1 interaction test passed |
-| Frontend production build | Passed | Vite: 95 modules, build completed |
-| Frontend HTTP runtime | Passed | Vite returned HTTP 200 and correct document title |
-| Interactive browser inspection | Unavailable | no browser backend was available in this session |
-| SQLite connection | Passed | in-memory SQLAlchemy test |
-| Alembic | Passed | upgrade/current against disposable SQLite database |
-| Dataset-file policy | Passed | no prohibited tracked data or large files |
-| Compose syntax | Passed | database, backend, and frontend services parsed |
-| Docker image/stack runtime | Skipped | Docker CLI installed; Docker Desktop engine not running |
-
-## Problems found and resolved
-
-- Git rejected sandbox ownership; the exact workspace was added to Git's safe
-  directory list without changing author identity.
-- uv's default sandbox cache path was unusable; a repository-local ignored cache
-  and managed Python directory allowed reproducible provisioning.
-- PowerShell blocked `npm.ps1`; Windows commands consistently use `npm.cmd`.
-- Initial pytest console execution could not import `app`; explicit pytest
-  `pythonpath` configuration fixed collection.
-- Strict mypy and Ruff exposed settings-test typing/import issues, structured-log
-  return typing, UTC alias use, Alembic import order, and router hot-reload
-  warnings; each was corrected and the full gates rerun.
-
-## Day 1 limitations (historical checkpoint)
-
-- No match data generation, ingestion, analytics, canonical schemas, Parquet,
-  domain persistence, risk calculation, or complete dashboard exists yet.
-- Readiness checks application state only until Day 3 database domain work.
-- Docker images and full Compose startup are implemented but not runtime-tested.
-- The synchronous framework test client emits a visible upstream deprecation warning.
-- No interactive rendered-browser inspection or screenshots were captured because
-  no supported browser backend was available.
+- Docker images/stack were not runtime-tested because the installed Docker CLI
+  could not connect to Docker Desktop's Linux engine.
+- PostgreSQL migration behavior is configured in CI but was not locally
+  executed because no local PostgreSQL service was available.
+- npm reports a high React Router advisory limited to RSC/server-action mode.
+  PlayerPulse is a client-only SPA with no RSC, SSR, actions, or route actions;
+  this accepted residual remains under dependency review.
+- FastAPI's synchronous test client emits an upstream future-`httpx2` warning.
+- A local pytest cache warning reflects denied cache writes, not test failure.
+- Authentication, tenancy, rate limiting, durable workers/audit logs, and
+  real-athlete governance remain outside the portfolio MVP.
+- No external deployment was performed or claimed.
 
 ## Resume protocol
 
-After the Day 2 report and tag exist, do not begin Day 3 until the user
-explicitly says `Continue to Day 3`. On resume, read `AGENTS.md`, the plan, this
-file, commit log, Day 2 report, and recent Git history; verify clean `main` and
-`day-2-complete`, then run small backend/frontend smoke checks before Day 3.
+This is the final planned development phase. If release tags or push are
+missing, read `AGENTS.md`, this file, `IMPLEMENTATION_PLAN.md`, `COMMIT_LOG.md`,
+and `DAY_5_REPORT.md`; verify clean `main`, rerun `scripts/verify_release.py`,
+and inspect local tags. Do not push, deploy, publish a release, or enable
+uploads without explicit owner authorization.
