@@ -10,6 +10,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.config import Settings
+from app.data.storage import read_match_parquet
 from app.data.synthetic import generate_synthetic_match
 from app.db.models import Match, Player, PlayerMatchMetric
 from app.db.session import get_session
@@ -90,9 +91,37 @@ def player_metrics(
     }
 
 
-def _tracking_for_player(request: Request, player: Player) -> pd.DataFrame:
-    match = generate_synthetic_match(seed=_settings(request).synthetic_seed)
-    return match.tracking[match.tracking["player_id"] == player.external_id]
+def _match(session: Session, match_id: UUID) -> Match:
+    match = session.get(Match, match_id)
+    if match is None:
+        raise HTTPException(status_code=404, detail="Match not found.")
+    return match
+
+
+def _processed_table(request: Request, match: Match, table: str) -> pd.DataFrame:
+    path = (
+        _settings(request).data_root
+        / "processed"
+        / "imports"
+        / f"{match.id}.{table}.parquet"
+    )
+    if not path.is_file():
+        raise HTTPException(
+            status_code=409,
+            detail="Processed local match data is unavailable; import it again.",
+        )
+    return read_match_parquet(path)
+
+
+def _tracking_for_player(
+    request: Request, match: Match, player: Player
+) -> pd.DataFrame:
+    tracking = (
+        generate_synthetic_match(seed=_settings(request).synthetic_seed).tracking
+        if match.is_synthetic
+        else _processed_table(request, match, "tracking")
+    )
+    return tracking[tracking["player_id"].astype(str) == player.external_id]
 
 
 @router.get("/matches/{match_id}/players/{player_id}/timeline")
@@ -104,11 +133,13 @@ def player_timeline(
 ) -> dict[str, object]:
     _metric(session, match_id, player_id)
     player = _player(session, player_id)
-    tracking = _tracking_for_player(request, player)
+    tracking = _tracking_for_player(request, _match(session, match_id), player)
     step = max(1, len(tracking) // 120)
-    sampled = tracking.iloc[::step]
+    sampled = tracking.dropna(subset=["period", "timestamp_seconds", "x", "y"]).iloc[
+        ::step
+    ]
     return {
-        "downsampled": True,
+        "downsampled": step > 1,
         "point_count": len(sampled),
         "points": sampled[["period", "timestamp_seconds", "x", "y"]].to_dict("records"),
     }
@@ -123,10 +154,11 @@ def player_heatmap(
 ) -> dict[str, object]:
     _metric(session, match_id, player_id)
     player = _player(session, player_id)
-    tracking = _tracking_for_player(request, player)
+    tracking = _tracking_for_player(request, _match(session, match_id), player)
+    observed = tracking[["x", "y"]].dropna()
     grid, _, _ = np.histogram2d(
-        tracking["y"].dropna(),
-        tracking["x"].dropna(),
+        observed["y"],
+        observed["x"],
         bins=(8, 12),
         range=((0, 68), (0, 105)),
     )
@@ -147,9 +179,19 @@ def player_events(
 ) -> dict[str, object]:
     _metric(session, match_id, player_id)
     player = _player(session, player_id)
-    events = generate_synthetic_match(seed=_settings(request).synthetic_seed).events
-    supported = events[events["player_id"] == player.external_id]
-    return {"supported": True, "events": supported.to_dict("records")}
+    match = _match(session, match_id)
+    events = (
+        generate_synthetic_match(seed=_settings(request).synthetic_seed).events
+        if match.is_synthetic
+        else _processed_table(request, match, "events")
+    )
+    supported = events[events["player_id"].astype(str) == player.external_id]
+    serializable = supported.astype(object)
+    serializable[serializable.isna()] = None
+    return {
+        "supported": not events.empty,
+        "events": serializable.to_dict("records"),
+    }
 
 
 @router.get("/players/{player_id}/baseline")
@@ -169,5 +211,5 @@ def player_baseline(
         "baseline_confidence": metric.baseline_confidence,
         "workload_zscore": metric.workload_vs_baseline_zscore,
         "sample_size": 1,
-        "limitation": "Match-only fictional comparison until historical matches exist.",
+        "limitation": "Match-only comparison until historical matches exist.",
     }
