@@ -10,8 +10,12 @@ type PanelProps = {
 export function Panel({ children, className = '', title, description }: PanelProps) {
   return (
     <section className={`panel ${className}`}>
-      {title && <h2 className="text-lg font-bold text-[var(--text)]">{title}</h2>}
-      {description && <p className="mt-1 text-sm text-[var(--muted)]">{description}</p>}
+      {(title || description) && (
+        <header className="panel-header">
+          {title && <h2>{title}</h2>}
+          {description && <p>{description}</p>}
+        </header>
+      )}
       <div className={title || description ? 'mt-5' : ''}>{children}</div>
     </section>
   )

@@ -23,7 +23,17 @@ export function WorkloadBars({ players }: { players: MatchPlayer[] }) {
       <div className="h-72" aria-label="Top player workload ranking">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ left: 38 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <defs>
+              <linearGradient id="workloadBar" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="var(--primary)" />
+                <stop offset="100%" stopColor="var(--accent)" />
+              </linearGradient>
+            </defs>
+            <CartesianGrid
+              horizontal={false}
+              strokeDasharray="3 6"
+              stroke="var(--border)"
+            />
             <XAxis type="number" unit=" m" tick={{ fill: 'var(--muted)' }} />
             <YAxis
               type="category"
@@ -34,7 +44,12 @@ export function WorkloadBars({ players }: { players: MatchPlayer[] }) {
             <Tooltip
               formatter={(value) => [`${Number(value).toLocaleString()} m`, 'Distance']}
             />
-            <Bar dataKey="distance" fill="#0d9488" radius={[0, 5, 5, 0]} />
+            <Bar
+              dataKey="distance"
+              fill="url(#workloadBar)"
+              radius={[0, 8, 8, 0]}
+              animationDuration={900}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>
