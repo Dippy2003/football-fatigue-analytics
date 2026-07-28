@@ -63,3 +63,35 @@ test('mobile navigation is keyboard operable', async ({ page }) => {
   await page.getByRole('link', { name: 'Methodology', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Methodology' })).toBeVisible()
 })
+
+test('authorized local tracking CSV becomes an explorable match', async ({ page }) => {
+  const tracking = [
+    'match_id,period,frame_id,timestamp_seconds,team_id,player_id,x,y,ball_x,ball_y',
+    'browser-import-001,1,0,0.0,Home,Home_1,0.10,0.20,0.50,0.50',
+    'browser-import-001,1,1,1.0,Home,Home_1,0.11,0.20,0.50,0.50',
+    'browser-import-001,1,0,0.0,Away,Away_1,0.90,0.80,0.50,0.50',
+    'browser-import-001,1,1,1.0,Away,Away_1,0.89,0.80,0.50,0.50',
+  ].join('\n')
+
+  await page.goto('/data')
+  await expect(
+    page.getByRole('heading', { name: 'Load data with its rights context intact.' }),
+  ).toBeVisible()
+  await page.getByLabel('Source match ID').fill('browser-import-001')
+  await page.getByLabel('Competition or context').fill('Authorized browser test')
+  await page.getByLabel('Tracking CSV (required)').setInputFiles({
+    name: 'tracking.csv',
+    mimeType: 'text/csv',
+    buffer: Buffer.from(tracking),
+  })
+  await page
+    .getByRole('checkbox', { name: /I am authorized to use these files/ })
+    .check()
+  await page.getByRole('button', { name: 'Process match' }).click()
+
+  await expect(
+    page.getByRole('heading', { name: 'Authorized browser test' }),
+  ).toBeVisible()
+  await expect(page.getByText('Local import').first()).toBeVisible()
+  await expect(page.getByRole('cell', { name: 'Home_1' })).toBeVisible()
+})
