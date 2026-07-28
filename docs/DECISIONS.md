@@ -226,3 +226,24 @@ deployment claim. CI, screenshots, browser tests, and documentation use only
 project-owned synthetic data. Official provider terms were rechecked without
 committing raw data or marks. Real-athlete use requires separate governance,
 security, privacy, validation, and qualified oversight.
+
+## ADR-019: real tracking analysis is an explicit local capability
+
+- Status: accepted
+- Date: 2026-07-28
+
+The public demo remains synthetic and upload-disabled, but a local operator may
+enable a rights-acknowledged Metrica-compatible long-form CSV workflow. Tracking
+is mandatory; optional events enrich only the supported event layer. StatsBomb
+event-only input is not presented as sufficient for movement or workload
+analysis.
+
+Raw multipart files use temporary storage and are deleted after processing.
+Checksummed provenance and bounded relational summaries are durable; canonical
+derived Parquet stays in the ignored local data workspace so timelines and
+heatmaps reflect the actual imported match. Repeated identical imports are
+idempotent, while a reused source match ID with different bytes fails closed.
+
+This is a controlled local feature, not a public athlete-data service.
+Authentication, authorization, retention, audit, tenancy, privacy governance,
+and qualified operational review remain prerequisites for organizational use.

@@ -2,16 +2,47 @@
 
 ## Current checkpoint
 
-- Development phase: release hardening and 1.0.0 checkpoint preparation
+- Development phase: post-1.0 local tracking import feature
 - Branch: `main` (no phase-named branch)
-- Verified starting tag: `day-4-complete` at
-  `304a4061a687d5051535769290c6641530f25b88`
-- Substantive commits after starting tag: 40 before final report/ledger commits
 - Runtime version: `1.0.0`
-- Remote state: `origin/main` remains at the starting checkpoint; final changes
-  have not been pushed
-- Next exact action: finalize checkpoint documents and ledger, create annotated
-  `day-5-complete` and `v1.0.0` tags, run post-tag verification, and stop
+- Starting release tag: `v1.0.0` at `8cd4861`
+- Feature commits: `87fcfbd`, `f9ca181`, and `169b0a9`
+- Remote state: local `main` contains unpushed work; no push or deployment was
+  performed
+- Next exact action: complete the full repository quality gate, update the
+  generated commit ledger, commit the verified documentation checkpoint, and
+  report the local enablement/import steps
+
+## Local tracking import completed
+
+- Added a capability endpoint and a disabled-by-default, rights-acknowledged
+  multipart CSV workflow for Metrica-compatible long-form tracking.
+- Validates declared files, basename, media type, byte and row limits, canonical
+  columns, coordinate bounds, source match identity, exactly two teams, and
+  player membership.
+- Removes raw temporary uploads after processing; stores checksummed provenance,
+  relational summaries, and ignored derived Parquet.
+- Serves imported timelines, heatmaps, event rows, workload metrics, quality,
+  baseline context, and explainable performance-risk results through existing
+  APIs.
+- Added an accessible Data-page form, downloadable tracking/event templates,
+  server-disabled guidance, local-import labels, and automatic navigation to
+  the processed match.
+- Added API security/idempotency tests, an API-to-analytics integration test,
+  frontend form tests, and desktop/mobile browser import coverage.
+- The local workflow does not accept StatsBomb event-only files because the
+  system requires tracking for movement and workload indicators.
+
+## Feature verification evidence
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Backend targeted format/lint/types | Passed | Ruff clean; mypy 121 source files |
+| Backend import/API tests | Passed | 15 tests |
+| Frontend format/lint/types | Passed | Prettier, ESLint, TypeScript clean |
+| Frontend unit suite | Passed | 8 files, 14 tests |
+| Frontend production build | Passed | 2,366 modules |
+| Browser journeys | Passed | 8 desktop/mobile tests, including local import |
 
 ## Release hardening completed
 

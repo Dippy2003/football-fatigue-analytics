@@ -10,7 +10,8 @@ references. All application routes are versioned under `/api/v1`.
 | System | `GET /health`, `/readiness`, `/version` | Operational state and version |
 | Data | `POST /datasets/demo` | Idempotent fictional import, match, players, metrics |
 | Data | `GET /datasets/sources` | Rights status and attribution |
-| Data | `POST /datasets/upload` | Disabled by default; validates bounded multipart contract |
+| Data | `GET /datasets/import-capabilities` | Upload state, provider, and configured limits |
+| Data | `POST /datasets/upload` | Rights-gated local tracking processing and persistence |
 | Processing | `POST /matches/{id}/process` | Queues an in-process persisted job |
 | Processing | `GET /jobs/{id}` | Stage, progress, outcome, retry limitation |
 | Matches | `GET /matches`, `/matches/{id}` | Stored list and detail |
@@ -37,10 +38,20 @@ returns the existing checksum-addressed records and `created=false`.
 
 Uploads use multipart fields `provider`, JSON-string `manifest`, and one or
 more `files`. `ENABLE_UPLOADS=false` returns 403 before parsing source content.
-When locally enabled, only safe basename `.csv` and `.json` files are accepted;
-file count and byte size use typed settings. ZIP, pickle, Joblib, path-like
-filenames, malformed manifests, and over-limit files are rejected. Validation
-does not grant data rights or enable public redistribution.
+When locally enabled, `provider` must be `metrica_sample_data`. The JSON
+manifest declares a safe source match ID, competition, rights acknowledgement,
+and exactly one tracking file plus an optional events file. Multipart filenames
+must exactly match those declarations. Only safe-basename CSV files with
+matching media types are accepted. File count, byte size, combined rows,
+canonical columns, coordinate bounds, match ID, two-team membership, and
+player identity are validated. ZIP, JSON, pickle, Joblib, path-like filenames,
+malformed manifests, undeclared files, and over-limit files are rejected.
+
+On success, the response contains the persisted dataset and match IDs, player
+count, quality score/confidence, limitations, and idempotency state. Raw uploads
+are removed with the temporary directory; derived Parquet is written to the
+ignored local data workspace. Validation does not grant data rights or enable
+public redistribution.
 
 ## Errors
 
@@ -63,5 +74,6 @@ raw uploaded rows.
 
 In-process jobs are not durable workers: a server restart can require retry.
 Synthetic timeline, heatmap, and event tables are regenerated deterministically
-instead of stored as raw frames. External imports remain local and rights-gated.
-
+instead of stored as raw frames. Local-import timeline, heatmap, and event
+responses read ignored derived Parquet. External imports remain local and
+rights-gated.

@@ -12,6 +12,8 @@ handling, and conservative dataset-rights controls.
 ## What works
 
 - One-click fictional demo generation and idempotent database persistence
+- Rights-acknowledged local tracking CSV import into persisted dashboard
+  analytics, with downloadable schemas and uploads disabled by default
 - Provider-neutral Metrica/StatsBomb adapters with fail-closed rights gates
 - Coordinate cleaning, interpolation, distance, speed, acceleration, intensity,
   sprints, 15-minute windows, event metrics, and quality reporting
@@ -67,6 +69,11 @@ Open:
 Select **Load demo match**, open the fictional match, and choose **Analyse** for
 a player. Stop both servers with `Ctrl+C`.
 
+For a rights-cleared tracking dataset, follow the
+[local data import guide](docs/LOCAL_DATA_IMPORT.md). The workflow requires
+`ENABLE_UPLOADS=true`, a Metrica-compatible long-form tracking CSV, and an
+explicit rights acknowledgement.
+
 ## Quality gate
 
 ```powershell
@@ -107,12 +114,16 @@ generated models are ignored. Metrica input is local-only; StatsBomb input is
 verification-gated. Current source terms and hashes are recorded in
 `data/sources.yml` and `docs/DATASET_ATTRIBUTION.md`.
 
-Uploads are disabled by default. Production CORS permits explicit HTTPS origins
-only. Never load user-supplied pickle or Joblib files.
+Uploads are disabled by default. When deliberately enabled, the local workflow
+accepts bounded CSV files, deletes temporary raw uploads after processing, and
+stores derived Parquet only in the ignored local data workspace. Production
+CORS permits explicit HTTPS origins only. Never load user-supplied pickle or
+Joblib files.
 
 ## Documentation
 
 - [User guide](docs/USER_GUIDE.md)
+- [Local data import](docs/LOCAL_DATA_IMPORT.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [API](docs/API.md)
 - [Methodology](docs/METHODOLOGY.md)
