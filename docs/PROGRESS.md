@@ -9,9 +9,8 @@
 - Feature commits: `87fcfbd`, `f9ca181`, and `169b0a9`
 - Remote state: local `main` contains unpushed work; no push or deployment was
   performed
-- Next exact action: complete the full repository quality gate, update the
-  generated commit ledger, commit the verified documentation checkpoint, and
-  report the local enablement/import steps
+- Next exact action: update the generated commit ledger, commit the verified
+  checkpoint, and report the local enablement/import steps
 
 ## Local tracking import completed
 
@@ -37,12 +36,15 @@
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Backend targeted format/lint/types | Passed | Ruff clean; mypy 121 source files |
-| Backend import/API tests | Passed | 15 tests |
+| Backend format/lint/types | Passed | Ruff 126 files; mypy 125 source files |
+| Backend full suite | Passed | 139 tests; 2 non-failing framework/cache warnings |
 | Frontend format/lint/types | Passed | Prettier, ESLint, TypeScript clean |
 | Frontend unit suite | Passed | 8 files, 14 tests |
 | Frontend production build | Passed | 2,366 modules |
 | Browser journeys | Passed | 8 desktop/mobile tests, including local import |
+| Dataset and secret checks | Passed | No prohibited tracked data or secrets |
+| Docker Compose syntax | Passed | Configuration parsed quietly |
+| Docker runtime | Skipped | Docker Desktop engine was unavailable |
 
 ## Release hardening completed
 
