@@ -1,4 +1,4 @@
-.PHONY: setup dev backend-dev frontend-dev format lint typecheck test test-backend test-frontend build migrate docker-up docker-down ci verify-rights export-commit-log
+.PHONY: setup dev backend-dev frontend-dev format lint typecheck test test-backend test-frontend test-e2e build migrate docker-up docker-down ci verify-rights verify-secrets verify-release export-commit-log
 
 setup:
 	uv sync --project backend --all-groups
@@ -35,6 +35,9 @@ test-backend:
 test-frontend:
 	npm --prefix frontend test -- --run
 
+test-e2e:
+	npm --prefix frontend run test:e2e
+
 build:
 	npm --prefix frontend run build
 
@@ -50,8 +53,14 @@ docker-down:
 verify-rights:
 	uv run --project backend python scripts/check_dataset_files.py
 
+verify-secrets:
+	uv run --project backend python scripts/check_secrets.py
+
+verify-release:
+	uv run --project backend python scripts/verify_release.py
+
 export-commit-log:
 	uv run --project backend python scripts/export_commit_log.py
 
-ci: lint typecheck test build verify-rights
+ci: lint typecheck test build verify-rights verify-secrets
 	docker compose config --quiet
