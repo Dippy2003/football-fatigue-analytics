@@ -47,6 +47,12 @@ services:
       retries: 10
     ports:
       - "8000:8000"
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     volumes:
       - ./data:/data
       - ./models:/models
@@ -61,6 +67,12 @@ services:
         condition: service_healthy
     ports:
       - "5173:8080"
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
 
 volumes:
   postgres_data:
