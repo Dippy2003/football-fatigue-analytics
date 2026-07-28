@@ -122,13 +122,11 @@ export type Baseline = {
 }
 
 export type RiskFactor = {
-  name: string
+  factor: string
   raw_value: number
-  normalized_value: number
-  configured_weight: number
+  normalized_score: number
   effective_weight: number
   contribution: number
-  explanation: string
 }
 
 export type RiskAssessment = {
@@ -136,7 +134,11 @@ export type RiskAssessment = {
   score: number | null
   category: string | null
   confidence: number
+  data_quality: number
+  feature_coverage: number
+  baseline_type: string
   factors: RiskFactor[]
+  top_contributing_factors: string[]
   explanation: string
   limitations: string[]
   disclaimer: string

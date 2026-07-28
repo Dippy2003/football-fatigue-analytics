@@ -16,7 +16,11 @@ test('reviewer loads demo and reaches an explained player indicator', async ({
     page.getByRole('heading', { name: 'Fictional Demonstration' }),
   ).toBeVisible()
   await expect(page.getByText('Synthetic demo').first()).toBeVisible()
-  const analyse = page.getByRole('link', { name: 'Analyse' }).first()
+  const analyse = page
+    .getByRole('row')
+    .filter({ hasText: 'Synthetic Player 01' })
+    .getByRole('link', { name: 'Analyse' })
+    .first()
   await expect(analyse).toBeVisible()
   await analyse.focus()
   await page.keyboard.press('Enter')
@@ -25,6 +29,14 @@ test('reviewer loads demo and reaches an explained player indicator', async ({
   await expect(
     page.getByRole('heading', { name: 'Performance-risk indicator' }),
   ).toBeVisible()
+  await expect(
+    page.getByText('Sprint Frequency Decline', { exact: true }),
+  ).toBeVisible()
+  await expect(
+    page.getByRole('progressbar', {
+      name: 'Sprint Frequency Decline normalized score',
+    }),
+  ).toHaveAttribute('aria-valuenow', '100')
   await expect(page.getByText(/not a medical diagnostic tool/i).first()).toBeVisible()
 })
 
