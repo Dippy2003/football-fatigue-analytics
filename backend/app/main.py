@@ -18,6 +18,7 @@ from app.api.routes.risk import router as risk_router
 from app.api.routes.system import router as system_router
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
+from app.core.security import security_headers_middleware
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -37,6 +38,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         openapi_url="/api/v1/openapi.json",
     )
     application.state.settings = resolved_settings
+    application.middleware("http")(security_headers_middleware)
     application.middleware("http")(request_id_middleware)
     application.add_exception_handler(HTTPException, http_exception_handler)
     application.add_exception_handler(
