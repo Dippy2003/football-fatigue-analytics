@@ -55,9 +55,12 @@ export function DashboardPage() {
         <div>
           <p className="eyebrow">Team overview</p>
           <h1>Dashboard</h1>
-          <p>Current synthetic match workload and indicator summary.</p>
+          <p>Current match workload and performance-indicator summary.</p>
         </div>
-        <StatusBadge label="Synthetic demo" tone="info" />
+        <StatusBadge
+          label={selectedMatch.is_synthetic ? 'Synthetic demo' : 'Local import'}
+          tone={selectedMatch.is_synthetic ? 'info' : 'success'}
+        />
       </header>
       <div className="metric-grid">
         <MetricCard

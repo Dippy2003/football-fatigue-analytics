@@ -333,6 +333,44 @@ select {
   color: var(--text);
   padding: 0.65rem;
 }
+.import-form {
+  display: grid;
+  gap: 1rem;
+}
+.import-form > label:not(.rights-check) {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.import-form input[type='text'],
+.import-form input:not([type]) {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.65rem;
+}
+.import-form input[type='file'] {
+  width: 100%;
+  border: 1px dashed var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface-muted);
+  color: var(--text);
+  padding: 0.65rem;
+}
+.rights-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  color: var(--text);
+  font-size: 0.82rem;
+}
+.rights-check input {
+  margin-top: 0.2rem;
+}
 .input-wrap {
   display: flex;
   align-items: center;
