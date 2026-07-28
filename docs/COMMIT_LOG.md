@@ -199,16 +199,21 @@ Generated from Git history by `scripts/export_commit_log.py`. Git remains the so
 | Day 5 | `82d7780` | 2026-07-28T10:02:01+05:30 | docs: persist release verification handoff |
 | Day 5 | `11fe786` | 2026-07-28T10:02:12+05:30 | docs: refresh release commit ledger |
 | Day 5 | `8cd4861` | 2026-07-28T10:03:39+05:30 | docs: add release hardening verification report |
-| Post-release import feature | `b3451b6` | 2026-07-28T10:09:15+05:30 | fix(config): allow documented loopback frontend |
-| Post-release import feature | `ba1650a` | 2026-07-28T10:15:55+05:30 | fix(frontend): align risk factor contract |
-| Post-release import feature | `87fcfbd` | 2026-07-28T10:33:58+05:30 | feat(backend): process authorized tracking imports |
-| Post-release import feature | `f9ca181` | 2026-07-28T10:34:04+05:30 | feat(frontend): add rights-aware local import workflow |
-| Post-release import feature | `169b0a9` | 2026-07-28T10:34:04+05:30 | test(e2e): verify local import journey |
-| Post-release import feature | `728d36b` | 2026-07-28T10:36:37+05:30 | docs: explain authorized local data analysis |
-| Post-release import feature | `f04281e` | 2026-07-28T10:37:59+05:30 | docs: record local import verification |
-| Post-release import feature | `d70d02f` | 2026-07-28T10:38:12+05:30 | docs: refresh feature commit ledger |
-| Post-release import feature | `c072989` | 2026-07-28T10:56:32+05:30 | feat(data): provide upload-ready fictional samples |
+| Post-release interface modernization | `b3451b6` | 2026-07-28T10:09:15+05:30 | fix(config): allow documented loopback frontend |
+| Post-release interface modernization | `ba1650a` | 2026-07-28T10:15:55+05:30 | fix(frontend): align risk factor contract |
+| Post-release interface modernization | `87fcfbd` | 2026-07-28T10:33:58+05:30 | feat(backend): process authorized tracking imports |
+| Post-release interface modernization | `f9ca181` | 2026-07-28T10:34:04+05:30 | feat(frontend): add rights-aware local import workflow |
+| Post-release interface modernization | `169b0a9` | 2026-07-28T10:34:04+05:30 | test(e2e): verify local import journey |
+| Post-release interface modernization | `728d36b` | 2026-07-28T10:36:37+05:30 | docs: explain authorized local data analysis |
+| Post-release interface modernization | `f04281e` | 2026-07-28T10:37:59+05:30 | docs: record local import verification |
+| Post-release interface modernization | `d70d02f` | 2026-07-28T10:38:12+05:30 | docs: refresh feature commit ledger |
+| Post-release interface modernization | `c072989` | 2026-07-28T10:56:32+05:30 | feat(data): provide upload-ready fictional samples |
+| Post-release interface modernization | `3ea0933` | 2026-07-28T10:56:39+05:30 | docs: record fictional sample delivery |
+| Post-release interface modernization | `e884711` | 2026-07-28T11:19:43+05:30 | feat(frontend): modernize reviewer experience |
+| Post-release interface modernization | `b7b712c` | 2026-07-28T11:19:47+05:30 | feat(frontend): refine animated analytics surfaces |
+| Post-release interface modernization | `cbbfb06` | 2026-07-28T11:19:53+05:30 | test(e2e): cover responsive navigation behavior |
+| Post-release interface modernization | `852b55d` | 2026-07-28T11:19:56+05:30 | docs: record modern interface verification |
 
-Commits recorded: **204**.
+Commits recorded: **209**.
 
 The commit that updates this generated file cannot contain its own not-yet-known hash; the next checkpoint generation captures it.
