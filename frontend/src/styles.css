@@ -346,6 +346,7 @@ select {
 }
 .table-wrap {
   overflow-x: auto;
+  position: relative;
 }
 table {
   width: 100%;
@@ -365,6 +366,14 @@ th {
 }
 th svg {
   display: inline;
+}
+.table-wrap th:last-child,
+.table-wrap td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  background: var(--surface);
+  box-shadow: -0.75rem 0 1rem -1rem rgb(15 23 42 / 45%);
 }
 .text-link {
   color: var(--primary);
