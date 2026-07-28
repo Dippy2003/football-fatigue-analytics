@@ -1,158 +1,128 @@
 # PlayerPulse
 
-PlayerPulse is an explainable football workload, fatigue-indicator, and
-performance-risk analytics platform for coaches, analysts, students, and
-portfolio reviewers
+PlayerPulse is an explainable football workload and performance-risk review
+application. It combines a FastAPI analytics API with a responsive React
+interface, deterministic synthetic demo data, transparent quality/confidence
+handling, and conservative dataset-rights controls.
 
 > PlayerPulse provides performance-based indicators from available match data.
 > It is not a medical diagnostic tool and must not be used as a substitute for
 > qualified medical or sports-science assessment.
 
-## Current checkpoint
+## What works
 
-Day 1 provides a verified application foundation:
+- One-click fictional demo generation and idempotent database persistence
+- Provider-neutral Metrica/StatsBomb adapters with fail-closed rights gates
+- Coordinate cleaning, interpolation, distance, speed, acceleration, intensity,
+  sprints, 15-minute windows, event metrics, and quality reporting
+- Teams, players, matches, workload metrics, baselines, heatmaps, and timelines
+  through a versioned FastAPI API
+- Explainable rule-based 0–100 indicators with confidence, factor
+  contributions, limitations, and insufficient-data handling
+- Dashboard, match explorer, player analysis, comparison, methodology, ethics,
+  data management, responsive themes, and accessible async/error states
+- SQLite development, PostgreSQL production support, Alembic migrations,
+  hardened containers, CI, and desktop/mobile browser tests
 
-- FastAPI application factory and versioned health, readiness, and version APIs
-- typed environment settings with safe upload and CORS defaults
-- structured JSON logging with sensitive-field redaction
-- SQLAlchemy sessions for SQLite and PostgreSQL, UUID/UTC model conventions,
-  and an Alembic migration environment
-- responsive React, TypeScript, Vite, Tailwind, React Router, TanStack Query,
-  and Axios application shell
-- accessible original PlayerPulse pitch/pulse mark, skip link, navigation,
-  disclaimer, placeholder routes, and not-found page
-- pytest, Ruff, mypy, Vitest, Testing Library, ESLint, Prettier, and TypeScript
-  checks
-- Dockerfiles, a three-service Compose stack, and GitHub Actions CI
-- verified dataset-rights registry with no downloaded football data
-
-Football data generation, processing, analytics, persistence, risk scoring, and
-the complete dashboard belong to Days 2-4 and are not claimed at this checkpoint.
+The optional Isolation Forest produces a separate anomaly signal only. No score
+is an injury probability or medical conclusion.
 
 ## Prerequisites
 
-- Git 2.48 or newer
-- uv 0.11 or newer
-- Node.js 22 and npm 10 or newer
-- Docker Desktop when using containers
+- Git
+- uv with Python 3.12
+- Node.js 22 and npm 10+
+- Docker Desktop only for the container path
 
-Python does not need to be preinstalled when uv can download Python 3.12.
+## Local quick start (Windows PowerShell)
 
-## Windows PowerShell quick start
-
-Run from the repository root:
+From the repository root:
 
 ```powershell
 uv sync --project backend --all-groups
 npm.cmd --prefix frontend ci
+uv run --project backend alembic -c backend/alembic.ini upgrade head
 ```
 
-Start the backend in the first terminal:
+Start the API:
 
 ```powershell
 uv run --project backend uvicorn app.main:app --app-dir backend --reload
 ```
 
-Open these URLs:
-
-- API health: http://127.0.0.1:8000/api/v1/health
-- API readiness: http://127.0.0.1:8000/api/v1/readiness
-- API version: http://127.0.0.1:8000/api/v1/version
-- interactive API docs: http://127.0.0.1:8000/docs
-
-Start the frontend in a second terminal:
+In a second root terminal, start the browser app:
 
 ```powershell
 npm.cmd --prefix frontend run dev
 ```
 
-Open http://127.0.0.1:5173 and use the Home, Dashboard, Matches, Data,
-Methodology, and About navigation links. Stop each server with `Ctrl+C`.
+Open:
 
-## Configuration
+- Application: http://127.0.0.1:5173
+- API documentation: http://127.0.0.1:8000/docs
+- Health: http://127.0.0.1:8000/api/v1/health
+- Readiness: http://127.0.0.1:8000/api/v1/readiness
+- Version: http://127.0.0.1:8000/api/v1/version
 
-Defaults are safe for a local SQLite demo. To customize them:
+Select **Load demo match**, open the fictional match, and choose **Analyse** for
+a player. Stop both servers with `Ctrl+C`.
 
-```powershell
-Copy-Item .env.example .env
-```
-
-The ignored `.env` may select PostgreSQL, allowed browser origins, data/model
-paths, and resource limits. `ENABLE_UPLOADS=false` is the default. See
-`docs/ENVIRONMENT.md`; never commit `.env`.
-
-## Quality checks
-
-Windows PowerShell:
+## Quality gate
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/check_day1.ps1
-```
-
-Individual commands:
-
-```powershell
-Push-Location backend
-uv run ruff format --check .
-uv run ruff check .
-uv run mypy
-uv run pytest
-Pop-Location
-
+uv run --project backend ruff format --check backend scripts
+uv run --project backend ruff check backend scripts
+uv run --project backend mypy --config-file backend/pyproject.toml backend/app backend/tests scripts
+uv run --project backend pytest
 npm.cmd --prefix frontend run format:check
 npm.cmd --prefix frontend run lint
 npm.cmd --prefix frontend run typecheck
 npm.cmd --prefix frontend test -- --run
 npm.cmd --prefix frontend run build
-
+npm.cmd --prefix frontend run test:e2e
 uv run --project backend python scripts/check_dataset_files.py
+uv run --project backend python scripts/check_secrets.py
+uv run --project backend python scripts/verify_release.py
 docker compose config --quiet
 ```
 
-GNU Make users can run `make setup` and `make ci`.
-
-## Docker
-
-With Docker Desktop running:
+## Containers
 
 ```powershell
-docker compose config
 docker compose up --build
 ```
 
-The stack defines PostgreSQL, the FastAPI backend on port 8000, and the
-frontend on port 5173. Stop it with `docker compose down`. Compose configuration
-was validated on Day 1; image builds were not run because the local Docker
-engine was unavailable.
+Open http://127.0.0.1:5173. The stack runs PostgreSQL, migrations, the API, and
+an unprivileged Nginx frontend. Stop it with:
 
-## Data rights and licence boundary
+```powershell
+docker compose down
+```
 
-The public demo, CI, tests, and screenshots use deterministic fictional data
-generated by PlayerPulse. No third-party raw football data is distributed.
+## Data and security boundary
 
-- Metrica Sports: https://github.com/metrica-sports/sample-data — local import
-  only under the conservative project policy.
-- StatsBomb Open Data: https://github.com/hudl/open-data — optional,
-  verification-gated, and subject to its current licence and attribution rules.
+Only project-owned synthetic data is used for public demos, CI, tests, and
+screenshots. Raw/interim/processed provider files, local databases, secrets, and
+generated models are ignored. Metrica input is local-only; StatsBomb input is
+verification-gated. Current source terms and hashes are recorded in
+`data/sources.yml` and `docs/DATASET_ATTRIBUTION.md`.
 
-See `data/sources.yml` and `docs/DATASET_ATTRIBUTION.md` for checked commits and
-terms digests. The root MIT licence covers original PlayerPulse code and
-documentation only; it does not relicense external data, provider trademarks,
-logos, badges, photographs, or other third-party material.
+Uploads are disabled by default. Production CORS permits explicit HTTPS origins
+only. Never load user-supplied pickle or Joblib files.
 
 ## Documentation
 
-- `docs/ARCHITECTURE.md` — current system and request flows
-- `docs/API.md` — working Day 1 endpoints
-- `docs/ENVIRONMENT.md` — settings and local configuration
-- `docs/TESTING.md` — quality commands and verified scope
-- `SECURITY.md` and `docs/THREAT_MODEL.md` — security boundary
-- `docs/DATASET_ATTRIBUTION.md` — rights and attribution evidence
-- `docs/PROGRESS.md` — exact continuation state
-- `docs/IMPLEMENTATION_PLAN.md` — five tagged development phases
+- [User guide](docs/USER_GUIDE.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [API](docs/API.md)
+- [Methodology](docs/METHODOLOGY.md)
+- [Data dictionary](docs/DATA_DICTIONARY.md)
+- [Synthetic data card](docs/DATA_CARD.md)
+- [Model card](docs/MODEL_CARD.md)
+- [Ethics and limitations](docs/ETHICS_AND_LIMITATIONS.md)
+- [Deployment](docs/DEPLOYMENT.md)
+- [Testing](docs/TESTING.md)
+- [Security policy](SECURITY.md)
 
-## Licence
-
-Original PlayerPulse code and documentation are MIT licensed. External datasets
-and third-party assets remain governed by their respective owners' terms. See
-`LICENSE` and `THIRD_PARTY_NOTICES.md`.
+Original PlayerPulse code and documentation are MIT licensed. Third-party data
+and marks remain governed by their owners' terms.
