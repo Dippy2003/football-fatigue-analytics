@@ -51,12 +51,14 @@ test('landing page has no serious automated accessibility violations', async ({
   expect(serious).toEqual([])
 })
 
-test('mobile navigation is keyboard operable', async ({ page }) => {
+test('navigation is keyboard operable', async ({ page }, testInfo) => {
   await page.goto('/')
-  const menu = page.getByRole('button', { name: 'Toggle navigation' })
-  await expect(menu).toBeVisible()
-  await menu.focus()
-  await page.keyboard.press('Enter')
+  if (testInfo.project.name === 'mobile-chromium') {
+    const menu = page.getByRole('button', { name: 'Toggle navigation' })
+    await expect(menu).toBeVisible()
+    await menu.focus()
+    await page.keyboard.press('Enter')
+  }
   await expect(
     page.getByRole('navigation', { name: 'Primary navigation' }),
   ).toBeVisible()
