@@ -7,7 +7,7 @@ providers' current official terms.
 
 ## Verification record
 
-- Verification timestamp: 2026-07-21T02:27:23Z
+- Verification timestamp: 2026-07-28T04:18:00Z
 - Verification method: official repository pages opened; official branch heads
   resolved; small official terms files fetched temporarily for SHA-256 only.
 - Raw football data downloaded: none
@@ -23,6 +23,23 @@ The Hudl StatsBomb commit remains
 `b0bc9f22dd77c206ddedc1d742893b3bbe64baec` and its licence digest remains
 `a5462e69aeb71a39268b760b110c5c2190a2e0cee3015ba976f66bd71f6c2bb4`.
 No rights status changed, so the conservative adapter policies remain in force.
+
+## Release re-verification
+
+The official source and terms pages were opened again on 2026-07-28. The
+Metrica `master` head remains
+`e706dd506b360d69d9d123d5b8026e7294b13996`, and its official README digest
+remains `fa4b178e62c4d3559e13b6d3a4fdd42e45293461c2ab656e05a13360a6adcbcf`.
+The official StatsBomb `master` head remains
+`b0bc9f22dd77c206ddedc1d742893b3bbe64baec`, and its licence digest remains
+`a5462e69aeb71a39268b760b110c5c2190a2e0cee3015ba976f66bd71f6c2bb4`.
+No raw data or provider marks were downloaded into the repository.
+
+The current official pages still request source acknowledgement for public
+Metrica use and identify StatsBomb source/branding requirements for published
+analysis. These statements are permission signals, not a general licence for
+PlayerPulse to repackage the datasets. The release therefore retains the
+local-only and verification-required policies.
 
 ## PlayerPulse deterministic synthetic data
 
@@ -52,8 +69,8 @@ verification.
 
 ## StatsBomb Open Data
 
-- Official repository: https://github.com/hudl/open-data
-- Official licence: https://github.com/hudl/open-data/blob/master/LICENSE.pdf
+- Official repository: https://github.com/statsbomb/open-data
+- Official licence: https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf
 - Checked branch: `master`
 - Checked commit: `b0bc9f22dd77c206ddedc1d742893b3bbe64baec`
 - Licence SHA-256: `a5462e69aeb71a39268b760b110c5c2190a2e0cee3015ba976f66bd71f6c2bb4`
