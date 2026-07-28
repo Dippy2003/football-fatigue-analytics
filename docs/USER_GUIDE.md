@@ -14,7 +14,7 @@ uv run --project backend alembic -c backend/alembic.ini upgrade head
 Start the API and frontend in separate root terminals:
 
 ```powershell
-uv run --project backend uvicorn app.main:app --reload
+uv run --project backend uvicorn app.main:app --app-dir backend --reload
 ```
 
 ```powershell
@@ -34,6 +34,11 @@ Open `http://localhost:5173`.
 6. Select two to four fictional players and review the role warning.
 7. Read Methodology and Ethics before interpreting indicators.
 
+If the API is unavailable, the page shows a safe retry state. Start the backend
+and choose **Try again**. If a risk result is `Insufficient data`, read its
+missing-factor and data-quality explanation instead of interpreting the absent
+score as low risk.
+
 Use the moon/sun button to change theme. Keyboard users can tab to the skip
 link, navigation, filters, actions, table links, and comparison checkboxes.
 
@@ -42,3 +47,11 @@ link, navigation, filters, actions, table links, and comparison checkboxes.
 PlayerPulse provides performance-based indicators from available match data.
 It is not a medical diagnostic tool and must not be used as a substitute for
 qualified medical or sports-science assessment.
+
+## Importing local provider files
+
+Uploads are disabled by default and are not needed for the demo. Only enable
+them in a controlled local environment after re-checking
+`DATASET_ATTRIBUTION.md`. Keep provider files in ignored `data/raw/`; never
+commit them. Metrica is local-import-only and StatsBomb requires explicit,
+current rights acknowledgement. Unsupported provider metrics stay unavailable.
