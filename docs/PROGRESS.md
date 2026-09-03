@@ -2,16 +2,86 @@
 
 ## Current checkpoint
 
-- Development phase: release hardening and 1.0.0 checkpoint preparation
+- Development phase: post-1.0 interface modernization
 - Branch: `main` (no phase-named branch)
-- Verified starting tag: `day-4-complete` at
-  `304a4061a687d5051535769290c6641530f25b88`
-- Substantive commits after starting tag: 40 before final report/ledger commits
 - Runtime version: `1.0.0`
-- Remote state: `origin/main` remains at the starting checkpoint; final changes
-  have not been pushed
-- Next exact action: finalize checkpoint documents and ledger, create annotated
-  `day-5-complete` and `v1.0.0` tags, run post-tag verification, and stop
+- Starting release tag: `v1.0.0` at `8cd4861`
+- Feature baseline: authorized local tracking import and fictional upload
+  samples are complete
+- Remote state: local `main` contains unpushed work; no push or deployment was
+  performed
+- Next exact action: commit the verified interface redesign, regenerate the
+  commit ledger, and hand off the browser review steps
+
+## Modern interface redesign completed
+
+- Rebuilt the application shell as a responsive glass navigation bar with
+  icon-labelled routes, a compact live-status indicator, an improved mobile
+  menu, and a richer footer.
+- Reworked the landing page into a contemporary football-intelligence hero
+  with a radar-style match visual, clearer calls to action, trust signals, and
+  an explicit responsible-review section.
+- Introduced a consistent visual language for metric cards, panels, buttons,
+  uploads, tables, status badges, data-quality meters, and light/dark themes.
+- Added restrained CSS-native motion for page entrances, hover feedback,
+  radar scanning, route drawing, metric fills, and chart transitions.
+- Modernized speed and workload charts with gradients and refined tooltips,
+  while preserving the semantic pitch description and real API-backed values.
+- Kept keyboard focus, skip navigation, readable contrast, mobile layouts, and
+  a comprehensive reduced-motion mode as release requirements.
+- Added no animation dependency: the motion layer uses CSS and the existing
+  chart library, limiting bundle and maintenance cost.
+
+## Interface verification evidence
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Prettier | Passed | All matched files use Prettier style |
+| ESLint | Passed | Zero warnings under `--max-warnings 0` |
+| TypeScript | Passed | Project references compiled cleanly |
+| Frontend unit suite | Passed | 8 files, 14 tests |
+| Production build | Passed | Vite transformed 2,366 modules |
+| Browser journeys | Passed | 8 desktop/mobile Playwright tests |
+| Accessibility | Passed | No serious/critical Axe findings at both viewports |
+| Keyboard navigation | Passed | Desktop and mobile route access verified |
+| Upload journey | Passed | Fictional CSV import verified at both viewports |
+
+## Local tracking import completed
+
+- Added a capability endpoint and a disabled-by-default, rights-acknowledged
+  multipart CSV workflow for Metrica-compatible long-form tracking.
+- Validates declared files, basename, media type, byte and row limits, canonical
+  columns, coordinate bounds, source match identity, exactly two teams, and
+  player membership.
+- Removes raw temporary uploads after processing; stores checksummed provenance,
+  relational summaries, and ignored derived Parquet.
+- Serves imported timelines, heatmaps, event rows, workload metrics, quality,
+  baseline context, and explainable performance-risk results through existing
+  APIs.
+- Added an accessible Data-page form, downloadable tracking/event templates,
+  server-disabled guidance, local-import labels, and automatic navigation to
+  the processed match.
+- Added downloadable deterministic fictional tracking and event samples with
+  20 players, two periods, explicit synthetic markers, and a reproducible
+  generator; the files process directly through the local-import form.
+- Added API security/idempotency tests, an API-to-analytics integration test,
+  frontend form tests, and desktop/mobile browser import coverage.
+- The local workflow does not accept StatsBomb event-only files because the
+  system requires tracking for movement and workload indicators.
+
+## Feature verification evidence
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Backend format/lint/types | Passed | Ruff 126 files; mypy 125 source files |
+| Backend full suite | Passed | 139 tests; 2 non-failing framework/cache warnings |
+| Frontend format/lint/types | Passed | Prettier, ESLint, TypeScript clean |
+| Frontend unit suite | Passed | 8 files, 14 tests |
+| Frontend production build | Passed | 2,366 modules |
+| Browser journeys | Passed | 8 desktop/mobile tests, including local import |
+| Dataset and secret checks | Passed | No prohibited tracked data or secrets |
+| Docker Compose syntax | Passed | Configuration parsed quietly |
+| Docker runtime | Skipped | Docker Desktop engine was unavailable |
 
 ## Release hardening completed
 

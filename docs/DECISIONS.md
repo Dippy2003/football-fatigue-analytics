@@ -226,3 +226,42 @@ deployment claim. CI, screenshots, browser tests, and documentation use only
 project-owned synthetic data. Official provider terms were rechecked without
 committing raw data or marks. Real-athlete use requires separate governance,
 security, privacy, validation, and qualified oversight.
+
+## ADR-019: real tracking analysis is an explicit local capability
+
+- Status: accepted
+- Date: 2026-07-28
+
+The public demo remains synthetic and upload-disabled, but a local operator may
+enable a rights-acknowledged Metrica-compatible long-form CSV workflow. Tracking
+is mandatory; optional events enrich only the supported event layer. StatsBomb
+event-only input is not presented as sufficient for movement or workload
+analysis.
+
+Raw multipart files use temporary storage and are deleted after processing.
+Checksummed provenance and bounded relational summaries are durable; canonical
+derived Parquet stays in the ignored local data workspace so timelines and
+heatmaps reflect the actual imported match. Repeated identical imports are
+idempotent, while a reused source match ID with different bytes fails closed.
+
+This is a controlled local feature, not a public athlete-data service.
+Authentication, authorization, retention, audit, tenancy, privacy governance,
+and qualified operational review remain prerequisites for organizational use.
+
+## ADR-020: motion supports hierarchy without obscuring evidence
+
+- Status: accepted
+- Date: 2026-07-28
+
+PlayerPulse uses a modern, animated interface to communicate hierarchy and
+interaction state, but motion never changes an analytical value or replaces a
+text label. Page entrances, card feedback, radar scanning, route drawing,
+quality fills, and chart transitions use CSS and the existing visualization
+library instead of adding another animation dependency.
+
+Every effect is short, non-blocking, and disabled under
+`prefers-reduced-motion`. Keyboard focus, skip navigation, contrast, semantic
+chart summaries, responsive layouts, light/dark themes, and the exact
+performance-risk disclaimer remain part of the design contract. This keeps the
+portfolio experience visually distinctive without turning decision-support
+evidence into decoration or implying medical certainty.

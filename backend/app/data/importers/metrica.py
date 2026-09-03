@@ -82,8 +82,10 @@ def load_metrica_events(path: Path) -> pd.DataFrame:
     validate_pitch_bounds(
         canonical, coordinate_pairs=(("start_x", "start_y"), ("end_x", "end_y"))
     )
+    canonical["event_type"] = canonical["event_type"].astype(str).str.lower()
     canonical["player_id"] = canonical.get("player_id", pd.Series(dtype="object"))
     canonical["outcome"] = canonical.get("outcome", pd.Series(dtype="object"))
+    canonical["outcome"] = canonical["outcome"].astype("string").str.lower()
     canonical["source"] = "metrica_sample_data"
     canonical["is_synthetic"] = False
     return canonical[

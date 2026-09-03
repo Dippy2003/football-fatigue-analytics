@@ -16,6 +16,27 @@ export type DataSource = {
   attribution: string
 }
 
+export type ImportCapabilities = {
+  uploads_enabled: boolean
+  provider: 'metrica_sample_data'
+  tracking_required: boolean
+  events_optional: boolean
+  accepted_extensions: string[]
+  max_upload_mb: number
+  max_import_rows: number
+}
+
+export type LocalImportResult = {
+  dataset_import_id: string
+  match_id: string
+  player_count: number
+  quality_score: number
+  quality_confidence: string
+  limitations: string[]
+  is_synthetic: false
+  created: boolean
+}
+
 export type Match = {
   id: string
   external_id: string

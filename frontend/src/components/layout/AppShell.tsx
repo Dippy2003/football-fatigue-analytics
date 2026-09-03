@@ -1,5 +1,16 @@
 import type { ReactNode } from 'react'
-import { Menu, X } from 'lucide-react'
+import {
+  BarChart3,
+  Database,
+  FileSearch,
+  Home,
+  Info,
+  Menu,
+  Radio,
+  Trophy,
+  X,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
@@ -7,13 +18,13 @@ import { ThemeToggle } from '../../app/theme'
 import { BrandMark } from './BrandMark'
 
 const navigation = [
-  { href: '/', label: 'Home' },
-  { href: '/dashboard', label: 'Dashboard' },
-  { href: '/matches', label: 'Matches' },
-  { href: '/data', label: 'Data' },
-  { href: '/methodology', label: 'Methodology' },
-  { href: '/about', label: 'About' },
-]
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/dashboard', label: 'Dashboard', icon: BarChart3 },
+  { href: '/matches', label: 'Matches', icon: Trophy },
+  { href: '/data', label: 'Data', icon: Database },
+  { href: '/methodology', label: 'Methodology', icon: FileSearch },
+  { href: '/about', label: 'About', icon: Info },
+] satisfies Array<{ href: string; label: string; icon: LucideIcon }>
 
 type AppShellProps = {
   children: ReactNode
@@ -30,26 +41,44 @@ export function AppShell({ children }: AppShellProps) {
         Skip to main content
       </a>
       <header className="app-header">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <NavLink
-            className="flex w-fit items-center gap-3"
-            to="/"
-            aria-label="PlayerPulse home"
-          >
+        <div className="header-inner">
+          <NavLink className="brand-link" to="/" aria-label="PlayerPulse home">
             <BrandMark />
-            <span>
-              <span className="block text-lg font-bold tracking-tight">
-                PlayerPulse
-              </span>
-              <span className="block text-xs text-[var(--muted)]">
-                Performance indicators
-              </span>
+            <span className="brand-copy">
+              <span>PlayerPulse</span>
+              <small>Football intelligence</small>
             </span>
           </NavLink>
-          <div className="flex items-center gap-2">
+          <nav
+            id="primary-navigation"
+            className={`primary-navigation ${open ? 'nav-open' : ''}`}
+            aria-label="Primary navigation"
+          >
+            <ul>
+              {navigation.map((item) => (
+                <li key={item.href}>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `nav-link ${isActive ? 'nav-link-active' : ''}`
+                    }
+                    to={item.href}
+                    onClick={() => setOpen(false)}
+                  >
+                    <item.icon aria-hidden="true" size={15} />
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="header-actions">
+            <span className="system-status">
+              <Radio aria-hidden="true" size={13} />
+              Live
+            </span>
             <ThemeToggle />
             <button
-              className="icon-button lg:hidden"
+              className="icon-button menu-button"
               onClick={() => setOpen((value) => !value)}
               type="button"
               aria-expanded={open}
@@ -59,44 +88,25 @@ export function AppShell({ children }: AppShellProps) {
               {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
             </button>
           </div>
-          <nav
-            id="primary-navigation"
-            className={`${open ? 'flex' : 'hidden'} absolute left-4 right-4 top-20 z-40 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-3 shadow-xl lg:static lg:flex lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
-            aria-label="Primary navigation"
-          >
-            <ul className="flex w-full flex-col gap-1 lg:flex-row">
-              {navigation.map((item) => (
-                <li key={item.href}>
-                  <NavLink
-                    className={({ isActive }) =>
-                      `inline-flex rounded-md px-3 py-2 text-sm font-medium hover:bg-[var(--surface-muted)] hover:text-[var(--primary)] ${
-                        isActive
-                          ? 'bg-[var(--surface-muted)] text-[var(--primary)]'
-                          : 'text-[var(--muted)]'
-                      }`
-                    }
-                    to={item.href}
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </div>
       </header>
-      <main
-        id="main-content"
-        className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8"
-      >
+      <main id="main-content" className="app-main">
         {children}
       </main>
-      <footer className="border-t border-[var(--border)] bg-[var(--surface)]">
-        <div className="mx-auto max-w-7xl px-4 py-6 text-sm text-[var(--muted)] sm:px-6 lg:px-8">
-          PlayerPulse provides performance-based indicators from available match data.
-          It is not a medical diagnostic tool and must not be used as a substitute for
-          qualified medical or sports-science assessment.
+      <footer className="app-footer">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <BrandMark />
+            <span>
+              <strong>PlayerPulse</strong>
+              <small>Evidence-led football analytics</small>
+            </span>
+          </div>
+          <p>
+            PlayerPulse provides performance-based indicators from available match data.
+            It is not a medical diagnostic tool and must not be used as a substitute for
+            qualified medical or sports-science assessment.
+          </p>
         </div>
       </footer>
     </div>

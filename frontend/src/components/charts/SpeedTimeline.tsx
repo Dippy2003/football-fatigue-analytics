@@ -1,7 +1,7 @@
 import {
+  Area,
+  AreaChart,
   CartesianGrid,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -25,8 +25,18 @@ export function SpeedTimeline({ points }: { points: TimelinePoint[] }) {
     <div>
       <div className="h-72" aria-label="Sampled speed timeline in metres per second">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+          <AreaChart data={data}>
+            <defs>
+              <linearGradient id="speedArea" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="var(--primary)" stopOpacity={0.42} />
+                <stop offset="100%" stopColor="var(--primary)" stopOpacity={0.02} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid
+              vertical={false}
+              strokeDasharray="3 6"
+              stroke="var(--border)"
+            />
             <XAxis dataKey="minute" unit=" min" tick={{ fill: 'var(--muted)' }} />
             <YAxis unit=" m/s" domain={[0, 'auto']} tick={{ fill: 'var(--muted)' }} />
             <Tooltip
@@ -35,14 +45,16 @@ export function SpeedTimeline({ points }: { points: TimelinePoint[] }) {
                 'Estimated speed',
               ]}
             />
-            <Line
+            <Area
               type="monotone"
               dataKey="speed"
-              stroke="#0d9488"
+              stroke="var(--primary)"
+              fill="url(#speedArea)"
               dot={false}
-              strokeWidth={2}
+              strokeWidth={2.5}
+              animationDuration={900}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
       <p className="text-xs text-[var(--muted)]">

@@ -62,9 +62,10 @@ export function FootballPitch({
           <polyline
             points={path}
             fill="none"
-            stroke="#0f172a"
-            strokeWidth=".55"
-            opacity=".5"
+            stroke="var(--trajectory)"
+            strokeWidth=".65"
+            opacity=".68"
+            className="trajectory-line"
           />
         )}
         {average && (

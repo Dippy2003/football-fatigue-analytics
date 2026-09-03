@@ -50,8 +50,15 @@ qualified medical or sports-science assessment.
 
 ## Importing local provider files
 
-Uploads are disabled by default and are not needed for the demo. Only enable
-them in a controlled local environment after re-checking
-`DATASET_ATTRIBUTION.md`. Keep provider files in ignored `data/raw/`; never
-commit them. Metrica is local-import-only and StatsBomb requires explicit,
-current rights acknowledgement. Unsupported provider metrics stay unavailable.
+Uploads are disabled by default and are not needed for the demo. In a
+controlled local environment, set `ENABLE_UPLOADS=true`, restart the API, and
+open the Data page. Supply a Metrica-compatible long-form tracking CSV,
+optionally supply an event CSV, acknowledge your rights to use the files, and
+select **Process match**. The accepted match opens automatically.
+
+The raw multipart files are temporary; derived Parquet remains in the ignored
+local data workspace. Keep provider originals outside Git and re-check
+`DATASET_ATTRIBUTION.md`. StatsBomb event-only files do not contain the tracking
+needed for PlayerPulse workload indicators and are not accepted by this form.
+See [Local football data import](LOCAL_DATA_IMPORT.md) for exact columns,
+commands, limits, and expected results.

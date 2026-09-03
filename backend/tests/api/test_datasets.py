@@ -2,6 +2,7 @@
 
 from collections.abc import Iterator
 from contextlib import contextmanager
+from pathlib import Path
 
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
@@ -14,7 +15,11 @@ from app.main import create_app
 
 @contextmanager
 def api_client(
-    *, enable_uploads: bool = False, max_upload_mb: int = 25
+    *,
+    enable_uploads: bool = False,
+    max_upload_mb: int = 25,
+    max_import_rows: int = 2_000_000,
+    data_root: Path = Path("../data"),
 ) -> Iterator[TestClient]:
     engine = build_engine(Settings(database_url="sqlite+pysqlite:///:memory:"))
     Base.metadata.create_all(engine)
@@ -24,6 +29,8 @@ def api_client(
             database_url="sqlite+pysqlite:///:memory:",
             enable_uploads=enable_uploads,
             max_upload_mb=max_upload_mb,
+            max_import_rows=max_import_rows,
+            data_root=data_root,
             synthetic_seed=42,
         )
     )
@@ -74,3 +81,19 @@ def test_upload_endpoint_fails_closed_by_default() -> None:
     assert response.status_code == 403
     assert response.json()["message"] == "Third-party uploads are disabled."
     assert response.json()["code"] == "http_403"
+
+
+def test_import_capabilities_follow_server_configuration() -> None:
+    with api_client(enable_uploads=True, max_upload_mb=7) as client:
+        response = client.get("/api/v1/datasets/import-capabilities")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "uploads_enabled": True,
+        "provider": "metrica_sample_data",
+        "tracking_required": True,
+        "events_optional": True,
+        "accepted_extensions": [".csv"],
+        "max_upload_mb": 7,
+        "max_import_rows": 2_000_000,
+    }

@@ -116,8 +116,10 @@ tag are required per development day.
 
 ## Current handoff
 
-Release hardening and the complete 1.0.0 quality gate are complete on `main`.
-The phase started from verified `day-4-complete` at `304a406`. Continue without
-phase-named branches. Only final report/ledger persistence, annotated
-`day-5-complete` and `v1.0.0` tags, post-tag verification, and an explicitly
-authorized push may remain. No external deployment has been performed.
+Release 1.0.0 remains tagged at `8cd4861`. A post-release authorized local
+tracking import feature is implemented on `main`: guarded multipart CSV is
+processed into database summaries and ignored derived Parquet, then displayed
+through the existing match and player interface. Continue without phase-named
+branches. Before further changes, read `docs/LOCAL_DATA_IMPORT.md` and verify
+the feature checkpoint in `docs/PROGRESS.md`. Uploads remain disabled by
+default. No push or external deployment has been performed.

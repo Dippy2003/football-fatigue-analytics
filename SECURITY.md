@@ -21,7 +21,10 @@ include real credentials, athlete data, or exploit payloads in a public issue.
   cache, and content-security controls
 - production startup rejects wildcard, HTTP, localhost, and loopback CORS
 - uploads stream through bounded memory and validate suffix, media type, path,
-  file count, row count, and configured size
+  file declaration, file count, row count, canonical schema, coordinate bounds,
+  match identity, team membership, and configured size
+- accepted raw upload files use temporary storage and are deleted after
+  processing; derived Parquet stays in a Git-ignored local workspace
 - CI audits Python packages, critical production npm issues, tracked secrets,
   dataset distribution, migrations, browsers, and container configuration
 
@@ -49,6 +52,8 @@ terms and must not be redistributed by default.
 
 Authentication, authorization, rate limiting, durable audit logs, object
 storage, retention policies, club tenancy, and a durable job queue are outside
-the five-day MVP. They are mandatory design work before real club deployment.
+the portfolio MVP. The local import workflow must not be exposed as a public
+upload service until those controls and athlete-data governance exist. They are
+mandatory design work before real club deployment.
 
 Never commit a vulnerability report containing secrets.

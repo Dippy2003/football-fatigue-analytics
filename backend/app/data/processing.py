@@ -38,25 +38,81 @@ def process_synthetic_demo(
 ) -> ProcessingResult:
     """Run canonical cleaning and analytics using only fictional data."""
     match = generate_synthetic_match(seed=seed, period_duration_s=period_duration_s)
-    ordered = sort_and_deduplicate_tracking(match.tracking)
+    return process_canonical_match(
+        tracking=match.tracking,
+        events=match.events,
+        output_directory=output_directory,
+        output_match_id="synthetic-match-001",
+    )
+
+
+def process_canonical_match(
+    *,
+    tracking: pd.DataFrame,
+    events: pd.DataFrame | None = None,
+    output_directory: Path | None = None,
+    output_match_id: str | None = None,
+) -> ProcessingResult:
+    """Clean and analyse one provider-neutral tracking match."""
+    ordered = sort_and_deduplicate_tracking(tracking)
     interpolated = interpolate_short_tracking_gaps(ordered.frame)
     movement = add_acceleration_features(interpolated.frame)
     intensity = classify_intensity_zones(interpolated.frame)
     movement["intensity_zone"] = intensity["intensity_zone"]
+    canonical_events = (
+        events.copy()
+        if events is not None and not events.empty
+        else pd.DataFrame(
+            columns=[
+                "match_id",
+                "event_id",
+                "period",
+                "timestamp_seconds",
+                "team_id",
+                "player_id",
+                "event_type",
+                "outcome",
+                "start_x",
+                "start_y",
+                "end_x",
+                "end_y",
+                "source",
+                "is_synthetic",
+            ]
+        )
+    )
+    if canonical_events.empty:
+        event_metrics = pd.DataFrame(
+            columns=[
+                "match_id",
+                "team_id",
+                "player_id",
+                "event_count",
+                "pass_attempts",
+                "completed_passes",
+                "defensive_actions",
+                "possession_losses",
+                "pass_completion_rate",
+            ]
+        )
+    else:
+        event_metrics = summarize_event_metrics(canonical_events)
     tables = {
         "tracking": interpolated.frame,
         "movement_features": movement,
         "sprints": detect_sprints(interpolated.frame),
         "match_windows": summarize_match_windows(interpolated.frame),
-        "event_metrics": summarize_event_metrics(match.events),
-        "events": match.events,
+        "event_metrics": event_metrics,
+        "events": canonical_events,
     }
     quality = build_quality_report(interpolated.frame)
-    output_paths = (
-        write_match_parquet(
-            output_directory, match_id="synthetic-match-001", tables=tables
+    output_paths: dict[str, Path] = {}
+    if output_directory is not None:
+        if output_match_id is None:
+            raise ValueError("output_match_id is required when persisting tables")
+        output_paths = write_match_parquet(
+            output_directory,
+            match_id=output_match_id,
+            tables=tables,
         )
-        if output_directory is not None
-        else {}
-    )
     return ProcessingResult(tables=tables, quality=quality, output_paths=output_paths)

@@ -71,3 +71,38 @@ rights audit, at least 150 total meaningful commits, all daily tags,
 - Progress and decisions are persisted after substantial work.
 - External deployment, remote creation, pushes, and releases require explicit
   user authorization.
+
+## Post-release feature: authorized local tracking analysis
+
+Status: implemented and verified.
+
+Goal: allow a local operator with current data rights to upload normalized
+tracking CSV, run the canonical analytics pipeline, persist summary results, and
+open the imported match in the existing reviewer interface.
+
+Acceptance:
+
+- imports remain disabled by default and require a rights acknowledgement
+- raw files are bounded, validated, temporary, and never committed
+- derived Parquet and database summaries drive the imported dashboard
+- repeated content is idempotent and conflicting source identities are rejected
+- incomplete physical evidence yields an explicit insufficient-data result
+- backend, frontend, integration, and desktop/mobile browser tests pass
+- public demo, CI fixtures, screenshots, and repository data remain synthetic
+
+## Post-release enhancement: modern reviewer experience
+
+Status: implemented and verified.
+
+Goal: replace the utilitarian presentation layer with a contemporary,
+responsive football-intelligence interface while preserving every API-backed
+workflow, accessibility contract, ethical boundary, and data-quality state.
+
+Acceptance:
+
+- navigation, landing, cards, charts, tables, forms, and footer share one
+  coherent light/dark visual system
+- motion provides useful feedback and honors reduced-motion preferences
+- analytical values and risk explanations remain sourced from the API
+- desktop and mobile demo, keyboard, Axe, and upload journeys pass
+- formatting, lint, types, unit tests, and production build pass

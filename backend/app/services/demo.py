@@ -29,7 +29,8 @@ class DemoCreationResult:
     created: bool
 
 
-def _metric_values(processing: ProcessingResult, player: Player) -> dict[str, object]:
+def metric_values(processing: ProcessingResult, player: Player) -> dict[str, object]:
+    """Build persisted summary values for a processed canonical player."""
     movement = processing.tables["movement_features"]
     player_rows = movement[movement["player_id"] == player.external_id]
     valid_speed = player_rows["speed_mps"].dropna()
@@ -91,7 +92,7 @@ def _metric_values(processing: ProcessingResult, player: Player) -> dict[str, ob
         "data_quality_score": processing.quality.quality_score / 100,
         "baseline_type": "match_only",
         "baseline_confidence": 0.4,
-        "supported_event_metrics": True,
+        "supported_event_metrics": not processing.tables["events"].empty,
         "feature_version": "features-v1",
     }
 
@@ -151,7 +152,7 @@ def _create_demo_dataset(
         analytics.upsert_metric(
             match_id=match.id,
             player_id=player.id,
-            **_metric_values(processing, player),
+            **metric_values(processing, player),
         )
     dataset_import.import_status = "complete"
     session.commit()

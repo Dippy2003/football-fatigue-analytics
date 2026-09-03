@@ -31,9 +31,9 @@ export function DataQualityPanel({
           tone={tone}
         />
       </div>
-      <div className="mt-4 h-2 overflow-hidden rounded-full bg-[var(--surface-muted)]">
+      <div className="quality-track mt-4">
         <div
-          className="h-full bg-teal-600"
+          className="quality-fill"
           style={{ width: `${Math.max(0, Math.min(100, score * 100))}%` }}
         />
       </div>

@@ -11,6 +11,7 @@ import { Panel } from '../components/ui/Panel'
 import { RiskPanel } from '../components/ui/RiskPanel'
 import { StatusBadge } from '../components/ui/StatusBadge'
 import { formatDistance, formatNumber, formatPercent, titleCase } from '../lib/format'
+import { getMatch } from '../services/api/matches'
 import {
   getPlayerBaseline,
   getPlayerEvents,
@@ -24,6 +25,11 @@ import { getPlayerRisk } from '../services/api/risk'
 export function PlayerPage() {
   const { matchId = '', playerId = '' } = useParams()
   const options = { enabled: Boolean(matchId && playerId) }
+  const match = useQuery({
+    queryKey: ['match', matchId],
+    queryFn: ({ signal }) => getMatch(matchId, signal),
+    enabled: Boolean(matchId),
+  })
   const profile = useQuery({
     queryKey: ['player', playerId],
     queryFn: ({ signal }) => getPlayer(playerId, signal),
@@ -75,7 +81,10 @@ export function PlayerPage() {
             {formatNumber(item.playing_minutes, 1)} playing minutes
           </p>
         </div>
-        <StatusBadge label="Synthetic demo" tone="info" />
+        <StatusBadge
+          label={match.data?.is_synthetic ? 'Synthetic demo' : 'Local import'}
+          tone={match.data?.is_synthetic ? 'info' : 'success'}
+        />
       </header>
       <div className="metric-grid">
         <MetricCard
@@ -117,7 +126,7 @@ export function PlayerPage() {
       <div className="content-grid">
         <Panel
           title="Movement heatmap"
-          description="Actual processed synthetic tracking values."
+          description="Processed tracking observations for this match."
         >
           <FootballPitch
             heatmap={heatmap.data}
