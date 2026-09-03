@@ -35,6 +35,11 @@ dev = [
   "types-pyyaml>=6,<7",
 ]
 
+[tool.uv]
+# aiohttp is a transitive dependency (via kloppy -> fsspec[http]); pinned above
+# its resolved floor to avoid PYSEC-2026-3545.
+override-dependencies = ["aiohttp>=3.14.3"]
+
 [build-system]
 requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
